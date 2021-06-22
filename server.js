@@ -1,6 +1,6 @@
 const express = require("express");
 
-const sequelize = require("mongoose");
+const sequelize = require("./connection");
 const routes = require("./routes");
 const app = express();
 const PORT = process.env.PORT || 3001;
