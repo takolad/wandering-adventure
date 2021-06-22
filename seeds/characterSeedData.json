@@ -1,0 +1,32 @@
+[
+    {
+        "id": 1,
+        "name": "Bort",
+        "bio": "From a distant land to the weast.",
+        "class": "Warrior",
+        "health": 100,
+        "stamina": 100,
+        "mana": 0,
+        "user_id": 1
+    },
+    {
+        "id": 2,
+        "name": "Luuke",
+        "bio": "Not your favorite uncle.",
+        "class": "Mage",
+        "health": 100,
+        "stamina": 0,
+        "mana": 100,
+        "user_id": 1
+    },
+    {
+        "id": 3,
+        "name": "Garrett",
+        "bio": "Weakness: Windows.",
+        "class": "Mage",
+        "health": 100,
+        "stamina": 0,
+        "mana": 100,
+        "user_id": 2
+    }
+]
