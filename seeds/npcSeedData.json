@@ -1,0 +1,26 @@
+[
+    {
+        "id": 1,
+        "name": "Heaffield",
+        "bio": "Loves Mondays",
+        "health": 100,
+        "stamina": 100,
+        "mana": 100
+    },
+    {
+        "id": 2,
+        "name": "Garthcliff",
+        "bio": "Hates Mondays",
+        "health": 100,
+        "stamina": 100,
+        "mana": 100
+    },
+    {
+        "id": 3,
+        "name": "Ben",
+        "bio": "Last name: Dover",
+        "health": 100,
+        "stamina": 100,
+        "mana": 0
+    }
+]
