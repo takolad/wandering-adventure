@@ -1,5 +1,5 @@
-import HomeLog from './pages/HomeLog'
-import NavBar from './components/Navbar'
+import HomeLog from './pages/Homepage'
+import NavBar from './components/Navbar/Navbar'
 
 
 function App() {
