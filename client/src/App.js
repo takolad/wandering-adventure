@@ -1,4 +1,4 @@
-import HomeLog from './pages/Homepage'
+import HomeLog from './pages/Homepage/Homepage'
 import NavBar from './components/Navbar/Navbar'
 
 
