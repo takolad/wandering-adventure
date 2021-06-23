@@ -10,6 +10,7 @@ import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import Container from '@material-ui/core/Container';
 import Button from '@material-ui/core/Button'
+import Grid from '@material-ui/core/Grid'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -48,75 +49,87 @@ export default function HomeLog() {
     };
 
     return (
-        <Container>
-            <div className={classes.root}>
-                <div>
-                    <h2>Welcome to Wandering Adventure!  Please Login.</h2>
-                    <FormControl className={clsx(classes.margin, classes.textField)} variant="outlined">
-                        <InputLabel htmlFor="outlined-adornment-password">Username</InputLabel>
-                        <OutlinedInput
-                            id="outlined-adornment-password"
-                            required
-                            labelWidth={70}
-                        />
-                    </FormControl>
-                    <FormControl className={clsx(classes.margin, classes.textField)} variant="outlined">
-                        <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
-                        <OutlinedInput
-                            id="outlined-adornment-password"
-                            type={values.showPassword ? 'text' : 'password'}
-                            value={values.password}
-                            onChange={handleChange('password')}
-                            required
-                            endAdornment={
-                                <InputAdornment position="end">
-                                    <IconButton
-                                        aria-label="toggle password visibility"
-                                        onClick={handleClickShowPassword}
-                                        onMouseDown={handleMouseDownPassword}
-                                        edge="end"
+        <Grid
+            container
+            justify="center"
+            alignItems="center"
+        >
+            <Grid item xs={5}>
+                <Container>
+                    <div className={classes.root}>
+                        <div>
+                            <h2>Welcome to Wandering Adventure!</h2>
+                            <br />
+                                <h3>Please Login.</h3>
+                                <FormControl className={clsx(classes.margin, classes.textField)} variant="outlined">
+                                    <InputLabel htmlFor="outlined-adornment-password">Username</InputLabel>
+                                    <OutlinedInput
+                                        id="outlined-adornment-password"
+                                        required
+                                        labelWidth={70}
+                                    />
+                                </FormControl>
+                                <br />
+                                <FormControl className={clsx(classes.margin, classes.textField)} variant="outlined">
+                                    <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
+                                    <OutlinedInput
+                                        id="outlined-adornment-password"
+                                        type={values.showPassword ? 'text' : 'password'}
+                                        value={values.password}
+                                        onChange={handleChange('password')}
+                                        required
+                                        endAdornment={
+                                            <InputAdornment position="end">
+                                                <IconButton
+                                                    aria-label="toggle password visibility"
+                                                    onClick={handleClickShowPassword}
+                                                    onMouseDown={handleMouseDownPassword}
+                                                    edge="end"
+                                                >
+                                                    {values.showPassword ? <Visibility /> : <VisibilityOff />}
+                                                </IconButton>
+                                            </InputAdornment>
+                                        }
+                                        labelWidth={70}
+                                    />
+                                </FormControl>
+                                <br />
+                                <FormControl className={clsx(classes.margin, classes.textField)} variant="outlined">
+                                    <InputLabel htmlFor="outlined-adornment-password">Confirm Password</InputLabel>
+                                    <OutlinedInput
+                                        id="outlined-adornment-password"
+                                        type={values.showPassword ? 'text' : 'password'}
+                                        value={values.password}
+                                        onChange={handleChange('password')}
+                                        required
+                                        endAdornment={
+                                            <InputAdornment position="end">
+                                                <IconButton
+                                                    aria-label="toggle password visibility"
+                                                    onClick={handleClickShowPassword}
+                                                    onMouseDown={handleMouseDownPassword}
+                                                    edge="end"
+                                                >
+                                                    {values.showPassword ? <Visibility /> : <VisibilityOff />}
+                                                </IconButton>
+                                            </InputAdornment>
+                                        }
+                                        labelWidth={70}
+                                    />
+                                </FormControl>
+                                <Container>
+                                    <Button
+                                        type="submit"
+                                        variant="contained"
+                                        color="secondary"
                                     >
-                                        {values.showPassword ? <Visibility /> : <VisibilityOff />}
-                                    </IconButton>
-                                </InputAdornment>
-                            }
-                            labelWidth={70}
-                        />
-                    </FormControl>
-                    <FormControl className={clsx(classes.margin, classes.textField)} variant="outlined">
-                        <InputLabel htmlFor="outlined-adornment-password">Confirm Password</InputLabel>
-                        <OutlinedInput
-                            id="outlined-adornment-password"
-                            type={values.showPassword ? 'text' : 'password'}
-                            value={values.password}
-                            onChange={handleChange('password')}
-                            required
-                            endAdornment={
-                                <InputAdornment position="end">
-                                    <IconButton
-                                        aria-label="toggle password visibility"
-                                        onClick={handleClickShowPassword}
-                                        onMouseDown={handleMouseDownPassword}
-                                        edge="end"
-                                    >
-                                        {values.showPassword ? <Visibility /> : <VisibilityOff />}
-                                    </IconButton>
-                                </InputAdornment>
-                            }
-                            labelWidth={70}
-                        />
-                    </FormControl>
-                    <Container>
-                        <Button
-                            type="submit"
-                            variant="contained"
-                            color="secondary"
-                        >
-                            Sign In
-                        </Button>
-                    </Container>
-                </div>
-            </div>
-        </Container>
-    );
+                                        Sign In
+                                    </Button>
+                                </Container>
+                        </div>
+                        </div>
+                </Container>
+            </Grid>
+            </Grid>
+            );
 }

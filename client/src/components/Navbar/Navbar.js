@@ -32,7 +32,7 @@ style.typography.h3 = {
     [style.breakpoints.up('md')]: {
         fontSize: '2.5rem',
     },
-    fontFamily: "MedievalSharp",
+    fontFamily: "IM Fell English SC",
    
     
 };
@@ -44,7 +44,6 @@ export default function NavBar() {
     return (
         <div className={classes.root}>
             <AppBar position="static" classes={{root: classes.color}}>
-
                 <Toolbar>
                     <ThemeProvider theme={style}>
                         <Typography variant="h3" className={classes.title}>
