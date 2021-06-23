@@ -31,8 +31,8 @@ const useStyles = makeStyles((theme) => ({
 export default function HomeLog() {
     const classes = useStyles();
     const [values, setValues] = React.useState({
-        password: '',
         username: '',
+        password: '',
         showPassword: false,
     });
 
@@ -54,7 +54,7 @@ export default function HomeLog() {
             justify="center"
             alignItems="center"
         >
-            <Grid item xs={5}>
+            <Grid item xs={6}>
                 <Container>
                     <div className={classes.root}>
                         <div>
