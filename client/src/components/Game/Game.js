@@ -2,6 +2,8 @@ import React, {useEffect, useState} from 'react';
 import Navbar from '../Navbar/Navbar';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
+import Card from '../CharacterCard/CharacterCard'
+import './game.css'
 
 const Game = () => {
     const [userState, setUserState] = useState('')
@@ -63,11 +65,12 @@ const Game = () => {
     return (
         <div>
         <Navbar/>
+        <Card/>
         <Box>
             <Box>
-            <Button onClick={ () => setUserState('rock')}>Rock</Button>
-            <Button onClick={ () => setUserState('paper')}>Paper</Button>
-            <Button onClick={ () => setUserState('scissors')}>Scissors</Button>
+            <Button id='Btn' onClick={ () => setUserState('rock')}>Rock</Button>
+            <Button id='Btn' onClick={ () => setUserState('paper')}>Paper</Button>
+            <Button id='Btn' onClick={ () => setUserState('scissors')}>Scissors</Button>
             </Box>
         </Box>
         </div>
