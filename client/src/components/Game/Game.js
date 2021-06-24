@@ -10,11 +10,11 @@ const Game = () => {
         let choice = Math.random();
 
         if (choice <= 0.33) {
-            choice = "rock";
-        } else if (choice => 0.34 ) {
-            choice = "paper";
-        } else if (choice => 0.67) {
             choice = "scissors";
+        } else if (choice >= 0.34 ) {
+            choice = "paper";
+        } else if (choice >= 0.67) {
+            choice = "rock";
         }
 
         return choice;
@@ -24,13 +24,17 @@ const Game = () => {
         if (choice1 === choice2) {
           return console.log("The result is a tie!");
         }
+        
         if (choice1 === "rock") {
           if (choice2 === "scissors") {
             return console.log("rock wins");
           } else {
-            return console.log("paper wins");
+            if (choice2 === "paper") {
+                return console.log("paper wins");
+            }
           }
         }
+
         if (choice1 === "paper") {
           if (choice2 === "rock") {
             return console.log("paper wins");
@@ -38,21 +42,22 @@ const Game = () => {
             if (choice2 === "scissors") {
               return "scissors wins";
             }
-          }
-          if (choice1 === "scissors") {
-            if (choice2 === "rock") {
-              return console.log("rock wins");
+          }        
+        }
+
+        if (choice1 === "scissors") {
+            if (choice2 === "paper") {
+              return console.log("scissors wins");
             } else {
-              if (choice2 === "paper") {
-                return console.log("scissors wins");
+              if (choice2 === "rock") {
+                return console.log("rock wins");
               }
             }
           }
-        }
-      };
+    };
     
     useEffect( () => {
-        compare(comChoice(), userState )
+        compare(userState, comChoice())
     }, [userState])
 
     return (

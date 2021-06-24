@@ -1,5 +1,5 @@
-import HomeLog from './pages/Homepage'
-import NavBar from './components/Navbar/Navbar'
+// import HomeLog from './pages/Homepage'
+// import NavBar from './components/Navbar/Navbar'
 import Game from './components/Game/Game'
 
 
