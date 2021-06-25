@@ -3,10 +3,12 @@ const { Character, User } = require('../models');
 const sequelize = require('../config/connection');
 const withAuth = require('../utils/auth');
 
+let characterData
+
 router
 .route('/')
     .get( async (req, res) => {
-        try{const characterData = await Character.findAll({
+        try{characterData = await Character.findAll({
             attributes: [
                 'id',
                 'name',
@@ -33,7 +35,7 @@ router
 
     })
     .post(withAuth, async (req, res) => {
-        try { const characterData =  await Character.create({
+        try { characterData =  await Character.create({
                 id: req.body.id,
                 name: req.body.name,
                 user_id: req.session.user_id
@@ -47,7 +49,7 @@ router
 router
 .route('/:id')
     .get( async (req, res) => {
-        try { const characterData = await Character.findByPK({
+        try { characterData = await Character.findByPK({
             where: {
                 id: req.params.id
             },
@@ -79,7 +81,7 @@ router
         }
 })
     .delete( withAuth, async (req, res) => {
-        try {const characterData = await Character.destroy({
+        try { characterData = await Character.destroy({
             where: {
                 id: req.params.id
             }
