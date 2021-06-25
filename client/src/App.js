@@ -1,18 +1,24 @@
 import HomeLog from './pages/Homepage/Homepage'
 import NavBar from './components/Navbar/Navbar'
 import Game from './components/Game/Game'
-import { BrowserRouter, Route } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route} from "react-router-dom";
 
 
 function App() {
   return (
-    <BrowserRouter>
+    <Router>
       <div className="App">
         <NavBar/>
-        <Route path="/" component={HomeLog}/>
-        <Route path="/game" component={Game}/>
+        <Switch>
+        <Route path="/login">
+          <HomeLog />
+        </Route>
+        <Route path="/game">
+          <Game />
+        </Route>
+        </Switch>
       </div>
-    </BrowserRouter>
+    </Router>
   );
 }
 

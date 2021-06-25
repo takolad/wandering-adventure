@@ -64,7 +64,6 @@ const Game = () => {
 
     return (
         <div>
-        <Navbar/>
         <Card/>
         <Box>
             <Box>
