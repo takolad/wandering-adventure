@@ -8,10 +8,10 @@ function App() {
   return (
     <BrowserRouter>
       <div className="App">
-      <NavBar/>
-      <Route path="/" component={HomeLog}/>
-      <Route path="/game" component={Game}/>
-    </div>
+        <NavBar/>
+        <Route path="/" component={HomeLog}/>
+        <Route path="/game" component={Game}/>
+      </div>
     </BrowserRouter>
   );
 }
