@@ -6,7 +6,7 @@ router
 .route('/')
 .get( async (req, res) => {
     try {userData = await User.findAll({
-        attributes: { exclude: ['[password'], include: [Character]},                   
+        attributes: { exclude: ['password'], include: [Character]},                   
     })
     .then( userData => res.json( userData ))}
         catch(err) {
