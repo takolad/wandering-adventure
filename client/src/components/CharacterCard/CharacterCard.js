@@ -15,7 +15,10 @@ export default function MediaCard() {
     <Card>
       <CardActionArea>
         <CardMedia
-          image="./AATROXBloodMoon.png"
+          id="character"
+          component="img"
+          height="150"
+          image="./Jiraiya.jpg"
           title="Contemplative Reptile"
         />
         <CardContent>
@@ -27,14 +30,6 @@ export default function MediaCard() {
           </Typography>
         </CardContent>
       </CardActionArea>
-      <CardActions>
-        <Button size="small" color="primary">
-          Share
-        </Button>
-        <Button size="small" color="primary">
-          Learn More
-        </Button>
-      </CardActions>
     </Card>
   );
 }

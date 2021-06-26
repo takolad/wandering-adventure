@@ -8,37 +8,36 @@ import './game.css'
 const Game = () => {
     const [userState, setUserState] = useState('');
     const [compState, setCompState] = useState('');
+    
 
-    const comChoice = () => {
+    
+    const compare = (user) => {
         const choices = ["rock", "paper", "scissors"];
 
-        setCompState(choices[Math.floor(Math.random() * 3)])        
-    }
+        setCompState(choices[Math.floor(Math.random() * 3)])
 
-    useEffect(() => {
-        comChoice()
-    }, [userState])
-    
-    const compare = (user, comp) => {
-        if (user === "rock" && comp === "scissors") {
+        if (user === "rock" && compState === "scissors") {
             console.log("rock wins!");
-          } else if (user === "rock" && comp === "paper") {
+          } else if (user === "rock" && compState === "paper") {
             console.log("paper wins!");
-          } else if (user === "scissors" && comp === "paper") {
+          } else if (user === "scissors" && compState === "paper") {
             console.log("scissors wins!")
-          } else if (user === "scissors" && comp === "rock") {
+          } else if (user === "scissors" && compState === "rock") {
             console.log("rock wins!")
-          } else if (user === "paper" && comp === "rock") {
+          } else if (user === "paper" && compState === "rock") {
             console.log("paper wins!")
-          } else if (user === "paper" && comp === "scissors") {
+          } else if (user === "paper" && compState === "scissors") {
             console.log("scissors wins!")
           } else {
             console.log("It's a tie!")
           }
     };
     
+
     useEffect( () => {
-        compare(userState, compState)
+        if (userState === "") return;
+        compare(userState)
+        setUserState('')
     }, [userState])
 
     return (
