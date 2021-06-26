@@ -11,6 +11,7 @@ import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import Container from '@material-ui/core/Container';
 import Button from '@material-ui/core/Button'
 import Grid from '@material-ui/core/Grid'
+import Card from '@material-ui/core/Card';
 import './homepage.css'
 
 const useStyles = makeStyles((theme) => ({
@@ -28,6 +29,7 @@ const useStyles = makeStyles((theme) => ({
         width: '25ch',
     },
 }));
+
 
 export default function HomeLog() {
     const classes = useStyles();
@@ -50,12 +52,14 @@ export default function HomeLog() {
     };
 
     return (
+        
         <Grid
             container
             justify="center"
             alignItems="center"
         >
             <Grid item xs={6}>
+            <Card>
                 <Container>
                     <div className={classes.root}>
                         <div>
@@ -124,13 +128,15 @@ export default function HomeLog() {
                                         variant="contained"
                                         color="secondary"
                                     >
-                                        Sign In
+                                        Log In
                                     </Button>
                                 </Container>
                         </div>
                         </div>
                 </Container>
+                </Card>
             </Grid>
             </Grid>
+            
             );
 }
