@@ -16,6 +16,12 @@ Event.init(
     text: {
       type: DataTypes.STRING,
     },
+    npc_id: {
+      references: {
+        model: "npc",
+        key: "id",
+      },
+    },
   },
   {
     sequelize,
