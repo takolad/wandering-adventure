@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import Navbar from '../Navbar/Navbar';
+// import Navbar from '../Navbar/Navbar';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
 import Card from '../CharacterCard/CharacterCard'
@@ -12,23 +12,25 @@ const Game = () => {
     const comChoice = () => {
         const choices = ["rock", "paper", "scissors"];
 
-        setCompState(choices[Math.floor(Math.random() * 3)])
-
-        return choices;
+        setCompState(choices[Math.floor(Math.random() * 3)])        
     }
+
+    useEffect(() => {
+        comChoice()
+    }, [userState])
     
-    const compare = () => {
-        if (userState === "rock" && compState === "scissors") {
+    const compare = (user, comp) => {
+        if (user === "rock" && comp === "scissors") {
             console.log("rock wins!");
-          } else if (userState === "rock" && compState === "paper") {
+          } else if (user === "rock" && comp === "paper") {
             console.log("paper wins!");
-          } else if (userState === "scissors" && compState === "paper") {
+          } else if (user === "scissors" && comp === "paper") {
             console.log("scissors wins!")
-          } else if (userState === "scissors" && compState === "rock") {
+          } else if (user === "scissors" && comp === "rock") {
             console.log("rock wins!")
-          } else if (userState === "paper" && compState === "rock") {
+          } else if (user === "paper" && comp === "rock") {
             console.log("paper wins!")
-          } else if (userState === "paper" && compState === "scissors") {
+          } else if (user === "paper" && comp === "scissors") {
             console.log("scissors wins!")
           } else {
             console.log("It's a tie!")
