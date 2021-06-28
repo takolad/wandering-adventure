@@ -4,6 +4,7 @@ import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
 import Card from '../CharacterCard/CharacterCard';
 import { makeStyles } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
 import './game.css'
 
 const Game = () => {
@@ -30,7 +31,7 @@ const Game = () => {
 
         if (user === "rock" && compState === "scissors") {
             console.log("rock wins!");
-            setGameState
+            setGameState('Rock wins!')
           } else if (user === "rock" && compState === "paper") {
             console.log("paper wins!");
           } else if (user === "scissors" && compState === "paper") {
@@ -58,12 +59,15 @@ const Game = () => {
         <Card/>
         <Box component= "div" display="inline"className={classes.root}>
             <Box component= "div">
+                <Typography>
+                    {gameState}
+                </Typography>
+            </Box>
                 <Box component= "div" justifyContent="center">
                     <Button id='Btn' onClick={ () => setUserState('rock')}>Rock</Button>
                     <Button id='Btn' onClick={ () => setUserState('paper')}>Paper</Button>
                     <Button id='Btn' onClick={ () => setUserState('scissors')}>Scissors</Button>
                 </Box>
-            </Box>
         </Box>
         </div>
     )
