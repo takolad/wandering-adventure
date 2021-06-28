@@ -8,7 +8,8 @@ import './game.css'
 
 const Game = () => {
     const [userState, setUserState] = useState('');
-    const [compState, setCompState] = useState('');   
+    const [compState, setCompState] = useState('');
+    const [gameState, setGameState] = useState('');   
 
     const useStyles = makeStyles({
         root: {
@@ -29,6 +30,7 @@ const Game = () => {
 
         if (user === "rock" && compState === "scissors") {
             console.log("rock wins!");
+            setGameState
           } else if (user === "rock" && compState === "paper") {
             console.log("paper wins!");
           } else if (user === "scissors" && compState === "paper") {
@@ -55,10 +57,12 @@ const Game = () => {
         <div>
         <Card/>
         <Box component= "div" display="inline"className={classes.root}>
-            <Box component= "div" justifyContent="center">
-            <Button id='Btn' onClick={ () => setUserState('rock')}>Rock</Button>
-            <Button id='Btn' onClick={ () => setUserState('paper')}>Paper</Button>
-            <Button id='Btn' onClick={ () => setUserState('scissors')}>Scissors</Button>
+            <Box component= "div">
+                <Box component= "div" justifyContent="center">
+                    <Button id='Btn' onClick={ () => setUserState('rock')}>Rock</Button>
+                    <Button id='Btn' onClick={ () => setUserState('paper')}>Paper</Button>
+                    <Button id='Btn' onClick={ () => setUserState('scissors')}>Scissors</Button>
+                </Box>
             </Box>
         </Box>
         </div>
