@@ -41,6 +41,14 @@ NPC.init(
         max: 100,
       },
     },
+    event_id: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      references: {
+        model: "event",
+        key: "id",
+      },
+    },
   },
   {
     sequelize,

@@ -1,20 +1,17 @@
 [
     {
-        "event_id": 1,
+        "id": 1,
         "description": "Test Description",
-        "text": "A wild test event happens before you!",
-        "npc_id": 3
+        "text": "A wild test event happens before you!"
     },
     {
-        "event_id": 2,
+        "id": 2,
         "description": "Additional Test Description",
-        "text": "You are attacked by a wild kite!",
-        "npc_id": 1
+        "text": "You are attacked by a wild kite!"
     },
     {
-        "event_id": 3,
+        "id": 3,
         "description": "Final Test Description",
-        "text": "It's terminal, quite terminal!",
-        "npc_id": 2
+        "text": "It's terminal, quite terminal!"
     }
 ]
