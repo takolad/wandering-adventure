@@ -1,4 +1,13 @@
 #Btn {
     background-color: #333333;
     color: white;
+    border-spacing: 3px;
+}
+
+#main {
+position: absolute;
+width: 862px;
+height: 648px;
+left: 504px;
+top: 158px;
 }
