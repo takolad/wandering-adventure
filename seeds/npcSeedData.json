@@ -5,7 +5,8 @@
         "bio": "Loves Mondays",
         "health": 100,
         "stamina": 100,
-        "mana": 100
+        "mana": 100,
+        "event_id": 1
     },
     {
         "id": 2,
@@ -13,7 +14,8 @@
         "bio": "Hates Mondays",
         "health": 100,
         "stamina": 100,
-        "mana": 100
+        "mana": 100,
+        "event_id": 2
     },
     {
         "id": 3,
@@ -21,6 +23,7 @@
         "bio": "Last name: Dover",
         "health": 100,
         "stamina": 100,
-        "mana": 0
+        "mana": 0,
+        "event_id": 3
     }
 ]
