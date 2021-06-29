@@ -9,7 +9,11 @@ import './game.css'
 const Game = () => {
     const [userState, setUserState] = useState('');
     const [compState, setCompState] = useState('');
-    const [gameState, setGameState] = useState('');   
+    const [gameState, setGameState] = useState('');  
+    
+    const redOptions = ["I try to hit them", "I start dancing like a butterfly", "I try to sting like a Bee"];
+    const blueOptions = ["I wave my Turkey leg in the air", "I conjure a clone of myself ", "I use my Rasengan" ];
+    const greenOptions = ["I dodge the attack", "I sneaked close and snapped in their ear", ];
 
     const useStyles = makeStyles({
         root: {
@@ -21,6 +25,7 @@ const Game = () => {
         },
         text: {
             color: "white",
+            
         }
     });
 
@@ -72,9 +77,9 @@ const Game = () => {
                 </Typography>
             </Box>
                 <Box component= "div">
-                    <Button id='red' onClick={ () => setUserState('rock')}>Rock</Button>
-                    <Button id='blue' onClick={ () => setUserState('paper')}>Paper</Button>
-                    <Button id='green' onClick={ () => setUserState('scissors')}>Scissors</Button>
+                    <Button id='red' onClick={ () => setUserState('rock')}>{redOptions[Math.floor(Math.random()*redOptions.length)]}</Button>
+                    <Button id='blue' onClick={ () => setUserState('paper')}>{blueOptions[Math.floor(Math.random()*blueOptions.length)]}</Button>
+                    <Button id='green' onClick={ () => setUserState('scissors')}>{greenOptions[Math.floor(Math.random()*greenOptions.length)]}</Button>
                 </Box>
         </Box>
         </div>

@@ -6,11 +6,13 @@
 #blue {
     background-color:blue;
     color: white;
+    margin-left: 5px;
 }
 
 #green {
     background-color:green;
     color: white;
+    margin-left: 5px;
 }
 
 #mainGame {
