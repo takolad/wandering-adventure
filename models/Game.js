@@ -11,6 +11,7 @@ Game.init(
     },
     event_count: {
       type: DataTypes.INTEGER,
+      defaultValue: 0,
     },
     character_id: {
       type: DataTypes.INTEGER,
