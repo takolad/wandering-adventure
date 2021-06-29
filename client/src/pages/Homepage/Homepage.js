@@ -12,6 +12,7 @@ import Container from '@material-ui/core/Container';
 import Button from '@material-ui/core/Button'
 import Grid from '@material-ui/core/Grid'
 import Card from '@material-ui/core/Card';
+import ParticlesBg from 'particles-bg';
 
 import './homepage.css'
 
@@ -100,29 +101,6 @@ export default function HomeLog() {
                                     />
                                 </FormControl>
                                 <br />
-                                <FormControl className={clsx(classes.margin, classes.textField)} variant="outlined">
-                                    <InputLabel htmlFor="outlined-adornment-password">Confirm Password</InputLabel>
-                                    <OutlinedInput
-                                        id="outlined-adornment-password"
-                                        type={values.showPassword ? 'text' : 'password'}
-                                        value={values.password}
-                                        onChange={handleChange('password')}
-                                        required
-                                        endAdornment={
-                                            <InputAdornment position="end">
-                                                <IconButton
-                                                    aria-label="toggle password visibility"
-                                                    onClick={handleClickShowPassword}
-                                                    onMouseDown={handleMouseDownPassword}
-                                                    edge="end"
-                                                >
-                                                    {values.showPassword ? <Visibility /> : <VisibilityOff />}
-                                                </IconButton>
-                                            </InputAdornment>
-                                        }
-                                        labelWidth={70}
-                                    />
-                                </FormControl>
                                 <Container>
                                     <Button
                                         type="submit"
@@ -138,7 +116,8 @@ export default function HomeLog() {
                 </Container>
                 </Card>
             </Grid>
+            <ParticlesBg type="circle" bg={true} />
             </Grid>
-            
+             
             );
 }
