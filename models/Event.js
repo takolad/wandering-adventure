@@ -16,6 +16,10 @@ Event.init(
     text: {
       type: DataTypes.STRING,
     },
+    imageUrl: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
   },
   {
     sequelize,

@@ -48,11 +48,8 @@ Character.init(
       },
     },
     user_id: {
-      type: DataTypes.UUID,
-      references: {
-        model: "user",
-        key: "id",
-      },
+      type: DataTypes.STRING,
+      allowNull: false,
     },
   },
   {
