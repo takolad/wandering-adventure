@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from 'react';
-import Navbar from '../Navbar/Navbar';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
 import Card from '../CharacterCard/CharacterCard';
@@ -19,6 +18,9 @@ const Game = () => {
             left: "504px",
             top: "158px",
             float: "right",
+        },
+        text: {
+            color: "white",
         }
     });
 
@@ -31,19 +33,25 @@ const Game = () => {
 
         if (user === "rock" && compState === "scissors") {
             console.log("rock wins!");
-            setGameState('Rock wins!')
+            setGameState("Rock wins!");
           } else if (user === "rock" && compState === "paper") {
             console.log("paper wins!");
+            setGameState("Paper wins!");
           } else if (user === "scissors" && compState === "paper") {
-            console.log("scissors wins!")
+            console.log("scissors wins!");
+            setGameState("Scissors wins!");
           } else if (user === "scissors" && compState === "rock") {
-            console.log("rock wins!")
+            console.log("rock wins!");
+            setGameState("Rock wins!");
           } else if (user === "paper" && compState === "rock") {
-            console.log("paper wins!")
+            console.log("paper wins!");
+            setGameState("Paper wins!");
           } else if (user === "paper" && compState === "scissors") {
-            console.log("scissors wins!")
+            console.log("scissors wins!");
+            setGameState("Scissors wins!");
           } else {
             console.log("It's a tie!")
+            setGameState("It's a tie!");
           }
     };
     
@@ -58,15 +66,15 @@ const Game = () => {
         <div>
         <Card/>
         <Box component= "div" display="inline"className={classes.root}>
-            <Box component= "div">
-                <Typography>
+            <Box component= "div" id="mainGame">
+                <Typography className={classes.text} variant="h1">
                     {gameState}
                 </Typography>
             </Box>
-                <Box component= "div" justifyContent="center">
-                    <Button id='Btn' onClick={ () => setUserState('rock')}>Rock</Button>
-                    <Button id='Btn' onClick={ () => setUserState('paper')}>Paper</Button>
-                    <Button id='Btn' onClick={ () => setUserState('scissors')}>Scissors</Button>
+                <Box component= "div">
+                    <Button id='red' onClick={ () => setUserState('rock')}>Rock</Button>
+                    <Button id='blue' onClick={ () => setUserState('paper')}>Paper</Button>
+                    <Button id='green' onClick={ () => setUserState('scissors')}>Scissors</Button>
                 </Box>
         </Box>
         </div>

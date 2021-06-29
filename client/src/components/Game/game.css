@@ -1,13 +1,23 @@
-#Btn {
-    background-color: #333333;
+#red {
+    background-color: red;
     color: white;
-    border-spacing: 3px;
 }
 
-#main {
+#blue {
+    background-color:blue;
+    color: white;
+}
+
+#green {
+    background-color:green;
+    color: white;
+}
+
+#mainGame {
 position: absolute;
 width: 862px;
 height: 648px;
 left: 504px;
 top: 158px;
+background-color: #333333;
 }
