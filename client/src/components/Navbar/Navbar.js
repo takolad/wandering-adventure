@@ -4,6 +4,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+import LogoutButton from '../Logout'
 import './nav.css'
 
 
@@ -11,7 +12,7 @@ import './nav.css'
 const useStyles = makeStyles((theme) => ({
     root: {
         flexGrow: 1,
-    
+
     },
     title: {
         flexGrow: 1,
@@ -33,8 +34,8 @@ style.typography.h3 = {
         fontSize: '2.5rem',
     },
     fontFamily: "IM Fell English SC",
-   
-    
+
+
 };
 
 
@@ -43,15 +44,15 @@ export default function NavBar() {
 
     return (
         <div className={classes.root}>
-            <AppBar position="static" classes={{root: classes.color}}>
+            <AppBar position="static" classes={{ root: classes.color }}>
                 <Toolbar>
                     <ThemeProvider theme={style}>
                         <Typography variant="h3" className={classes.title}>
                             Wandering Adventure
                         </Typography>
                     </ThemeProvider>
+                    <LogoutButton />
                 </Toolbar>
-
             </AppBar>
         </div>
     );

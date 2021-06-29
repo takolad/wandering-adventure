@@ -1,4 +1,4 @@
-import HomeLog from './pages/Homepage/Homepage'
+import HomePage from './pages/Homepage/Homepage'
 import NavBar from './components/Navbar/Navbar'
 import Game from './components/Game/Game'
 import { BrowserRouter as Router, Switch, Route} from "react-router-dom";
@@ -14,7 +14,7 @@ function App() {
           <Game />
         </Route>
         <Route path="/">
-          <HomeLog />
+          <HomePage />
         </Route>
         </Switch>
       </div>
