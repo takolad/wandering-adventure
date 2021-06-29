@@ -1,4 +1,6 @@
 const User = require("./User");
+const NPC = require("./NPC");
+const Event = require("./Event");
 const Character = require("./Character");
 
 User.hasMany(Character, {
@@ -10,4 +12,10 @@ Character.belongsTo(User, {
   foreignKey: "user_id",
 });
 
-module.exports = { User, Character };
+Event.hasOne(NPC, {
+  foreignKey: "event_id",
+});
+
+NPC.belongsTo(Event);
+
+module.exports = { User, Character, Event, NPC };

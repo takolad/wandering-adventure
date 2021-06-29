@@ -1,7 +1,12 @@
 const { Model, DataTypes, UUIDV4 } = require("sequelize");
 const sequelize = require("../config/connection");
+const argon2 = require("argon2");
 
-class User extends Model {}
+class User extends Model {
+  checkPassword(loginPw) {
+    return argon2.verify(loginPw, this.password);
+  }
+}
 
 User.init(
   {
@@ -30,8 +35,7 @@ User.init(
     hooks: {
       beforeCreate: async (newUser) => {
         try {
-          const salt = await bcrypt.genSalt(10);
-          newUser.password = await bcrypt.hash(newUser.password, salt);
+          newUser.password = await argon2.hash(newUser.password);
           return newUser;
         } catch (err) {
           console.log(err);
@@ -40,8 +44,7 @@ User.init(
       },
       beforeUpdate: async (updatedUser) => {
         try {
-          const salt = await bcrypt.genSalt(10);
-          updatedUser.password = await bcrypt.hash(updatedUser.password, salt);
+          updatedUser.password = await argon2.hash(updatedUser.password);
           return updatedUser;
         } catch (err) {
           console.log(err);
