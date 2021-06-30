@@ -1,7 +1,6 @@
 const router = require("express").Router();
 const { Character } = require("../../models");
-const sequelize = require("../../config/connection");
-const withAuth = require("../../utils/auth");
+// const withAuth = require("../../utils/auth");
 
 let characterData;
 
@@ -125,7 +124,7 @@ router
       res.status(500).json(err);
     }
   })
-  .delete(withAuth, async (req, res) => {
+  .delete(async (req, res) => {
     try {
       characterData = await Character.destroy({
         where: {
