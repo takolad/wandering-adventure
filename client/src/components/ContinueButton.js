@@ -15,7 +15,7 @@ export default function ContinueButton() {
   
     return (
       <div className={classes.root}>
-        <Button variant="contained" disabled>
+        <Button variant="contained">
           Continue Game
         </Button>
       </div>
