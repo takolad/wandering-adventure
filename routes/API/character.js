@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { Character, User } = require("../../models");
+const { Character } = require("../../models");
 const sequelize = require("../../config/connection");
 const withAuth = require("../../utils/auth");
 
@@ -7,24 +7,24 @@ let characterData;
 
 // get characters
 router
-  .route("/character")
-  .get(async (req, res) => {
+  .get("/", async (req, res) => {
     try {
       characterData = await Character.findAll({
         order: [["name", "DESC"]],
-        include: [
-          {
-            model: User,
-            attributes: ["id", "username"],
-          },
-        ],
+        // include: [
+        //   {
+        //     model: User,
+        //     attributes: ["username"],
+        //   },
+        // ],
       }).then((characterData) => res.json(characterData));
     } catch (err) {
       console.log(err);
       res.status(500).json(err);
     }
   })
-  .post(withAuth, async (req, res) => {
+  // create character
+  .post(async (req, res) => {
     // get from Auth0
     const userID = "";
 
@@ -66,6 +66,28 @@ router
     }
   });
 
+// update the character's stats (health, stamina/mana)
+router.put("/:id", async (req, res) => {
+  try {
+    updatedCharacter = await Character.update(
+      {
+        health: req.body.health,
+        stamina: req.body.stamina,
+        mana: req.body.mana,
+      },
+      {
+        where: {
+          id: req.body.character_id,
+        },
+      }
+    )
+      .then((updatedCharacter) => res.json(updatedCharacter))
+      .catch((err) => res.status(500).json(err));
+  } catch (err) {
+    res.json(err);
+  }
+});
+
 // get character by id
 router
   .route("/:id")
@@ -85,15 +107,15 @@ router
           "mana",
           "user_id",
         ],
-        include: [
-          {
-            model: User,
-            attributes: ["username"],
-          },
-        ],
+        // include: [
+        //   {
+        //     model: User,
+        //     attributes: ["username"],
+        //   },
+        // ],
       }).then((characterData) => {
         if (!characterData) {
-          res.status(404).json({ message: "Character not found with this id" });
+          res.status(404).json({ message: "No character found with this id" });
           return;
         }
         res.json(characterData);
