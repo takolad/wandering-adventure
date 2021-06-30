@@ -1,7 +1,7 @@
 const sequelize = require("../config/connection");
-const { User, Character, Event, NPC } = require("../models");
+const { Game, Character, Event, NPC } = require("../models");
 
-const userData = require("./userSeedData.json");
+const gameData = require("./gameSeedData.json");
 const characterData = require("./characterSeedData.json");
 const eventData = require("./eventSeedData.json");
 const npcData = require("./npcSeedData.json");
@@ -9,11 +9,8 @@ const npcData = require("./npcSeedData.json");
 const seedDatabase = async () => {
   await sequelize.sync({ force: true });
 
-  const users = await User.bulkCreate(userData, {
-    individualHooks: true,
-    returning: true,
-  });
   const chars = await Character.bulkCreate(characterData);
+  const games = await Game.bulkCreate(gameData);
   const events = await Event.bulkCreate(eventData);
   const npcs = await NPC.bulkCreate(npcData);
 
