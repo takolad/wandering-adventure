@@ -9,9 +9,10 @@ import './game.css'
 const Game = () => {
     const [userState, setUserState] = useState('');
     const [compState, setCompState] = useState('');
+    const [displayState, setDisplayState] = useState('');
     const [gameState, setGameState] = useState({
         displayText:"",
-        faze: "encounter",
+        phase: "encounter",
         maxEncounters: 1,
         encounterImage:"",
         encounterText:"",
@@ -46,25 +47,38 @@ const Game = () => {
 
         if (userState === "rock" && compState === "scissors") {
             console.log("rock wins!");
-            setGameState({...gameState, displayText:"You defeated your enemy!", faze:"end"});
+            setGameState({...gameState, phase:"end"});
+            setDisplayState("You defeated your enemy!");
+
           } else if (userState === "rock" && compState === "paper") {
             console.log("paper wins!");
-            setGameState({...gameState, displayText:"You've been defeated!", userHealth:0, faze:"end"});
+            setGameState({...gameState, userHealth:0, phase:"end"});
+            setDisplayState("You've been defeated!");
+
           } else if (userState === "scissors" && compState === "paper") {
             console.log("scissors wins!");
-            setGameState({...gameState, displayText:"You defeated your enemy!"});
+            setGameState({...gameState, phase:"end"});
+            setDisplayState("You defeated your enemy!");
+
           } else if (userState === "scissors" && compState === "rock") {
             console.log("rock wins!");
-            setGameState({...gameState, text:"You defeated your enemy!"});
+            setGameState({...gameState, userHealth:0, phase:"end"});
+            setDisplayState("You've been defeated!");
+
           } else if (userState === "paper" && compState === "rock") {
             console.log("paper wins!");
-            setGameState({...gameState, text:"You defeated your enemy!"});
+            setGameState({...gameState, phase:"end"});
+            setDisplayState("You defeated your enemy!");
+
           } else if (userState === "paper" && compState === "scissors") {
             console.log("scissors wins!");
-            setGameState({...gameState, text:"You defeated your enemy!"});
+            setGameState({...gameState, userHealth:0, phase:"end"});
+            setDisplayState("You've been defeated!");
+
           } else {
             console.log("It's a tie!")
-            setGameState({...gameState, text:"The battle was tuff each of you held their own"});
+            setGameState({...gameState});
+            setDisplayState("Battle was fierce but you each held your own")
           }
     };
     
@@ -77,7 +91,7 @@ const Game = () => {
 
     useEffect ( () => {
 
-    }, [gameState.faze]);
+    }, [gameState.phase]);
 
     return (
         <div>
@@ -85,16 +99,17 @@ const Game = () => {
         <Box component= "div" display="inline"className={classes.root}>
             <Box component= "div" id="mainGame">
                 <Typography className={classes.text} variant="h1">
-                    {gameState.text}
+                    {displayState}
                 </Typography>
             </Box>
-            {gameState.faze === "encounter" ? (
+            {gameState.phase === "encounter" ? (
                 <Box component= "div">
-                <Button id='red' onClick={() => setUserState('rock')}>{redOptions[Math.floor(Math.random()*redOptions.length)]}</Button>
-                <Button id='blue' onClick={() => setUserState('paper')}>{blueOptions[Math.floor(Math.random()*blueOptions.length)]}</Button>
-                <Button id='green' onClick={() => setUserState('scissors')}>{greenOptions[Math.floor(Math.random()*greenOptions.length)]}</Button>
-            </Box>
+                    <Button id='red' onClick={() => setUserState('rock')}>{redOptions[Math.floor(Math.random()*redOptions.length)]}</Button>
+                    <Button id='blue' onClick={() => setUserState('paper')}>{blueOptions[Math.floor(Math.random()*blueOptions.length)]}</Button>
+                    <Button id='green' onClick={() => setUserState('scissors')}>{greenOptions[Math.floor(Math.random()*greenOptions.length)]}</Button>
+                </Box>
             ): null }
+
                 
         </Box>
         </div>
