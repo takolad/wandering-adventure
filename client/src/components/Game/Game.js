@@ -11,15 +11,14 @@ const Game = () => {
     const [compState, setCompState] = useState('');
     const [displayState, setDisplayState] = useState('');
     const [gameState, setGameState] = useState({
-        displayText:"",
         phase: "encounter",
-        maxEncounters: 1,
+        endGameEncounters: 5,
         encounterImage:"",
         encounterText:"",
         encounterTitle:"",
         userHealth: 100,
-        maxMovement:5,
-        currentMovement:2
+        maxMovement:7,
+        currentMovement:0
     });  
     
     const redOptions = ["I try to hit them", "I start dancing like a butterfly", "I try to sting like a Bee"];
@@ -39,6 +38,11 @@ const Game = () => {
     });
 
     const classes = useStyles()
+
+    const exploringClick = (display) => {
+        setDisplayState(display); 
+        setGameState({...gameState, currentMovement:gameState.currentMovement+1})
+    }
     
     const compare = () => {
         const choices = ["rock", "paper", "scissors"];
@@ -47,32 +51,33 @@ const Game = () => {
 
         if (userState === "rock" && compState === "scissors") {
             console.log("rock wins!");
-            setDisplayState("You defeated your enemy! Which way do you want to go?");
-            setGameState({...gameState, phase:"exploring"});
+            setDisplayState("You defeated your Enemy! What direction do you want to go?");
+
+            setGameState({...gameState, phase:"exploring", maxMovement:gameState.currentMovement+Math.floor(Math.random() *10) +5});
 
           } else if (userState === "rock" && compState === "paper") {
             console.log("paper wins!");
-            setDisplayState("You've been defeated!");
+            setDisplayState("You've been defeated! Better luck next time!");
             setGameState({...gameState, userHealth:0, phase:"end"});
 
           } else if (userState === "scissors" && compState === "paper") {
             console.log("scissors wins!");
-            setDisplayState("You defeated your enemy! Which way do you want to go?");
-            setGameState({...gameState, phase:"exploring"});
+            setDisplayState("You defeated your Enemy! What direction do you want to go?");
+            setGameState({...gameState, phase:"exploring", maxMovement:gameState.currentMovement+Math.floor(Math.random() *10) +5});
 
           } else if (userState === "scissors" && compState === "rock") {
             console.log("rock wins!");
-            setDisplayState("You've been defeated!");
+            setDisplayState("You've been defeated! Better luck next time!");
             setGameState({...gameState, userHealth:0, phase:"end"});
 
           } else if (userState === "paper" && compState === "rock") {
             console.log("paper wins!");
-            setDisplayState("You defeated your enemy! Which way do you want to go?");
-            setGameState({...gameState, phase:"exploring"});
+            setDisplayState("You defeated your Enemy! What direction do you want to go?");
+            setGameState({...gameState, phase:"exploring", maxMovement:gameState.currentMovement+Math.floor(Math.random() *10) +5});
 
           } else if (userState === "paper" && compState === "scissors") {
             console.log("scissors wins!");
-            setDisplayState("You've been defeated!");
+            setDisplayState("You've been defeated! Better luck next time!");
             setGameState({...gameState, userHealth:0, phase:"end"});
 
           } else {
@@ -89,8 +94,13 @@ const Game = () => {
     }, [userState]);
 
     useEffect ( () => {
-        
-    }, [gameState.phase]);
+        if (gameState.currentMovement === gameState.maxMovement){
+            setGameState({...gameState, phase:"encounter"})
+        }        
+    }, [gameState.currentMovement]);
+
+    console.log(gameState.currentMovement);
+    console.log(gameState.maxMovement);
 
     return (
         <div>
@@ -111,9 +121,9 @@ const Game = () => {
             
             {gameState.phase === "exploring" ? (
                 <Box component= "div" id="container">
-                    <Button id="red" onClick={() => setDisplayState("You take a left...")}>Left</Button>
-                    <Button id="blue" onClick={() => setDisplayState("You go forward a couple of steps...")}>Forward</Button>
-                    <Button id="green" onClick={() => setDisplayState("You take a right...")}>Right</Button>
+                    <Button id="red" onClick={() => exploringClick("You took a left...")}>Left</Button>
+                    <Button id="blue" onClick={() => exploringClick("You go forward a couple of steps...")}>Forward</Button>
+                    <Button id="green" onClick={() => exploringClick("You take a right...")}>Right</Button>
                 </Box>
             ): null }
 
