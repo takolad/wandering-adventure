@@ -1,4 +1,25 @@
-#Btn {
-    background-color: #333333;
+#red {
+    background-color: red;
     color: white;
+}
+
+#blue {
+    background-color:blue;
+    color: white;
+    margin-left: 5px;
+}
+
+#green {
+    background-color:green;
+    color: white;
+    margin-left: 5px;
+}
+
+#mainGame {
+position: absolute;
+width: 862px;
+height: 648px;
+left: 504px;
+top: 158px;
+background-color: #333333;
 }
