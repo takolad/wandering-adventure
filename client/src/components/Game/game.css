@@ -15,11 +15,21 @@
     margin-left: 5px;
 }
 
+#container {
+    text-align: center;  
+}
+
+#text {
+    color: white;
+    opacity: 1;
+}
+
 #mainGame {
 position: absolute;
 width: 862px;
 height: 648px;
 left: 504px;
 top: 158px;
+opacity: 0.7;
 background-color: #333333;
 }
