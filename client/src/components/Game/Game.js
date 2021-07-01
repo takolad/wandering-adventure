@@ -47,37 +47,36 @@ const Game = () => {
 
         if (userState === "rock" && compState === "scissors") {
             console.log("rock wins!");
-            setGameState({...gameState, phase:"end"});
-            setDisplayState("You defeated your enemy!");
+            setDisplayState("You defeated your enemy! Which way do you want to go?");
+            setGameState({...gameState, phase:"exploring"});
 
           } else if (userState === "rock" && compState === "paper") {
             console.log("paper wins!");
-            setGameState({...gameState, userHealth:0, phase:"end"});
             setDisplayState("You've been defeated!");
+            setGameState({...gameState, userHealth:0, phase:"end"});
 
           } else if (userState === "scissors" && compState === "paper") {
             console.log("scissors wins!");
-            setGameState({...gameState, phase:"end"});
-            setDisplayState("You defeated your enemy!");
+            setDisplayState("You defeated your enemy! Which way do you want to go?");
+            setGameState({...gameState, phase:"exploring"});
 
           } else if (userState === "scissors" && compState === "rock") {
             console.log("rock wins!");
-            setGameState({...gameState, userHealth:0, phase:"end"});
             setDisplayState("You've been defeated!");
+            setGameState({...gameState, userHealth:0, phase:"end"});
 
           } else if (userState === "paper" && compState === "rock") {
             console.log("paper wins!");
-            setGameState({...gameState, phase:"end"});
-            setDisplayState("You defeated your enemy!");
+            setDisplayState("You defeated your enemy! Which way do you want to go?");
+            setGameState({...gameState, phase:"exploring"});
 
           } else if (userState === "paper" && compState === "scissors") {
             console.log("scissors wins!");
-            setGameState({...gameState, userHealth:0, phase:"end"});
             setDisplayState("You've been defeated!");
+            setGameState({...gameState, userHealth:0, phase:"end"});
 
           } else {
             console.log("It's a tie!")
-            setGameState({...gameState});
             setDisplayState("Battle was fierce but you each held your own")
           }
     };
@@ -90,7 +89,7 @@ const Game = () => {
     }, [userState]);
 
     useEffect ( () => {
-
+        
     }, [gameState.phase]);
 
     return (
@@ -98,15 +97,23 @@ const Game = () => {
         <Card/>
         <Box component= "div" display="inline"className={classes.root}>
             <Box component= "div" id="mainGame">
-                <Typography className={classes.text} variant="h1">
+                <Typography id="text" className={classes.text} variant="h1">
                     {displayState}
                 </Typography>
             </Box>
             {gameState.phase === "encounter" ? (
-                <Box component= "div">
+                <Box component= "div" id="container">
                     <Button id='red' onClick={() => setUserState('rock')}>{redOptions[Math.floor(Math.random()*redOptions.length)]}</Button>
                     <Button id='blue' onClick={() => setUserState('paper')}>{blueOptions[Math.floor(Math.random()*blueOptions.length)]}</Button>
                     <Button id='green' onClick={() => setUserState('scissors')}>{greenOptions[Math.floor(Math.random()*greenOptions.length)]}</Button>
+                </Box>
+            ): null }
+            
+            {gameState.phase === "exploring" ? (
+                <Box component= "div" id="container">
+                    <Button id="red" onClick={() => setDisplayState("You take a left...")}>Left</Button>
+                    <Button id="blue" onClick={() => setDisplayState("You go forward a couple of steps...")}>Forward</Button>
+                    <Button id="green" onClick={() => setDisplayState("You take a right...")}>Right</Button>
                 </Box>
             ): null }
 
