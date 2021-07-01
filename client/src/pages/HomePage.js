@@ -5,6 +5,8 @@ import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import StartButton from '../components/StartButton';
 import ContinueButton from '../components/ContinueButton';
+import { useAuth0 } from '@auth0/auth0-react'
+import './LoginPage/loginpage.css'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -23,8 +25,9 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function UserPage() {
+export default function LoginPage() {
     const classes = useStyles();
+    const { user } =  useAuth0(); 
     return (
 
         <Grid
@@ -37,7 +40,7 @@ export default function UserPage() {
                     <Container>
                         <div className={classes.root}>
                             <div>
-                                <h2>Hi User!  Make a selection.</h2>
+                                <h2>Hi {user.name}!  Make a selection.</h2>
                                 <Container>
                                     <StartButton />
                                     <ContinueButton />

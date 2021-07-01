@@ -1,27 +1,48 @@
-import HomePage from './pages/Homepage/Homepage';
+import LoginPage from './pages/LoginPage/LoginPage';
 import NavBar from './components/Navbar/Navbar';
 import Game from './components/Game/Game';
-import UserPage from './pages/Userpage';
-import { BrowserRouter as Router, Switch, Route} from "react-router-dom";
+import HomePage from './pages/HomePage';
+import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
-
 
 function App() {
   const { isAuthenticated, isLoading } = useAuth0();
+  console.log(isAuthenticated);
+  console.log(isLoading);
+  const PrivateRoute = (
+    {
+      component: Component, auth, ...rest
+    }
+  ) => {
+    console.log(auth);
+
+    return (
+      <Route
+        {...rest}
+        render={(props) => auth
+          ? <Component {...props} />
+          : <Redirect to={{
+            pathname: '/login',
+            state: { from: props.location }
+          }} />
+        } />
+    )
+  }
+  if (isLoading) {
+    return <div> Loading</div>
+  }
   return (
     <Router>
       <div className="App">
-        <NavBar/>
+        <NavBar />
         <Switch>
-        <Route path="/game">
-          <Game />
-        </Route>
-        <Route path="/userpage">
-          <UserPage />
-        </Route>
-        <Route path="/">
-          <HomePage />
-        </Route>
+
+          <PrivateRoute exact path='/' auth={isAuthenticated} component={HomePage} />
+
+          <PrivateRoute exact path='/game' auth={isAuthenticated} component={Game} />
+
+          <Route path='/login' component={LoginPage} />
+
         </Switch>
       </div>
     </Router>

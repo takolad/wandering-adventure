@@ -5,7 +5,9 @@ import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 // import ParticlesBg from 'particles-bg';
 import LoginButton from '../../components/Login';
-import './homepage.css';
+import { useAuth0 } from '@auth0/auth0-react';
+import { useHistory } from 'react-router-dom';
+import './loginpage.css';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -23,8 +25,13 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function HomePage() {
+export default function LoginPage() {
+    const { isAuthenticated } = useAuth0();
+    const history = useHistory();
     const classes = useStyles();
+    if (isAuthenticated) {
+        history.push('/userpage')
+    }
     return (
         
         <Grid

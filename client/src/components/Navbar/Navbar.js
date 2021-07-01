@@ -5,6 +5,8 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import LogoutButton from '../Logout'
+import LoginButton from '../Login'
+import { useAuth0 } from '@auth0/auth0-react';
 import './nav.css'
 
 
@@ -41,6 +43,7 @@ style.typography.h3 = {
 
 export default function NavBar() {
     const classes = useStyles();
+    const { isAuthenticated } = useAuth0();
 
     return (
         <div className={classes.root}>
@@ -51,7 +54,7 @@ export default function NavBar() {
                             Wandering Adventure
                         </Typography>
                     </ThemeProvider>
-                    <LogoutButton />
+                    {isAuthenticated  ?  <LogoutButton /> : <LoginButton /> }
                 </Toolbar>
             </AppBar>
         </div>
