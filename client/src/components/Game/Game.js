@@ -21,9 +21,9 @@ const Game = () => {
         currentMovement:0
     });  
     
-    const redOptions = ["I try to hit them", "I start dancing like a butterfly", "I try to sting like a Bee"];
-    const blueOptions = ["I wave my Turkey leg in the air", "I conjure a clone of myself ", "I use Rasengan"];
-    const greenOptions = ["I dodge the attack", "I sneaked close and snapped in their ear", "I drop a smoke bomb"];
+    const redOptions = ["I try to hit them", "I start dancing like a butterfly", "I try to sting like a Bee", "Bite them in the ear"];
+    const blueOptions = ["I wave my Turkey leg in the air", "I conjure a clone of myself ", "I use Rasengan", "I choose you Pickahu, lightning bolt"];
+    const greenOptions = ["I dodge the attack", "I sneaked close and snapped in their ear", "I drop a smoke bomb", "Run at them naked"];
 
     const useStyles = makeStyles({
         root: {
@@ -126,7 +126,6 @@ const Game = () => {
                     <Button id="green" onClick={() => exploringClick("You take a right...")}>Right</Button>
                 </Box>
             ): null }
-
                 
         </Box>
         </div>
