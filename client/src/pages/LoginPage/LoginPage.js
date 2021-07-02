@@ -7,8 +7,8 @@ import Card from '@material-ui/core/Card';
 import LoginButton from '../../components/Login';
 import { useAuth0 } from '@auth0/auth0-react';
 import { useHistory } from 'react-router-dom';
-import Typography from '@material-ui/core/Typography';
-import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+// import Typography from '@material-ui/core/Typography';
+// import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import './loginpage.css';
 
 const useStyles = makeStyles((theme) => ({
@@ -26,30 +26,30 @@ const useStyles = makeStyles((theme) => ({
         width: '25ch',
     },
 }));
-const style = createMuiTheme();
+// const style = createMuiTheme();
 
-style.typography.h4 = {
-    fontSize: '1rem',
-    '@media (min-width:300px)': {
-        fontSize: '1.5rem',
-    },
-    [style.breakpoints.up('sm')]: {
-        fontSize: '2rem',
-    },
-    fontFamily: "IM Fell English SC",
+// style.typography.h4 = {
+//     fontSize: '1rem',
+//     '@media (min-width:300px)': {
+//         fontSize: '1.5rem',
+//     },
+//     [style.breakpoints.up('sm')]: {
+//         fontSize: '2rem',
+//     },
+//     fontFamily: "IM Fell English SC",
 
 
-};
-style.typography.h5 = {
-    fontSize: '.5rem',
-    '@media (min-width:300px)': {
-        fontSize: '1rem',
-    },
-    [style.breakpoints.up('md')]: {
-        fontSize: '1.5rem',
-    },
-    fontFamily: "IM Fell English SC",
-}
+// };
+// style.typography.h5 = {
+//     fontSize: '.5rem',
+//     '@media (min-width:300px)': {
+//         fontSize: '1rem',
+//     },
+//     [style.breakpoints.up('md')]: {
+//         fontSize: '1.5rem',
+//     },
+//     fontFamily: "IM Fell English SC",
+// }
 
 export default function LoginPage() {
     const { isAuthenticated } = useAuth0();
@@ -71,19 +71,16 @@ export default function LoginPage() {
                     <Container>
                         <div className={classes.root}>
                             <div id='login'>
-                                <ThemeProvider theme={style}>
-                                    <Typography variant="h4">
+                                {/* <ThemeProvider theme={style}> */}
+                                    <h2>
                                         Welcome to Wandering Adventure!
-                                    </Typography>
-                                    <Typography variant="h5">
+                                   </h2>
+                                    <h3>
                                         Click below to enter the Tavern of the Wanderer.
-                                    </Typography>
-                                </ThemeProvider>
-
-
+                                        </h3>
+                                {/* </ThemeProvider> */}
                                 <Container>
                                     <LoginButton />
-
                                 </Container>
                             </div>
                         </div>
