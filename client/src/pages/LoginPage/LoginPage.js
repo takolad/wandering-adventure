@@ -33,31 +33,35 @@ export default function LoginPage() {
         history.push('/userpage')
     }
     return (
-        
+
         <Grid
             container
             justify="center"
             alignItems="center"
         >
-            <Grid item xs={6}>
-            <Card>
-                <Container>
-                    <div className={classes.root}>
-                        <div>
-                            <h2>Welcome to Wandering Adventure!</h2>
-                                <h3>Please Login.</h3>
-                                
+            <Grid item s={2} />
+            <Grid item s={6}>
+                <Card id='cardbox'>
+                    <Container>
+                        <div className={classes.root}>
+                            <div id='login'>
+                                <h2>Welcome to Wandering Adventure!</h2>
+                                <h3>Click below to enter the Tavern of the Wanderer.</h3>
+
                                 <Container>
-                                <LoginButton />
+                                    <LoginButton />
 
                                 </Container>
+                            </div>
                         </div>
-                        </div>
-                </Container>
+                    </Container>
                 </Card>
             </Grid>
-            
-            </Grid>
-             
-            );
+            <Grid item s={2} />
+
+
+
+        </Grid>
+
+    );
 }

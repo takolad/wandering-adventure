@@ -20,7 +20,7 @@ const LoginButton = () => {
   color="primary" 
     variant="contained" 
     className={classes.root} 
-  onClick={() => loginWithRedirect()}>Log In</Button>;
+  onClick={() => loginWithRedirect()}>Enter</Button>;
 };
 
 export default LoginButton;
