@@ -5,6 +5,8 @@ import HomePage from './pages/HomePage';
 import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 
+
+
 function App() {
   const { isAuthenticated, isLoading } = useAuth0();
   console.log(isAuthenticated);
@@ -29,12 +31,14 @@ function App() {
     )
   }
   if (isLoading) {
-    return <div> Loading</div>
+    return <div> Loading </div>
   }
   return (
     <Router>
       <div className="App">
+        
         <NavBar />
+        <br/>
         <Switch>
 
           <PrivateRoute exact path='/' auth={isAuthenticated} component={HomePage} />

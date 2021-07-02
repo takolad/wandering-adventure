@@ -7,6 +7,8 @@ import Card from '@material-ui/core/Card';
 import LoginButton from '../../components/Login';
 import { useAuth0 } from '@auth0/auth0-react';
 import { useHistory } from 'react-router-dom';
+// import Typography from '@material-ui/core/Typography';
+// import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import './loginpage.css';
 
 const useStyles = makeStyles((theme) => ({
@@ -24,6 +26,30 @@ const useStyles = makeStyles((theme) => ({
         width: '25ch',
     },
 }));
+// const style = createMuiTheme();
+
+// style.typography.h4 = {
+//     fontSize: '1rem',
+//     '@media (min-width:300px)': {
+//         fontSize: '1.5rem',
+//     },
+//     [style.breakpoints.up('sm')]: {
+//         fontSize: '2rem',
+//     },
+//     fontFamily: "IM Fell English SC",
+
+
+// };
+// style.typography.h5 = {
+//     fontSize: '.5rem',
+//     '@media (min-width:300px)': {
+//         fontSize: '1rem',
+//     },
+//     [style.breakpoints.up('md')]: {
+//         fontSize: '1.5rem',
+//     },
+//     fontFamily: "IM Fell English SC",
+// }
 
 export default function LoginPage() {
     const { isAuthenticated } = useAuth0();
@@ -33,31 +59,39 @@ export default function LoginPage() {
         history.push('/userpage')
     }
     return (
-        
+
         <Grid
             container
             justify="center"
             alignItems="center"
         >
-            <Grid item xs={6}>
-            <Card>
-                <Container>
-                    <div className={classes.root}>
-                        <div>
-                            <h2>Welcome to Wandering Adventure!</h2>
-                                <h3>Please Login.</h3>
-                                
+            <Grid item s={2} />
+            <Grid item s={6}>
+                <Card id='cardbox'>
+                    <Container>
+                        <div className={classes.root}>
+                            <div id='login'>
+                                {/* <ThemeProvider theme={style}> */}
+                                    <h2>
+                                        Welcome to Wandering Adventure!
+                                   </h2>
+                                    <h3>
+                                        Click below to enter the Tavern of the Wanderer.
+                                        </h3>
+                                {/* </ThemeProvider> */}
                                 <Container>
-                                <LoginButton />
-
+                                    <LoginButton />
                                 </Container>
+                            </div>
                         </div>
-                        </div>
-                </Container>
+                    </Container>
                 </Card>
             </Grid>
-            
-            </Grid>
-             
-            );
+            <Grid item s={2} />
+
+
+
+        </Grid>
+
+    );
 }

@@ -1,4 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=IM+Fell+English+SC&display=swap');
+
 body {
     background-image: url('./tavern.jpeg');
     background-position: center;
 }
+
+#login {
+    padding-bottom: 3%;
+    text-align: center;
+    
+}
+
+
