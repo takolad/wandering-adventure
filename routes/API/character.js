@@ -5,65 +5,71 @@ const { Character } = require("../../models");
 let characterData;
 
 // get characters
-router
-  .get("/", async (req, res) => {
+router.get("/", async (req, res) => {
+  try {
+    characterData = await Character.findAll({
+      where: {
+        user_id: req.query.user_id,
+      },
+    });
+
+    if (!characterData) {
+      res.status(404).json({ message: "No characters found for this user." });
+      return;
+    }
+
+    const characters = characterData.map((character) =>
+      character.get({ plain: true })
+    );
+    res.json(characters);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
+
+// create character
+router.post("/", async (req, res) => {
+  // get from Auth0
+  const userID = req.query.user_id;
+
+  if (req.body.class === "Warrior") {
     try {
-      characterData = await Character.findAll({
-        order: [["name", "DESC"]],
-        // include: [
-        //   {
-        //     model: User,
-        //     attributes: ["username"],
-        //   },
-        // ],
-      }).then((characterData) => res.json(characterData));
+      characterData = await Character.create({
+        name: req.body.name,
+        bio: req.body.bio,
+        class: req.body.class,
+        stamina: 100,
+        user_id: userID,
+      })
+        .then((characterData) => res.json(characterData))
+        .catch((err) => {
+          res.status(500).json(err);
+        });
     } catch (err) {
-      console.log(err);
       res.status(500).json(err);
     }
-  })
-  // create character
-  .post(async (req, res) => {
-    // get from Auth0
-    const userID = "";
+  }
 
-    if (req.body.class === "Warrior") {
-      try {
-        characterData = await Character.create({
-          name: req.body.name,
-          bio: req.body.bio,
-          class: req.body.class,
-          stamina: 100,
-          user_id: userID,
-        })
-          .then((characterData) => res.json(characterData))
-          .catch((err) => {
-            res.status(500).json(err);
-          });
-      } catch (err) {
-        res.status(500).json(err);
-      }
+  if (req.body.class === "Mage") {
+    try {
+      characterData = await Character.create({
+        name: req.body.name,
+        bio: req.body.bio,
+        class: req.body.class,
+        mana: 100,
+        user_id: userID,
+      })
+        .then((characterData) => res.json(characterData))
+        .catch((err) => {
+          console.log(err);
+          res.status(500).json(err);
+        });
+    } catch (err) {
+      res.status(500).json(err);
     }
-
-    if (req.body.class === "Mage") {
-      try {
-        characterData = await Character.create({
-          name: req.body.name,
-          bio: req.body.bio,
-          class: req.body.class,
-          mana: 100,
-          user_id: userID,
-        })
-          .then((characterData) => res.json(characterData))
-          .catch((err) => {
-            console.log(err);
-            res.status(500).json(err);
-          });
-      } catch (err) {
-        res.status(500).json(err);
-      }
-    }
-  });
+  }
+});
 
 // update the character's stats (health, stamina/mana)
 router.put("/:id", async (req, res) => {
