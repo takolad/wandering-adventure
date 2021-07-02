@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function LoginPage() {
+export default function HomePage() {
     const classes = useStyles();
     const { user } =  useAuth0(); 
     console.log(user.username)
