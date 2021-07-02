@@ -41,6 +41,7 @@ style.typography.h3 = {
 };
 
 
+
 export default function NavBar() {
     const classes = useStyles();
     const { isAuthenticated } = useAuth0();
