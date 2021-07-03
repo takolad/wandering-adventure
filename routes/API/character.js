@@ -83,6 +83,7 @@ router.put("/:id", async (req, res) => {
       {
         where: {
           id: req.body.character_id,
+          user_id: req.query.user_id,
         },
       }
     )
@@ -101,6 +102,7 @@ router
       characterData = await Character.findByPK({
         where: {
           id: req.params.id,
+          user_id: req.query.user_id,
         },
         attributes: [
           "id",
@@ -112,12 +114,6 @@ router
           "mana",
           "user_id",
         ],
-        // include: [
-        //   {
-        //     model: User,
-        //     attributes: ["username"],
-        //   },
-        // ],
       }).then((characterData) => {
         if (!characterData) {
           res.status(404).json({ message: "No character found with this id" });
@@ -135,6 +131,7 @@ router
       characterData = await Character.destroy({
         where: {
           id: req.params.id,
+          user_id: req.query.user_id,
         },
       }).then((characterData) => {
         if (!characterData) {
