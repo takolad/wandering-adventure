@@ -1,9 +1,11 @@
 import LoginPage from './pages/LoginPage/LoginPage';
 import NavBar from './components/Navbar/Navbar';
 import Game from './components/Game/Game';
-import HomePage from './pages/HomePage';
+import HomePage from './pages/HomePage/HomePage';
 import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
+
+
 
 
 
@@ -19,6 +21,7 @@ function App() {
     console.log(auth);
 
     return (
+
       <Route
         {...rest}
         render={(props) => auth
@@ -26,27 +29,31 @@ function App() {
           : <Redirect to={{
             pathname: '/login',
             state: { from: props.location }
-          }} />
+          }}/>
+
         } />
     )
   }
+ 
   if (isLoading) {
+
     return <div> Loading </div>
   }
+  
+    
+
   return (
     <Router>
       <div className="App">
-        
+
         <NavBar />
-        <br/>
+        <br />
         <Switch>
+            <PrivateRoute exact path='/' auth={isAuthenticated} component={HomePage} />
 
-          <PrivateRoute exact path='/' auth={isAuthenticated} component={HomePage} />
+            <PrivateRoute exact path='/game' auth={isAuthenticated} component={Game} />
 
-          <PrivateRoute exact path='/game' auth={isAuthenticated} component={Game} />
-
-          <Route path='/login' component={LoginPage} />
-
+            <Route path='/login' component={LoginPage} />
         </Switch>
       </div>
     </Router>

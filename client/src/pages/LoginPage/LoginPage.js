@@ -9,6 +9,7 @@ import { useAuth0 } from '@auth0/auth0-react';
 import { useHistory } from 'react-router-dom';
 // import Typography from '@material-ui/core/Typography';
 // import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+// import ParticleBackground from '../../Particles'
 import './loginpage.css';
 
 const useStyles = makeStyles((theme) => ({
@@ -88,9 +89,6 @@ export default function LoginPage() {
                 </Card>
             </Grid>
             <Grid item s={2} />
-
-
-
         </Grid>
 
     );
