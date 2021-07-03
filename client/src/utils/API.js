@@ -7,10 +7,13 @@ export default {
   getCharacters: function (user_id) {
     return axios.get("/api/characters/");
   },
-  deleteCharacter: function (characterData) {
-    return axios.delete("/api/characters", characterData);
+  getCharacter: function (user_id, id) {
+    return axios.get("/api/characters/" + id);
   },
-  updateCharacter: function (characterData) {
+  deleteCharacter: function (user_id, id) {
+    return axios.delete("/api/characters" + id);
+  },
+  updateCharacter: function (user_id, characterData) {
     return axios.put("/api/characters", characterData);
   },
 };
