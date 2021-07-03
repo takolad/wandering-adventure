@@ -40,7 +40,7 @@ export default function HomePage() {
             <Grid item s={6}>
                 <Card>
                     <Container >
-                        <div className={classes.root}>
+                        <div id='center' className={classes.root}>
                             <div>
                                 <h2>Hi {user.name}!</h2>
                                 <h3> Make a selection.</h3>

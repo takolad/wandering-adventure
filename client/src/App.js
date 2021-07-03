@@ -2,11 +2,9 @@ import LoginPage from './pages/LoginPage/LoginPage';
 import NavBar from './components/Navbar/Navbar';
 import Game from './components/Game/Game';
 import HomePage from './pages/HomePage/HomePage';
+import CharacterSelect from './pages/CharacterSelect';
 import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
-
-
-
 
 
 function App() {
@@ -52,6 +50,8 @@ function App() {
             <PrivateRoute exact path='/' auth={isAuthenticated} component={HomePage} />
 
             <PrivateRoute exact path='/game' auth={isAuthenticated} component={Game} />
+
+            <PrivateRoute exact path='/character' auth={isAuthenticated} component={CharacterSelect} />
 
             <Route path='/login' component={LoginPage} />
         </Switch>
