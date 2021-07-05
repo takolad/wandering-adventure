@@ -28,7 +28,10 @@ const Game = () => {
     const blueOptions = ["I wave my Turkey leg in the air", "I conjure a clone of myself ", "I use Rasengan", "I choose you Pickahu, lightning bolt"];
     const greenOptions = ["I dodge the attack", "I sneaked close and snapped in their ear", "I drop a smoke bomb", "Run at them naked"];
 
-    
+    // Arrays for directions
+    const rightText = ["You go right, and walk over a dead body", "You walk a past a pitch black cave", "You step over a log"];
+    const forwardText = ["You walk by two old men playing chess", "You cross a river", "You look ahead and see the most beautiful sight"];
+    const leftText = ["You walk by a merchant", "You cross paths with an odd looking traveler", "You see a bear cub with their mother"];
 
     // Material UI Styling
     const useStyles = makeStyles({
@@ -122,7 +125,7 @@ const Game = () => {
     useEffect ( () => {
         if (gameState.currentMovement === gameState.maxMovement){
             setGameState({...gameState, phase:"confirm"})
-            setDisplayState({...displayState, text:"You've encountered and enemy!"})
+            setDisplayState({...displayState, text:"You've encountered an enemy!"})
         }        
     }, [gameState.currentMovement]);
 
@@ -163,9 +166,9 @@ const Game = () => {
             
             {gameState.phase === "exploring" ? (
                 <Box component= "div" id="container">
-                    <Button id="red" onClick={() => exploringClick("You took a left...")}>Left</Button>
-                    <Button id="blue" onClick={() => exploringClick("You go forward a couple of steps...")}>Forward</Button>
-                    <Button id="green" onClick={() => exploringClick("You take a right...")}>Right</Button>
+                    <Button id="red" onClick={() => exploringClick(leftText[Math.floor(Math.random()*leftText.length)])}>Left</Button>
+                    <Button id="blue" onClick={() => exploringClick(forwardText[Math.floor(Math.random()*forwardText.length)])}>Forward</Button>
+                    <Button id="green" onClick={() => exploringClick(rightText[Math.floor(Math.random()*rightText.length)])}>Right</Button>
                 </Box>
             ): null }
 
