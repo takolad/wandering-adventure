@@ -15,10 +15,8 @@ const Game = () => {
         image:""
     });
     const [gameState, setGameState] = useState({
-        phase: "confirm",
+        phase: "start",
         endGameEncounters: 5,
-        encounterImage:"",
-        encounterText:"",
         encounterTitle:"",
         userHealth: 100,
         maxMovement:7,
@@ -51,7 +49,7 @@ const Game = () => {
         setGameState({...gameState, currentMovement:gameState.currentMovement+1})
     }
     
-    // Handles click for the confirmation button
+    // Handles click for the confirmation button/ Set up encounter
     const confirmClick = () => {
         setGameState({...gameState, phase:"encounter"})
         //API call
@@ -104,6 +102,11 @@ const Game = () => {
           }
     };
     
+    useEffect( () => {
+        setGameState({...gameState, phase:"start"})
+        setDisplayState({...displayState, text:"You awake from your sleep, all of your memory comes back to you, you know what you must do..."})
+        setGameState({...gameState, phase:"exploring"})
+    }, [])
 
     useEffect( () => {
         if (userState === "") return;
@@ -129,13 +132,22 @@ const Game = () => {
                 <Typography id="text" className={classes.text} variant="h1">
                     {displayState.text}
                 </Typography>
+                
             </Box>
             {gameState.phase === "encounter" ? (
+                <>
+                <Box component= "div" id="mainGame">
+                <Typography id="text" className={classes.text} variant="h1">
+                    {displayState.text}
+                </Typography>
+                <img src={displayState.image} alt="event"/>
+                </Box>
                 <Box component= "div" id="container">
                     <Button id='red' onClick={() => setUserState('rock')}>{redOptions[Math.floor(Math.random()*redOptions.length)]}</Button>
                     <Button id='blue' onClick={() => setUserState('paper')}>{blueOptions[Math.floor(Math.random()*blueOptions.length)]}</Button>
                     <Button id='green' onClick={() => setUserState('scissors')}>{greenOptions[Math.floor(Math.random()*greenOptions.length)]}</Button>
                 </Box>
+                </>
             ): null }
             
             {gameState.phase === "exploring" ? (
@@ -148,7 +160,7 @@ const Game = () => {
 
             {gameState.phase === "confirm" ? (
                 <Box component= "div" id="container">
-                    <Button id="red" onClick={() => confirmClick()}>Battle</Button>
+                    <Button id="red" onClick={() => confirmClick()}>To Battle!</Button>
                 </Box>
             ): null }
                 
