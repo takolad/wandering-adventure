@@ -1,16 +1,25 @@
 const router = require("express").Router();
-const { Character } = require("../../models");
+const { Character, Game, EventLog, Event } = require("../../models");
 // const withAuth = require("../../utils/auth");
 
 let characterData;
 
-// get characters
-router.get("/", async (req, res) => {
+// get all characters of matching user_id
+router.get("/:id", async (req, res) => {
+  console.log("get by user_id");
   try {
     characterData = await Character.findAll({
       where: {
-        user_id: req.query.user_id,
+        user_id: req.params.id,
       },
+      include: [
+        {
+          model: Game,
+          include: {
+            model: Event,
+          },
+        },
+      ],
     });
 
     if (!characterData) {
@@ -30,8 +39,8 @@ router.get("/", async (req, res) => {
 
 // create character
 router.post("/", async (req, res) => {
-  // get from Auth0
   const userID = req.query.user_id;
+  console.log(userID);
 
   if (req.body.class === "Warrior") {
     try {
@@ -72,18 +81,19 @@ router.post("/", async (req, res) => {
 });
 
 // update the character's stats (health, stamina/mana)
-router.put("/:id", async (req, res) => {
+router.put("/", async (req, res) => {
+  const { id, health, stamina, mana } = req.body.characterData;
   try {
     updatedCharacter = await Character.update(
       {
-        health: req.body.health,
-        stamina: req.body.stamina,
-        mana: req.body.mana,
+        health: health,
+        stamina: stamina,
+        mana: mana,
       },
       {
         where: {
-          id: req.body.character_id,
-          user_id: req.query.user_id,
+          id: id,
+          user_id: req.body.user_id,
         },
       }
     )
@@ -96,12 +106,13 @@ router.put("/:id", async (req, res) => {
 
 // get character by id
 router
-  .route("/:id")
+  .route("/")
   .get(async (req, res) => {
+    console.log(req.query);
     try {
-      characterData = await Character.findByPK({
+      characterData = await Character.findOne({
         where: {
-          id: req.params.id,
+          id: req.query.id,
           user_id: req.query.user_id,
         },
         attributes: [

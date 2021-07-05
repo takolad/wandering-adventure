@@ -20,7 +20,7 @@ router
   .get(async (req, res) => {
     try {
       eventData = await Event.findAll({
-        attributes: ["id", "description", "text", "imageUrl"],
+        attributes: ["id", "title", "text", "imageUrl"],
         order: [["id", "DESC"]],
       }).then((eventData) => res.json(eventData.reverse()));
     } catch (err) {
@@ -33,7 +33,7 @@ router
     try {
       eventData = await Event.create({
         id: req.body.id,
-        description: req.body.name,
+        title: req.body.name,
         text: req.body.text,
         imageUrl: req.body.imageUrl,
       }).then((eventData) => res.json(eventData));
@@ -48,7 +48,7 @@ router.route("/:id").get(async (req, res) => {
       where: {
         id: req.params.id,
       },
-      attributes: ["id", "description", "text", "imageUrl"],
+      attributes: ["id", "title", "text", "imageUrl"],
     }).then((eventData) => {
       if (!eventData) {
         res.status(404).json({ message: "Event not found" });

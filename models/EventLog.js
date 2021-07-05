@@ -1,9 +1,9 @@
-const { Model, DataTypes, UUIDV4 } = require("sequelize");
+const { Model, DataTypes } = require("sequelize");
 const sequelize = require("../config/connection");
 
-class Game extends Model {}
+class EventLog extends Model {}
 
-Game.init(
+EventLog.init(
   {
     id: {
       type: DataTypes.INTEGER,
@@ -11,19 +11,19 @@ Game.init(
       primaryKey: true,
       autoIncrement: true,
     },
-    event_count: {
+    event_id: {
       type: DataTypes.INTEGER,
-      defaultValue: 0,
-    },
-    character_id: {
-      type: DataTypes.UUID,
       references: {
-        model: "character",
+        model: "event",
         key: "id",
       },
     },
-    status: {
-      type: DataTypes.ENUM(["Active", "Inactive"]),
+    game_id: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: "game",
+        key: "id",
+      },
     },
   },
   {
@@ -31,8 +31,8 @@ Game.init(
     freezeTableName: true,
     timestamps: false,
     underscored: true,
-    modelName: "game",
+    modelName: "eventlog",
   }
 );
 
-module.exports = Game;
+module.exports = EventLog;
