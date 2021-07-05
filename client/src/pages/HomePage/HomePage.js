@@ -32,11 +32,12 @@ export default function HomePage() {
   console.log("userId: ", userId);
   return (
     <Grid container justify="center" alignItems="center">
-      <Grid item xs={6}>
+      <Grid item sm={2} />
+      <Grid item sm={6}>
         <Card>
           <Container>
             <div className={classes.root}>
-              <div>
+              <div id="center">
                 <h2>Hi {user.name}! Make a selection.</h2>
                 <Container>
                   <StartButton />
@@ -47,6 +48,8 @@ export default function HomePage() {
           </Container>
         </Card>
       </Grid>
+      <Grid item sm={2} />
+
     </Grid>
   );
 }

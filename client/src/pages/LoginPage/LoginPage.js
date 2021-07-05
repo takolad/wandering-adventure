@@ -66,8 +66,8 @@ export default function LoginPage() {
             justify="center"
             alignItems="center"
         >
-            <Grid item s={2} />
-            <Grid item s={6}>
+            <Grid item sm={2} />
+            <Grid item sm={6}>
                 <Card id='cardbox'>
                     <Container>
                         <div className={classes.root}>
@@ -92,7 +92,7 @@ export default function LoginPage() {
                     </Container>
                 </Card>
             </Grid>
-            <Grid item s={2} />
+            <Grid item sm={2} />
         </Grid>
 
     );

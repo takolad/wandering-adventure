@@ -1,7 +1,8 @@
 import LoginPage from "./pages/LoginPage/LoginPage";
 import NavBar from "./components/Navbar/Navbar";
 import Game from "./components/Game/Game";
-import HomePage from "./pages/HomePage";
+import HomePage from "./pages/HomePage/HomePage";
+import CharacterSelect from './pages/CharacterSelect/CharacterSelect';
 import {
   BrowserRouter as Router,
   Switch,
@@ -39,8 +40,8 @@ function App() {
   if (isLoading) {
     return <div> Loading </div>;
   }
-  
-    
+
+
 
   return (
     <Router>
@@ -53,6 +54,13 @@ function App() {
             path="/"
             auth={isAuthenticated}
             component={HomePage}
+          />
+
+          <PrivateRoute
+            exact
+            path="/character"
+            auth={isAuthenticated}
+            component={CharacterSelect}
           />
 
           <PrivateRoute
