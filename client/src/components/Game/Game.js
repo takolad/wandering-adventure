@@ -15,7 +15,7 @@ const Game = () => {
         image:""
     });
     const [gameState, setGameState] = useState({
-        phase: "start",
+        phase: "end",
         endGameEncounters: 5,
         encounterTitle:"",
         userHealth: 100,
@@ -63,6 +63,10 @@ const Game = () => {
                 console.log(res.data)
                 setDisplayState({...displayState, text:res.data.text})
             })
+    }
+
+    const restartGame = () => {
+        setGameState({...gameState, phase:"start"})
     }
     
     // The battle between Comp and User
@@ -131,7 +135,9 @@ const Game = () => {
 
     // useEffect( () => {
     //     if (gameState.phase === "end") {
-    //         setDisplayState({...displayState, text:"Better luck next time!"})
+    //         return (
+
+    //         );
     //     }
     // })
 
@@ -175,6 +181,13 @@ const Game = () => {
             {gameState.phase === "confirm" ? (
                 <Box component= "div" id="container">
                     <Button id="red" onClick={() => confirmClick()}>To Battle!</Button>
+                </Box>
+            ): null }
+
+            {gameState.phase === "end" ? (
+                <Box component= "div" id="container">
+                    <Button id="red" onClick={() => restartGame()}>Try Again</Button>
+                    <Button id ="blue">Main Menu</Button>
                 </Box>
             ): null }
                 
