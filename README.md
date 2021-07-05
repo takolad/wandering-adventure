@@ -28,8 +28,6 @@ Aside from React and the various packages it has associated with it, we also uti
 [Sequelize](https://www.npmjs.com/package/sequelize)<br>
 [Material UI](https://material-ui.com/)<br>
 [Auth0](https://auth0.com/)<br>
-[Particles-Bg](https://www.npmjs.com/package/particles-bg)<br>
-[React-Spinners](https://www.npmjs.com/package/react-spinners)<br>
 
 
 ## Collaborators
