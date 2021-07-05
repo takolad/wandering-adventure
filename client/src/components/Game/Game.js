@@ -10,7 +10,10 @@ import './game.css'
 const Game = () => {
     const [userState, setUserState] = useState('');
     const [compState, setCompState] = useState('');
-    const [displayState, setDisplayState] = useState('');
+    const [displayState, setDisplayState] = useState({
+        text:"",
+        image:""
+    });
     const [gameState, setGameState] = useState({
         phase: "confirm",
         endGameEncounters: 5,
@@ -44,7 +47,7 @@ const Game = () => {
 
     // Handles the clicks for exploring 
     const exploringClick = (display) => {
-        setDisplayState(display); 
+        setDisplayState({...displayState, text:display}); 
         setGameState({...gameState, currentMovement:gameState.currentMovement+1})
     }
     
@@ -54,7 +57,8 @@ const Game = () => {
         //API call
         API.getRandomEvent()
             .then((res) => {
-                console.log(res)
+                console.log(res.data)
+                setDisplayState({...displayState, text:res.data.text})
             })
     }
     
@@ -66,37 +70,37 @@ const Game = () => {
 
         if (userState === "rock" && compState === "scissors") {
             console.log("rock wins!");
-            setDisplayState("You defeated your Enemy! What direction do you want to go?");
+            setDisplayState({...displayState, text:"You defeated your Enemy! What direction do you want to go?"});
             setGameState({...gameState, phase:"exploring", maxMovement:gameState.currentMovement+Math.floor(Math.random() *10) +3});
 
           } else if (userState === "rock" && compState === "paper") {
             console.log("paper wins!");
-            setDisplayState("You've been defeated! Better luck next time!");
+            setDisplayState({...displayState, text:"You've been defeated! Better luck next time!"});
             setGameState({...gameState, userHealth:0, phase:"end"});
 
           } else if (userState === "scissors" && compState === "paper") {
             console.log("scissors wins!");
-            setDisplayState("You defeated your Enemy! What direction do you want to go?");
+            setDisplayState({...displayState, text:"You defeated your Enemy! What direction do you want to go?"});
             setGameState({...gameState, phase:"exploring", maxMovement:gameState.currentMovement+Math.floor(Math.random() *10) +3});
 
           } else if (userState === "scissors" && compState === "rock") {
             console.log("rock wins!");
-            setDisplayState("You've been defeated! Better luck next time!");
+            setDisplayState({...displayState, text:"You've been defeated! Better luck next time!"});
             setGameState({...gameState, userHealth:0, phase:"end"});
 
           } else if (userState === "paper" && compState === "rock") {
             console.log("paper wins!");
-            setDisplayState("You defeated your Enemy! What direction do you want to go?");
+            setDisplayState({...displayState, text:"You defeated your Enemy! What direction do you want to go?"});
             setGameState({...gameState, phase:"exploring", maxMovement:gameState.currentMovement+Math.floor(Math.random() *10) +3});
 
           } else if (userState === "paper" && compState === "scissors") {
             console.log("scissors wins!");
-            setDisplayState("You've been defeated! Better luck next time!");
+            setDisplayState({...displayState, text:"You've been defeated! Better luck next time!"});
             setGameState({...gameState, userHealth:0, phase:"end"});
 
           } else {
             console.log("It's a tie!")
-            setDisplayState("Battle was fierce but you each held your own")
+            setDisplayState({...displayState, text:"Battle was fierce but you each held your own"})
           }
     };
     
@@ -110,7 +114,7 @@ const Game = () => {
     useEffect ( () => {
         if (gameState.currentMovement === gameState.maxMovement){
             setGameState({...gameState, phase:"confirm"})
-            setDisplayState("You've encountered and enemy!")
+            setDisplayState({...displayState, text:"You've encountered and enemy!"})
         }        
     }, [gameState.currentMovement]);
 
@@ -123,7 +127,7 @@ const Game = () => {
         <Box component= "div" display="inline"className={classes.root}>
             <Box component= "div" id="mainGame">
                 <Typography id="text" className={classes.text} variant="h1">
-                    {displayState}
+                    {displayState.text}
                 </Typography>
             </Box>
             {gameState.phase === "encounter" ? (
@@ -144,7 +148,7 @@ const Game = () => {
 
             {gameState.phase === "confirm" ? (
                 <Box component= "div" id="container">
-                    <Button onClick={() => confirmClick()}>Confirm</Button>
+                    <Button id="red" onClick={() => confirmClick()}>Battle</Button>
                 </Box>
             ): null }
                 
