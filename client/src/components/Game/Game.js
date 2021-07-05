@@ -52,6 +52,10 @@ const Game = () => {
     const confirmClick = () => {
         setGameState({...gameState, phase:"encounter"})
         //API call
+        API.getRandomEvent()
+            .then((res) => {
+                console.log(res)
+            })
     }
     
     // The battle between Comp and User
