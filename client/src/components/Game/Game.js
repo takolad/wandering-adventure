@@ -4,6 +4,7 @@ import Button from '@material-ui/core/Button';
 import Card from '../CharacterCard/CharacterCard';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
+import API from '../../utils/API'
 import './game.css'
 
 const Game = () => {
@@ -11,7 +12,7 @@ const Game = () => {
     const [compState, setCompState] = useState('');
     const [displayState, setDisplayState] = useState('');
     const [gameState, setGameState] = useState({
-        phase: "encounter",
+        phase: "confirm",
         endGameEncounters: 5,
         encounterImage:"",
         encounterText:"",
@@ -21,10 +22,12 @@ const Game = () => {
         currentMovement:0
     });  
     
+    // Array for the battle options
     const redOptions = ["I try to hit them", "I start dancing like a butterfly", "I try to sting like a Bee", "Bite them in the ear"];
     const blueOptions = ["I wave my Turkey leg in the air", "I conjure a clone of myself ", "I use Rasengan", "I choose you Pickahu, lightning bolt"];
     const greenOptions = ["I dodge the attack", "I sneaked close and snapped in their ear", "I drop a smoke bomb", "Run at them naked"];
 
+    // Material UI Styling
     const useStyles = makeStyles({
         root: {
             width: "862px",
@@ -39,12 +42,20 @@ const Game = () => {
 
     const classes = useStyles()
 
+    // Handles the clicks for exploring 
     const exploringClick = (display) => {
         setDisplayState(display); 
         setGameState({...gameState, currentMovement:gameState.currentMovement+1})
     }
     
-    const compare = () => {
+    // Handles click for the confirmation button
+    const confirmClick = () => {
+        setGameState({...gameState, phase:"encounter"})
+        //API call
+    }
+    
+    // The battle between Comp and User
+    const battle = () => {
         const choices = ["rock", "paper", "scissors"];
 
         setCompState(choices[Math.floor(Math.random() * 3)])
@@ -52,8 +63,7 @@ const Game = () => {
         if (userState === "rock" && compState === "scissors") {
             console.log("rock wins!");
             setDisplayState("You defeated your Enemy! What direction do you want to go?");
-
-            setGameState({...gameState, phase:"exploring", maxMovement:gameState.currentMovement+Math.floor(Math.random() *10) +5});
+            setGameState({...gameState, phase:"exploring", maxMovement:gameState.currentMovement+Math.floor(Math.random() *10) +3});
 
           } else if (userState === "rock" && compState === "paper") {
             console.log("paper wins!");
@@ -63,7 +73,7 @@ const Game = () => {
           } else if (userState === "scissors" && compState === "paper") {
             console.log("scissors wins!");
             setDisplayState("You defeated your Enemy! What direction do you want to go?");
-            setGameState({...gameState, phase:"exploring", maxMovement:gameState.currentMovement+Math.floor(Math.random() *10) +5});
+            setGameState({...gameState, phase:"exploring", maxMovement:gameState.currentMovement+Math.floor(Math.random() *10) +3});
 
           } else if (userState === "scissors" && compState === "rock") {
             console.log("rock wins!");
@@ -73,7 +83,7 @@ const Game = () => {
           } else if (userState === "paper" && compState === "rock") {
             console.log("paper wins!");
             setDisplayState("You defeated your Enemy! What direction do you want to go?");
-            setGameState({...gameState, phase:"exploring", maxMovement:gameState.currentMovement+Math.floor(Math.random() *10) +5});
+            setGameState({...gameState, phase:"exploring", maxMovement:gameState.currentMovement+Math.floor(Math.random() *10) +3});
 
           } else if (userState === "paper" && compState === "scissors") {
             console.log("scissors wins!");
@@ -89,13 +99,14 @@ const Game = () => {
 
     useEffect( () => {
         if (userState === "") return;
-        compare(userState)
+        battle(userState)
         setUserState('')
     }, [userState]);
 
     useEffect ( () => {
         if (gameState.currentMovement === gameState.maxMovement){
-            setGameState({...gameState, phase:"encounter"})
+            setGameState({...gameState, phase:"confirm"})
+            setDisplayState("You've encountered and enemy!")
         }        
     }, [gameState.currentMovement]);
 
@@ -124,6 +135,12 @@ const Game = () => {
                     <Button id="red" onClick={() => exploringClick("You took a left...")}>Left</Button>
                     <Button id="blue" onClick={() => exploringClick("You go forward a couple of steps...")}>Forward</Button>
                     <Button id="green" onClick={() => exploringClick("You take a right...")}>Right</Button>
+                </Box>
+            ): null }
+
+            {gameState.phase === "confirm" ? (
+                <Box component= "div" id="container">
+                    <Button onClick={() => confirmClick()}>Confirm</Button>
                 </Box>
             ): null }
                 
