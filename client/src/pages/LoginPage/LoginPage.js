@@ -73,12 +73,16 @@ export default function LoginPage() {
                         <div className={classes.root}>
                             <div id='login'>
                                 {/* <ThemeProvider theme={style}> */}
-                                    <h2>
-                                        Welcome to Wandering Adventure!
-                                   </h2>
-                                    <h3>
-                                        Click below to enter the Tavern of the Wanderer.
-                                        </h3>
+                                <h2>
+                                    Welcome to Wandering Adventure!
+                                </h2>
+                                <p>
+                                    A fun, immersive text adventure game where you pick your actions.<br/>
+                                    Enter the tavern to begin your journey and complete the quest!
+                                </p>
+                                <h3>
+                                    Click below to enter the Tavern of the Wanderer.
+                                </h3>
                                 {/* </ThemeProvider> */}
                                 <Container>
                                     <LoginButton />

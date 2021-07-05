@@ -2,7 +2,7 @@ import LoginPage from './pages/LoginPage/LoginPage';
 import NavBar from './components/Navbar/Navbar';
 import Game from './components/Game/Game';
 import HomePage from './pages/HomePage/HomePage';
-import CharacterSelect from './pages/CharacterSelect';
+import CharacterSelect from './pages/CharacterSelect/CharacterSelect';
 import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 
