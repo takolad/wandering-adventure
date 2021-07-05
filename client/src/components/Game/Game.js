@@ -28,6 +28,8 @@ const Game = () => {
     const blueOptions = ["I wave my Turkey leg in the air", "I conjure a clone of myself ", "I use Rasengan", "I choose you Pickahu, lightning bolt"];
     const greenOptions = ["I dodge the attack", "I sneaked close and snapped in their ear", "I drop a smoke bomb", "Run at them naked"];
 
+    
+
     // Material UI Styling
     const useStyles = makeStyles({
         root: {
@@ -102,24 +104,33 @@ const Game = () => {
           }
     };
     
+    // Start of the game
     useEffect( () => {
         setGameState({...gameState, phase:"start"})
-        setDisplayState({...displayState, text:"You awake from your sleep, all of your memory comes back to you, you know what you must do..."})
+        setDisplayState({...displayState, text:"You awake from your sleep, all of your memories come rushing back to you, you know what you must do..."})
         setGameState({...gameState, phase:"exploring"})
     }, [])
 
+    // Helps with battle
     useEffect( () => {
         if (userState === "") return;
         battle(userState)
         setUserState('')
     }, [userState]);
 
+    // Checks user encounter 
     useEffect ( () => {
         if (gameState.currentMovement === gameState.maxMovement){
             setGameState({...gameState, phase:"confirm"})
             setDisplayState({...displayState, text:"You've encountered and enemy!"})
         }        
     }, [gameState.currentMovement]);
+
+    // useEffect( () => {
+    //     if (gameState.phase === "end") {
+    //         setDisplayState({...displayState, text:"Better luck next time!"})
+    //     }
+    // })
 
     console.log(gameState.currentMovement);
     console.log(gameState.maxMovement);
