@@ -10,52 +10,43 @@ import './homepage.css'
 
 
 const useStyles = makeStyles((theme) => ({
-    root: {
-        display: 'flex',
-        flexWrap: 'wrap',
-    },
-    margin: {
-        margin: theme.spacing(1),
-    },
-    withoutLabel: {
-        marginTop: theme.spacing(3),
-    },
-    textField: {
-        width: '25ch',
-    },
+  root: {
+    display: "flex",
+    flexWrap: "wrap",
+  },
+  margin: {
+    margin: theme.spacing(1),
+  },
+  withoutLabel: {
+    marginTop: theme.spacing(3),
+  },
+  textField: {
+    width: "25ch",
+  },
 }));
 
 export default function HomePage() {
-    const classes = useStyles();
-    const { user } = useAuth0();
-    console.log(user.username)
-    return (
-
-        <Grid
-            container
-            justify="center"
-            alignItems="center"
-        >
-            <Grid item s={2} />
-            <Grid item s={6}>
-                <Card>
-                    <Container >
-                        <div id='center' className={classes.root}>
-                            <div>
-                                <h2>Hi {user.name}!</h2>
-                                <h3> Make a selection.</h3>
-                                <Container>
-                                    <StartButton />
-                                    <ContinueButton />
-                                </Container>
-                            </div>
-                        </div>
-                    </Container>
-                </Card>
-            </Grid>
-            <Grid item s={2} />
-
-        </Grid>
-
-    );
+  const classes = useStyles();
+  const { user } = useAuth0();
+  const userId = user.sub.split("|")[1];
+  console.log("userId: ", userId);
+  return (
+    <Grid container justify="center" alignItems="center">
+      <Grid item xs={6}>
+        <Card>
+          <Container>
+            <div className={classes.root}>
+              <div>
+                <h2>Hi {user.name}! Make a selection.</h2>
+                <Container>
+                  <StartButton />
+                  <ContinueButton />
+                </Container>
+              </div>
+            </div>
+          </Container>
+        </Card>
+      </Grid>
+    </Grid>
+  );
 }

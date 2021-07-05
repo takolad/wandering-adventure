@@ -1,7 +1,19 @@
-import axios from 'axios';
+import axios from "axios";
 
 export default {
-  getUser: (user_id) => axios.get('/api', user_id),
-  getCharacter: (id) => axios.get('/api', id),
-  deleteCharacter: (characterData) => axios.delete('/api', characterData),
+  getRandomEvent: function () {
+    return axios.get("/api/events/random");
+  },
+  getCharacters: function (user_id) {
+    return axios.get("/api/characters/");
+  },
+  getCharacter: function (user_id, id) {
+    return axios.get("/api/characters/" + id);
+  },
+  deleteCharacter: function (user_id, id) {
+    return axios.delete("/api/characters" + id);
+  },
+  updateCharacter: function (user_id, characterData) {
+    return axios.put("/api/characters", characterData);
+  },
 };
