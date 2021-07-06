@@ -2,22 +2,24 @@
 import axios from "axios";
 
 export default {
-  getRandomEvent: function () {
-    return axios.get("/api/events/random");
-  },
+  // get all characters of specified user
   getCharacters: function (user_id) {
     return axios.get("/api/characters/" + user_id);
   },
+  // get single character of specified user
   getCharacter: function (user_id, id) {
     return axios.get("/api/characters", {
       params: { user_id: user_id, id: id },
     });
   },
-  deleteCharacter: function (user_id, id) {
-    return axios.delete("/api/characters/" + id);
+  createCharacter: function (user_id, characterData) {
+    return axios.post("/api/characters", { user_id, characterData });
+  },
+  // delete character
+  deleteCharacter: function (user_id, char_id) {
+    return axios.delete("/api/characters/" + char_id);
   },
   // update the character's stats as well as progress in a game (how many and which events seen)
-  // user_id from auth0
   // characterData & eventID from state
   updateCharacter: function (user_id, characterData, eventID) {
     let eventLogData = {
@@ -40,10 +42,18 @@ export default {
       )
       .catch((err) => console.log(err));
   },
-  getEventLog: function (id) {
-    return axios.get("/api/eventlogs/:id");
+  getRandomEvent: function () {
+    return axios.get("/api/events/random");
   },
-  getGame: function () {},
+  getSeenEvents: function (char_id) {
+    return axios.get("/api/events/" + char_id);
+  },
+  createGame: function (charID) {
+    return axios.create("/api/games", { character_id: charID });
+  },
+  getActiveGamesByUser: function (user_id) {
+    return axios.get("/api/games/active/" + user_id);
+  },
   // createEventLog: function (event_id, character_id) {
   //   return axios.post("/api/eventlogs", event_id, character_id);
   // },

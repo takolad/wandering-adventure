@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { Event } = require("../../models");
+const { Event, Game } = require("../../models");
 
 let eventData;
 
@@ -42,16 +42,21 @@ router
       res.status(500).json(err);
     }
   });
+// get events seen by specific char
 router.route("/:id").get(async (req, res) => {
   try {
-    eventData = await Event.findByPK({
-      where: {
-        id: req.params.id,
-      },
-      attributes: ["id", "title", "text", "imageUrl"],
+    eventData = await Event.findAll({
+      include: [
+        {
+          model: Game,
+          where: {
+            character_id: req.params.id,
+          },
+        },
+      ],
     }).then((eventData) => {
       if (!eventData) {
-        res.status(404).json({ message: "Event not found" });
+        res.status(404).json({ message: "No matching events found." });
         return;
       }
       res.json(eventData);

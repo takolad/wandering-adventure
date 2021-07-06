@@ -30,7 +30,7 @@ router.get("/:id", async (req, res) => {
     const characters = characterData.map((character) =>
       character.get({ plain: true })
     );
-    res.json(characters);
+    res.status(200).json(characters);
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
@@ -39,20 +39,22 @@ router.get("/:id", async (req, res) => {
 
 // create character
 router.post("/", async (req, res) => {
-  const userID = req.query.user_id;
-  console.log(userID);
+  const { name, bio } = req.body.characterData;
+  const class_ = req.body.characterData.class;
+  const userID = req.body.user_id;
 
-  if (req.body.class === "Warrior") {
+  if (class_ === "Warrior") {
     try {
       characterData = await Character.create({
-        name: req.body.name,
-        bio: req.body.bio,
-        class: req.body.class,
+        name: name,
+        bio: bio,
+        class: class_,
         stamina: 100,
         user_id: userID,
       })
-        .then((characterData) => res.json(characterData))
+        .then((characterData) => res.status(200).json(characterData))
         .catch((err) => {
+          console.log(err);
           res.status(500).json(err);
         });
     } catch (err) {
@@ -60,16 +62,16 @@ router.post("/", async (req, res) => {
     }
   }
 
-  if (req.body.class === "Mage") {
+  if (class_ === "Mage") {
     try {
       characterData = await Character.create({
-        name: req.body.name,
-        bio: req.body.bio,
-        class: req.body.class,
+        name: name,
+        bio: bio,
+        class: class_,
         mana: 100,
         user_id: userID,
       })
-        .then((characterData) => res.json(characterData))
+        .then((characterData) => res.status(200).json(characterData))
         .catch((err) => {
           console.log(err);
           res.status(500).json(err);
