@@ -54,7 +54,16 @@ export default {
   getActiveGamesByUser: function (user_id) {
     return axios.get("/api/games/active/" + user_id);
   },
-  // createEventLog: function (event_id, character_id) {
-  //   return axios.post("/api/eventlogs", event_id, character_id);
-  // },
+  // call with event_id and game_id from state,
+  updateGame: function (eventCount, game_id) {
+    // pass game id AND event count
+    return axios.put("/api/games/" + game_id, { event_count: eventCount });
+  },
+  // call with game id, event count AND status
+  updateGame: function (game_id, eventCount, status) {
+    return axios.put("/api/games/" + game_id, {
+      status: status,
+      event_count: eventCount,
+    });
+  },
 };

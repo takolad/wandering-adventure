@@ -19,23 +19,45 @@ router.post("/", async (req, res) => {
   }
 });
 
-// update game record // req should have event_count & character_id
+// update game record // req should have event_count & id (game)
 router.put("/:id", async (req, res) => {
   try {
-    updatedGame = await Game.update(
-      {
-        event_count: req.body.event_count,
-        character_id: req.body.character_id,
-        status: req.body.status,
-      },
-      {
-        where: {
-          id: req.params.id,
+    if (!req.body.status) {
+      const updatedGame = await Game.update(
+        {
+          event_count: req.body.event_count,
         },
+        {
+          where: {
+            id: req.params.id,
+          },
+        }
+      );
+      if (!updatedGame[0]) {
+        res.status(404).json({ message: "No matching game found." });
+        return;
       }
-    )
-      .then((updatedGame) => res.status(200).json(updatedGame))
-      .catch((err) => res.status(500).json(err));
+      res.status(200).json(updatedGame);
+    } else {
+      const updatedGame = await Game.update(
+        {
+          event_count: req.body.event_count,
+          status: req.body.status,
+        },
+        {
+          where: {
+            id: req.params.id,
+          },
+        }
+      );
+
+      if (!updatedGame[0]) {
+        res.status(404).json({ message: "No matchin game found." });
+        return;
+      }
+      console.log(updatedGame);
+      res.status(200).json(updatedGame);
+    }
   } catch (err) {
     res.status(500).json(err);
   }
