@@ -80,6 +80,7 @@ const Game = () => {
 
     const npcEvent = () => {
         setGameState({...gameState, phase:"exploring"})
+        setDisplayState({...displayState, text:"You continue down your path"})
     }
     
     // The battle between Comp and User
@@ -190,12 +191,12 @@ const Game = () => {
 
             {gameState.phase === "confirm" ? (
                 <Box component= "div" id="container">
-                    <Button id="red" onClick={() => confirmClick()}>To Battle!</Button>
+                    <Button id="red" onClick={() => confirmClick()}>Investigate</Button>
                 </Box>
             ): null }
 
             {gameState.phase === "NPC" ? (
-                <Box>
+                <Box component= "div" id="container">
                     <Button id="green" onClick={() => npcEvent()}>Continue</Button>
                 </Box>
             ): null }
