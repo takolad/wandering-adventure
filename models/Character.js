@@ -28,6 +28,7 @@ Character.init(
     },
     health: {
       type: DataTypes.INTEGER,
+      defaultValue: 100,
       validate: {
         min: 0,
         max: 100,

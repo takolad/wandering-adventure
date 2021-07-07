@@ -1,32 +1,79 @@
 [
     {
         "id": 1,
-        "description": "Test Description",
-        "text": "A wild test event happens before you!",
+        "type": "Combat",
+        "title": "Horrible Knight for a Fight",
+        "text": "A knight with a vendetta draws their weapon!",
         "imageUrl": ""
     },
     {
         "id": 2,
-        "description": "Additional Test Description",
+        "type": "Combat",
+        "title": "Hitchcock was right",
         "text": "You are attacked by a wild kite!",
         "imageUrl": ""
     },
     {
         "id": 3,
-        "description": "Third Test Description",
-        "text": "It's terminal, quite terminal!",
+        "type": "Combat",
+        "title": "Griffin",
+        "text": "You encounter a griffin!",
         "imageUrl": ""
     },
     {
         "id": 4,
-        "description": "To Shreds You Say",
-        "text": "\"A bandersnatch, in this place?\" you say to yourself before you are torn to shreds.",
+        "type": "Noncombat",
+        "title": "To Shreds You Say",
+        "text": "\"A bandersnatch, in this place?\" you say to yourself before you are torn to shreds. (You got better)",
         "imageUrl": ""
     },
     {
         "id": 5,
-        "description": "Final Test Description",
+        "type": "Noncombat",
+        "title": "Misplaced Keys",
         "text": "You've misplaced your keys and are late to work.",
+        "imageUrl": ""
+    },
+    {
+        "id": 6,
+        "type": "Noncombat",
+        "title": "Oh Jeralt",
+        "text": "A shine catches your eye from the ground. As you walk up to take a closer look you see it's a wolf medallion. \"Fudge\", you say.",
+        "imageUrl": ""
+    },
+    {
+        "id": 7,
+        "type": "Noncombat",
+        "title": "Wild Gophers",
+        "text": "A pack of wild gophers gets the jump on you, after an incredibly embarrassing de-pantsing incident you continue your journey.",
+        "imageUrl": ""
+    },
+    {
+        "id": 8,
+        "type": "Combat",
+        "title": "Encantar",
+        "text": "An enemy you find extremely attractive approaches you!",
+        "imageUrl": ""
+    },
+    {
+        "id": 9,
+        "type": "Noncombat",
+        "title": "Take Time",
+        "text": "You stop to take a moment for yourself. Shutting your eyes, you breathe in deep and slowly release. After a few breaths you carry on.",
+        "imageUrl": ""
+    },
+    {
+        "id": 10,
+        "type": "Combat",
+        "title": "SOAT",
+        "text": "A one meter tall spider wearing sneakers descends before you!",
+        "imageUrl": ""
+    },
+    {
+        "id": 11,
+        "type": "Combat",
+        "title": "Not The Bs",
+        "text": "You are struck from behind with a jar of honey. The sound of pitter-pattering feet and giggling grows distant as a honeybear takes flight and approaches from a nearby cave!",
         "imageUrl": ""
     }
 ]
