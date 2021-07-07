@@ -20,7 +20,7 @@ const useStyles = makeStyles({
         maxWidth: 400,
     },
     media: {
-        height: 140,
+        height: 400,
     },
 });
 export default function CharacterSelect() {
@@ -35,15 +35,15 @@ export default function CharacterSelect() {
                         <CardActionArea>
                             <CardMedia
                                 className={classes.media}
-                                image="/static/images/cards/contemplative-reptile.jpg"
-                                title="Contemplative Reptile"
+                                image="https://live.staticflickr.com/65535/51297013113_71c5d66e7d_w.jpg"
+                                title="https://www.deviantart.com/chaosringen/art/Swordman-536325555"
                             />
                             <CardContent>
                                 <Typography gutterBottom variant="h5" component="h2">
                                     Warrior
                                 </Typography>
                                 <Typography variant="body2" color="textSecondary" component="p">
-                                    A fierce swordsman on a quest to become the greatest knight in all the kingdom.
+                                    A fierce swordsman on a quest to become the greatest knight.
                                 </Typography>
                             </CardContent>
                             <Container>
@@ -58,8 +58,8 @@ export default function CharacterSelect() {
                         <CardActionArea>
                             <CardMedia
                                 className={classes.media}
-                                image="/static/images/cards/contemplative-reptile.jpg"
-                                title="Contemplative Reptile"
+                                image="https://live.staticflickr.com/65535/51296892783_ff5dc2707f_w.jpg"
+                                title="https://www.deviantart.com/gerryarthur/art/Leaena-573272592"
                             />
                             <CardContent>
                                 <Typography gutterBottom variant="h5" component="h2">
