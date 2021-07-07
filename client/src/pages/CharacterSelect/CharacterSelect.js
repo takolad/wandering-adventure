@@ -6,11 +6,18 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
+import Container from '@material-ui/core/Container';
+import FormField from '../../components/FormField';
+import SelectButton from '../../components/SelectButton';
 import './characterselect.css';
+
+
+
+
 
 const useStyles = makeStyles({
     root: {
-        maxWidth: 345,
+        maxWidth: 400,
     },
     media: {
         height: 140,
@@ -22,7 +29,7 @@ export default function CharacterSelect() {
     return (
         <div>
             <Grid container spacing={3}>
-            <Grid item sm={3} />
+                <Grid item sm={3} />
                 <Grid item sm={3}>
                     <Card className={classes.root}>
                         <CardActionArea>
@@ -36,10 +43,13 @@ export default function CharacterSelect() {
                                     Warrior
                                 </Typography>
                                 <Typography variant="body2" color="textSecondary" component="p">
-                                    Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
-                                    across all continents except Antarctica
+                                    A fierce swordsman on a quest to become the greatest knight in all the kingdom.
                                 </Typography>
                             </CardContent>
+                            <Container>
+                                <FormField />
+                                <SelectButton />
+                            </Container>
                         </CardActionArea>
                     </Card>
                 </Grid>
@@ -56,15 +66,17 @@ export default function CharacterSelect() {
                                     Mage
                                 </Typography>
                                 <Typography variant="body2" color="textSecondary" component="p">
-                                    Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
-                                    across all continents except Antarctica
+                                    A cunning mage, setting out on their first quest out of their apprenticeship.
                                 </Typography>
                             </CardContent>
+                            <Container>
+                                <FormField />
+                                <SelectButton />
+                            </Container>
                         </CardActionArea>
-
                     </Card>
                 </Grid>
-                <Grid item sm={3}/>
+                <Grid item sm={3} />
             </Grid>
         </div>
     );
