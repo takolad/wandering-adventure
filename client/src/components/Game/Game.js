@@ -77,6 +77,10 @@ const Game = () => {
     // const endGame = () => {
     //     i
     // }
+
+    const npcEvent = () => {
+        setGameState({...gameState, phase:"exploring"})
+    }
     
     // The battle between Comp and User
     const battle = () => {
@@ -138,7 +142,7 @@ const Game = () => {
     useEffect ( () => {
         if (gameState.currentMovement === gameState.maxMovement){
             setGameState({...gameState, phase:"confirm"})
-            setDisplayState({...displayState, text:"You've encountered an enemy!"})
+            setDisplayState({...displayState, text:"You've stumbled on to an event!"})
         }        
     }, [gameState.currentMovement]);
 
@@ -169,13 +173,11 @@ const Game = () => {
                 
             </Box>
             {gameState.phase === "encounter" ? (
-                <>
                 <Box component= "div" id="container">
                     <Button id='red' onClick={() => setUserState('rock')}>{redOptions[Math.floor(Math.random()*redOptions.length)]}</Button>
                     <Button id='blue' onClick={() => setUserState('paper')}>{blueOptions[Math.floor(Math.random()*blueOptions.length)]}</Button>
                     <Button id='green' onClick={() => setUserState('scissors')}>{greenOptions[Math.floor(Math.random()*greenOptions.length)]}</Button>
                 </Box>
-                </>
             ): null }
             
             {gameState.phase === "exploring" ? (
@@ -189,6 +191,12 @@ const Game = () => {
             {gameState.phase === "confirm" ? (
                 <Box component= "div" id="container">
                     <Button id="red" onClick={() => confirmClick()}>To Battle!</Button>
+                </Box>
+            ): null }
+
+            {gameState.phase === "NPC" ? (
+                <Box>
+                    <Button id="green" onClick={() => npcEvent()}>Continue</Button>
                 </Box>
             ): null }
 
