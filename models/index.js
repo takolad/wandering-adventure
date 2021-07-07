@@ -1,28 +1,41 @@
-// const User = require("./User");
 const NPC = require("./NPC");
 const Game = require("./Game");
 const Event = require("./Event");
 const Character = require("./Character");
+const EventLog = require("./EventLog");
 
-// User.hasMany(Character, {
-//   foreignKey: "user_id",
-//   onDelete: "CASCADE",
-// });
+Game.belongsToMany(Event, {
+  through: {
+    model: EventLog,
+    unique: false,
+  },
+  onDelete: "CASCADE",
+});
 
-// Character.belongsTo(User, {
-//   foreignKey: "user_id",
-// });
+Event.belongsToMany(Game, {
+  through: {
+    model: EventLog,
+    unique: false,
+  },
+  onDelete: "SET NULL",
+});
 
 Event.hasOne(NPC, {
   foreignKey: "event_id",
 });
 
-NPC.belongsTo(Event);
+NPC.belongsTo(Event, {
+  foreignKey: "event_id",
+});
 
-Character.hasOne(Game);
+Character.hasOne(Game, {
+  foreignKey: "character_id",
+  onDelete: "CASCADE",
+});
 
 Game.belongsTo(Character, {
   foreignKey: "character_id",
+  onDelete: "SET NULL",
 });
 
-module.exports = { Game, Character, Event, NPC };
+module.exports = { Game, Character, Event, NPC, EventLog };
