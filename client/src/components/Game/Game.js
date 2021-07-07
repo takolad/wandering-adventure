@@ -11,6 +11,7 @@ const Game = () => {
     const [userState, setUserState] = useState('');
     const [compState, setCompState] = useState('');
     const [displayState, setDisplayState] = useState({
+        title:"",
         text:"",
         image:""
     });
@@ -56,12 +57,16 @@ const Game = () => {
     
     // Handles click for the confirmation button/ Set up encounter
     const confirmClick = () => {
-        setGameState({...gameState, phase:"encounter"})
         //API call
         API.getRandomEvent()
             .then((res) => {
                 console.log(res.data)
-                setDisplayState({...displayState, text:res.data.text})
+                setDisplayState({...displayState, text:res.data.text, title:res.data.title})
+                if (res.data.type === "Combat") {
+                    setGameState({...gameState, phase:"encounter"})
+                } else if (res.data.type === "Noncombat") {
+                    setGameState({...gameState, phase:"NPC"})
+                }
             })
     }
 
@@ -69,9 +74,9 @@ const Game = () => {
         setGameState({...gameState, phase:"start"})
     }
 
-    const endGame = () => {
-        i
-    }
+    // const endGame = () => {
+    //     i
+    // }
     
     // The battle between Comp and User
     const battle = () => {
@@ -153,6 +158,11 @@ const Game = () => {
         <Card/>
         <Box component= "div" display="inline"className={classes.root}>
             <Box component= "div" id="mainGame">
+                <Box>
+                    <Typography id="text" variant="h6">
+                        {displayState.title}
+                    </Typography>
+                </Box>
                 <Typography id="text" className={classes.text} variant="h1">
                     {displayState.text}
                 </Typography>
@@ -160,12 +170,6 @@ const Game = () => {
             </Box>
             {gameState.phase === "encounter" ? (
                 <>
-                <Box component= "div" id="mainGame">
-                <Typography id="text" className={classes.text} variant="h1">
-                    {displayState.text}
-                </Typography>
-                <img src={displayState.image} alt="event"/>
-                </Box>
                 <Box component= "div" id="container">
                     <Button id='red' onClick={() => setUserState('rock')}>{redOptions[Math.floor(Math.random()*redOptions.length)]}</Button>
                     <Button id='blue' onClick={() => setUserState('paper')}>{blueOptions[Math.floor(Math.random()*blueOptions.length)]}</Button>
