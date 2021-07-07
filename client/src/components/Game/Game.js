@@ -10,15 +10,18 @@ import './game.css'
 const Game = () => {
     const [userState, setUserState] = useState('');
     const [compState, setCompState] = useState('');
+    const [enemyState, setEnemyState] = useState({
+        name:"enemy",
+        health:100
+    });
     const [displayState, setDisplayState] = useState({
         title:"",
         text:"",
         image:""
     });
     const [gameState, setGameState] = useState({
-        phase: "end",
-        endGameEncounters: 5,
-        encounterTitle:"",
+        phase: "encounter",
+        encounters: 0,
         userHealth: 100,
         maxMovement:7,
         currentMovement:0
@@ -74,13 +77,18 @@ const Game = () => {
         setGameState({...gameState, phase:"start"})
     }
 
-    // const endGame = () => {
-    //     i
-    // }
+    const battleCheck = () => {
+        if (gameState.userHealth === 0) {
+        setDisplayState({...displayState, text:"You've been defeated! Better luck next time!"});
+        setGameState({...gameState, phase:"end"});
+    } else if (enemyState.health === 0) {
+        setDisplayState({...displayState, text:"You defeated your Enemy! What direction do you want to go?", title:""});
+        setGameState({...gameState, encounters:gameState.encounters +1})
+    }}
 
     const npcEvent = () => {
         setGameState({...gameState, phase:"exploring"})
-        setDisplayState({...displayState, text:"You continue down your path"})
+        setDisplayState({...displayState, text:"You continue down your path", title:""})
     }
     
     // The battle between Comp and User
@@ -93,31 +101,37 @@ const Game = () => {
             console.log("rock wins!");
             setDisplayState({...displayState, text:"You defeated your Enemy! What direction do you want to go?"});
             setGameState({...gameState, phase:"exploring", maxMovement:gameState.currentMovement+Math.floor(Math.random() *10) +3});
+            setEnemyState({...enemyState, health:enemyState.health -10})
+            battleCheck()
 
           } else if (userState === "rock" && compState === "paper") {
             console.log("paper wins!");
-            setDisplayState({...displayState, text:"You've been defeated! Better luck next time!"});
-            setGameState({...gameState, userHealth:0, phase:"end"});
+            setGameState({...gameState, userHealth:gameState.userHealth -10})
+            battleCheck()
 
           } else if (userState === "scissors" && compState === "paper") {
             console.log("scissors wins!");
             setDisplayState({...displayState, text:"You defeated your Enemy! What direction do you want to go?"});
             setGameState({...gameState, phase:"exploring", maxMovement:gameState.currentMovement+Math.floor(Math.random() *10) +3});
+            setEnemyState({...enemyState, health:enemyState.health -10})
+            battleCheck()
 
           } else if (userState === "scissors" && compState === "rock") {
             console.log("rock wins!");
-            setDisplayState({...displayState, text:"You've been defeated! Better luck next time!"});
-            setGameState({...gameState, userHealth:0, phase:"end"});
+            setGameState({...gameState, userHealth:gameState.userHealth -10})
+            battleCheck()
 
           } else if (userState === "paper" && compState === "rock") {
             console.log("paper wins!");
             setDisplayState({...displayState, text:"You defeated your Enemy! What direction do you want to go?"});
             setGameState({...gameState, phase:"exploring", maxMovement:gameState.currentMovement+Math.floor(Math.random() *10) +3});
+            setEnemyState({...enemyState, health:enemyState.health -10})
+            battleCheck()
 
           } else if (userState === "paper" && compState === "scissors") {
             console.log("scissors wins!");
-            setDisplayState({...displayState, text:"You've been defeated! Better luck next time!"});
-            setGameState({...gameState, userHealth:0, phase:"end"});
+            setGameState({...gameState, userHealth:gameState.userHealth -10})
+            battleCheck()
 
           } else {
             console.log("It's a tie!")
@@ -126,11 +140,11 @@ const Game = () => {
     };
     
     // Start of the game
-    useEffect( () => {
-        setGameState({...gameState, phase:"start"})
-        setDisplayState({...displayState, text:"You awake from your sleep, all of your memories come rushing back to you, you know what you must do..."})
-        setGameState({...gameState, phase:"exploring"})
-    }, [])
+    // useEffect( () => {
+    //     setGameState({...gameState, phase:"start"})
+    //     setDisplayState({...displayState, text:"You awake from your sleep, all of your memories come rushing back to you, you know what you must do..."})
+    //     setGameState({...gameState, phase:"exploring"})
+    // }, [])
 
     // Helps with battle
     useEffect( () => {
@@ -147,13 +161,6 @@ const Game = () => {
         }        
     }, [gameState.currentMovement]);
 
-    // useEffect( () => {
-    //     if (gameState.phase === "end") {
-    //         return (
-
-    //         );
-    //     }
-    // })
 
     console.log(gameState.currentMovement);
     console.log(gameState.maxMovement);
@@ -168,7 +175,7 @@ const Game = () => {
                         {displayState.title}
                     </Typography>
                 </Box>
-                <Typography id="text" className={classes.text} variant="h1">
+                <Typography id="text" className={classes.text} variant="h3">
                     {displayState.text}
                 </Typography>
                 
