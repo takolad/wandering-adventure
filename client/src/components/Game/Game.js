@@ -68,6 +68,10 @@ const Game = () => {
     const restartGame = () => {
         setGameState({...gameState, phase:"start"})
     }
+
+    const endGame = () => {
+        i
+    }
     
     // The battle between Comp and User
     const battle = () => {
