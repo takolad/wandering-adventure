@@ -8,56 +8,87 @@ let gameData;
 // create new game record // req should have the character_id
 router.post("/", async (req, res) => {
   try {
-    const newGame = await Game.create({
+    newGame = await Game.create({
       character_id: req.body.character_id,
-    });
-
-    res.status(200).json(newGame);
+      status: "Active",
+    })
+      .then((newGame) => res.status(200).json(newGame))
+      .catch((err) => res.status(500).json(err));
   } catch (err) {
     res.status(500).json(err);
   }
 });
 
-// update game record // req should have event_count & character_id
+// update game record // req should have event_count & id (game)
 router.put("/:id", async (req, res) => {
   try {
-    const updatedGame = await Game.update(
-      {
-        event_count: req.body.event_count,
-        character_id: req.body.character_id,
-      },
-      {
-        where: {
-          id: req.params.id,
+    if (!req.body.status) {
+      const updatedGame = await Game.update(
+        {
+          event_count: req.body.event_count,
         },
+        {
+          where: {
+            id: req.params.id,
+          },
+        }
+      );
+      if (!updatedGame[0]) {
+        res.status(404).json({ message: "No matching game found." });
+        return;
       }
-    );
+      res.status(200).json(updatedGame);
+    } else {
+      const updatedGame = await Game.update(
+        {
+          event_count: req.body.event_count,
+          status: req.body.status,
+        },
+        {
+          where: {
+            id: req.params.id,
+          },
+        }
+      );
+
+      if (!updatedGame[0]) {
+        res.status(404).json({ message: "No matchin game found." });
+        return;
+      }
+      console.log(updatedGame);
+      res.status(200).json(updatedGame);
+    }
   } catch (err) {
     res.status(500).json(err);
   }
 });
 
-// get all active games
-// req should have user_id
+// get a users active games
 router.get("/active/:user_id", async (req, res) => {
   try {
-    const gameData = await Game.findAll({
+    gameData = await Game.findAll({
       where: {
-        // event_count: { [Op.lt]: 5 } // if game condition is # of events
         status: "Active",
       },
       include: [
         {
           model: Character,
           where: {
-            character_id: Character.id,
-            user_id: user_id, // does this work?
+            user_id: req.params.user_id,
           },
         },
       ],
     });
+
+    if (gameData.length < 1 || !gameData) {
+      res.status(404).json({ message: "No active games found for this user." });
+      return;
+    }
+
+    const games = gameData.map((game) => game.get({ plain: true }));
+    res.status(200).json(games);
   } catch (err) {
-    res.json(err);
+    res.status(500).json(err);
   }
 });
 
