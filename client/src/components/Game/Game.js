@@ -77,18 +77,18 @@ const Game = () => {
         setGameState({...gameState, phase:"start"})
     }
 
-    const battleCheck = () => {
+    const healthCheck = () => {
         if (gameState.userHealth === 0) {
         setDisplayState({...displayState, text:"You've been defeated! Better luck next time!"});
         setGameState({...gameState, phase:"end"});
     } else if (enemyState.health === 0) {
         setDisplayState({...displayState, text:"You defeated your Enemy! What direction do you want to go?", title:""});
-        setGameState({...gameState, encounters:gameState.encounters +1})
+        setGameState({...gameState, encounters:gameState.encounters +1, phase:"exploring", maxMovement:gameState.currentMovement+Math.floor(Math.random() *10) +3})
     }}
 
     const npcEvent = () => {
-        setGameState({...gameState, phase:"exploring"})
         setDisplayState({...displayState, text:"You continue down your path", title:""})
+        setGameState({...gameState, phase:"exploring", maxMovement:gameState.currentMovement+Math.floor(Math.random() *10) +3})
     }
     
     // The battle between Comp and User
@@ -98,40 +98,40 @@ const Game = () => {
         setCompState(choices[Math.floor(Math.random() * 3)])
 
         if (userState === "rock" && compState === "scissors") {
-            console.log("rock wins!");
-            setDisplayState({...displayState, text:"You defeated your Enemy! What direction do you want to go?"});
-            setGameState({...gameState, phase:"exploring", maxMovement:gameState.currentMovement+Math.floor(Math.random() *10) +3});
+            console.log("User wins");
+            setDisplayState({...displayState, text:"You drew blood!"});
             setEnemyState({...enemyState, health:enemyState.health -10})
-            battleCheck()
+            healthCheck()
 
           } else if (userState === "rock" && compState === "paper") {
-            console.log("paper wins!");
+            console.log("Comp wins");
+            setDisplayState({...displayState, text:"Your Enemy was to fast for you and struck you"})
             setGameState({...gameState, userHealth:gameState.userHealth -10})
-            battleCheck()
+            healthCheck()
 
           } else if (userState === "scissors" && compState === "paper") {
-            console.log("scissors wins!");
-            setDisplayState({...displayState, text:"You defeated your Enemy! What direction do you want to go?"});
-            setGameState({...gameState, phase:"exploring", maxMovement:gameState.currentMovement+Math.floor(Math.random() *10) +3});
+            console.log("User wins");
+            setDisplayState({...displayState, text:"You outsmarted your Enemy"});
             setEnemyState({...enemyState, health:enemyState.health -10})
-            battleCheck()
+            healthCheck()
 
           } else if (userState === "scissors" && compState === "rock") {
-            console.log("rock wins!");
+            console.log("Comp wins");
+            setDisplayState({...displayState, text:"Your were to slow this time"})
             setGameState({...gameState, userHealth:gameState.userHealth -10})
-            battleCheck()
+            healthCheck()
 
           } else if (userState === "paper" && compState === "rock") {
-            console.log("paper wins!");
-            setDisplayState({...displayState, text:"You defeated your Enemy! What direction do you want to go?"});
-            setGameState({...gameState, phase:"exploring", maxMovement:gameState.currentMovement+Math.floor(Math.random() *10) +3});
+            console.log("User wins");
+            setDisplayState({...displayState, text:"You hit the Enemy"});
             setEnemyState({...enemyState, health:enemyState.health -10})
-            battleCheck()
+            healthCheck()
 
           } else if (userState === "paper" && compState === "scissors") {
-            console.log("scissors wins!");
+            console.log("Com wins!");
+            setDisplayState({...displayState, text:"You've been hit"});
             setGameState({...gameState, userHealth:gameState.userHealth -10})
-            battleCheck()
+            healthCheck()
 
           } else {
             console.log("It's a tie!")
