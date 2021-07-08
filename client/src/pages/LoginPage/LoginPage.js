@@ -9,6 +9,7 @@ import { useAuth0 } from '@auth0/auth0-react';
 import { useHistory } from 'react-router-dom';
 // import Typography from '@material-ui/core/Typography';
 // import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+// import ParticleBackground from '../../Particles'
 import './loginpage.css';
 
 const useStyles = makeStyles((theme) => ({
@@ -65,19 +66,23 @@ export default function LoginPage() {
             justify="center"
             alignItems="center"
         >
-            <Grid item s={2} />
-            <Grid item s={6}>
+            <Grid item sm={2} />
+            <Grid item sm={6}>
                 <Card id='cardbox'>
                     <Container>
                         <div className={classes.root}>
                             <div id='login'>
                                 {/* <ThemeProvider theme={style}> */}
-                                    <h2>
-                                        Welcome to Wandering Adventure!
-                                   </h2>
-                                    <h3>
-                                        Click below to enter the Tavern of the Wanderer.
-                                        </h3>
+                                <h2>
+                                    Welcome to Wandering Adventure!
+                                </h2>
+                                <p>
+                                    A fun, immersive text adventure game where you pick your actions.<br/>
+                                    Enter the tavern to begin your journey and complete the quest!
+                                </p>
+                                <h3>
+                                    Click below to enter the Tavern of the Wanderer.
+                                </h3>
                                 {/* </ThemeProvider> */}
                                 <Container>
                                     <LoginButton />
@@ -87,10 +92,7 @@ export default function LoginPage() {
                     </Container>
                 </Card>
             </Grid>
-            <Grid item s={2} />
-
-
-
+            <Grid item sm={2} />
         </Grid>
 
     );

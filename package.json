@@ -26,7 +26,6 @@
   },
   "homepage": "https://github.com/madison-vega/wandering-adventure#readme",
   "dependencies": {
-    "argon2": "^0.28.2",
     "axios": "^0.21.1",
     "dotenv": "^10.0.0",
     "eslint": "^7.29.0",
