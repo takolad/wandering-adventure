@@ -29,7 +29,7 @@ export default function CharacterSelect() {
     return (
         <div>
             <Grid container spacing={3}>
-                <Grid item sm={2} />
+                <Grid item sm={3} />
                 <Grid item sm={3}>
                     <Card className={classes.root}>
                         <CardActionArea>
@@ -51,14 +51,6 @@ export default function CharacterSelect() {
                                 <SelectButton />
                             </Container>
                         </CardActionArea>
-                    </Card>
-                </Grid>
-                <Grid item sm={2}>
-                    <Card >
-                        <CardContent>
-                            <h2>Choose your character and add a custom name!</h2>
-                        </CardContent>
-
                     </Card>
                 </Grid>
                 <Grid item sm={3}>
@@ -84,7 +76,7 @@ export default function CharacterSelect() {
                         </CardActionArea>
                     </Card>
                 </Grid>
-                <Grid item sm={2} />
+                <Grid item sm={3} />
             </Grid>
         </div>
     );
