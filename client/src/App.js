@@ -64,10 +64,10 @@ function App() {
             component={CharacterSelect}
           />
 
-          <PrivateRoute
+          <Route
             exact
             path="/game"
-            auth={isAuthenticated}
+            // auth={isAuthenticated}
             component={Game}
           />
 

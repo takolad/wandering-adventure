@@ -12,7 +12,9 @@ const Game = () => {
     const [compState, setCompState] = useState('');
     const [enemyState, setEnemyState] = useState({
         name:"enemy",
-        health:100
+        health:100,
+        stamina:100,
+        mana:100
     });
     const [displayState, setDisplayState] = useState({
         title:"",
@@ -22,9 +24,10 @@ const Game = () => {
     const [gameState, setGameState] = useState({
         phase: "exploring",
         encounters: 0,
-        userHealth: 1,
+        seenEncounters: [],
+        userHealth: 100,
         maxMovement:7,
-        currentMovement:0
+        currentMovement:0, 
     });
     
     // Array for the battle options
@@ -57,20 +60,36 @@ const Game = () => {
         setDisplayState({...displayState, text:display}); 
         setGameState({...gameState, currentMovement:gameState.currentMovement+1})
     }
+
+    const eventDuplicate = (id) => {
+        if (gameState.seenEncounters.includes(id)) {
+            API.getRandomEvent()
+        }
+    }
     
     // Handles click for the confirmation button/ Set up encounter
-    const confirmClick = () => {
-        //API call
-        API.getRandomEvent()
-            .then((res) => {
-                console.log(res.data)
-                setDisplayState({...displayState, text:res.data.text, title:res.data.title})
-                if (res.data.type === "Combat") {
+    const confirmClick = async () => {
+        let flag = true
+        let event; 
+
+        do {
+             event = await API.getRandomEvent();
+
+            if (!gameState.seenEncounters.includes(event.id)) {
+                flag = false
+            }
+
+        } while (flag) 
+        
+        console.log(event)
+                gameState.seenEncounters.push(event.data.id)
+                setDisplayState({...displayState, text:event.data.text, title:event.data.title})
+                if (event.data.type === "Combat") {
                     setGameState({...gameState, phase:"encounter"})
-                } else if (res.data.type === "Noncombat") {
+                    setEnemyState({...enemyState, name:event.data.name})
+                } else if (event.data.type === "Noncombat") {
                     setGameState({...gameState, phase:"NPC"})
                 }
-            })
     }
 
     // Restarts the game
@@ -88,8 +107,9 @@ const Game = () => {
         setGameState({...gameState, phase:"end"});
     } else if (enemyState.health <= 0) {
         setDisplayState({...displayState, text:"You defeated your Enemy! What direction do you want to go?", title:""});
-        console.log(enemyState.health)
         setGameState({...gameState, encounters:gameState.encounters +1, phase:"exploring", maxMovement:gameState.currentMovement+Math.floor(Math.random() *10) +3})
+        setEnemyState({...enemyState, health:100})
+        // API Call to save the current progress
         console.log(gameState.encounters)
     }}
 
@@ -200,11 +220,28 @@ const Game = () => {
                 
             </Box>
             {gameState.phase === "encounter" ? (
+                <>
+                <Box component= "div" id="mainGame">
+                <Box>
+                    <Typography id="text" variant="h6">
+                        {displayState.title}
+                    </Typography>
+                </Box>
+                <Typography id="text" className={classes.text} variant="h3">
+                    {displayState.text}
+                </Typography>
+                <Typography>
+                    {enemyState.name}
+                    {enemyState.health}
+                </Typography>
+                
+                </Box>
                 <Box component= "div" id="container">
                     <Button id='red' onClick={() => setUserState('rock')}>{redOptions[Math.floor(Math.random()*redOptions.length)]}</Button>
                     <Button id='blue' onClick={() => setUserState('paper')}>{blueOptions[Math.floor(Math.random()*blueOptions.length)]}</Button>
                     <Button id='green' onClick={() => setUserState('scissors')}>{greenOptions[Math.floor(Math.random()*greenOptions.length)]}</Button>
                 </Box>
+                </>
             ): null }
             
             {gameState.phase === "exploring" ? (
