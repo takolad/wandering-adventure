@@ -117,15 +117,13 @@ router
           id: req.query.id,
           user_id: req.query.user_id,
         },
-        attributes: [
-          "id",
-          "name",
-          "bio",
-          "class",
-          "health",
-          "stamina",
-          "mana",
-          "user_id",
+        include: [
+          {
+            model: Game,
+            include: {
+              model: Event,
+            },
+          },
         ],
       }).then((characterData) => {
         if (!characterData) {
