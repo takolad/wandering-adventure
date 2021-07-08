@@ -22,7 +22,20 @@
 
 ## Credits
 
+Aside from React and the various packages it has associated with it, we also utilized some other npm packages, a React UI framework, and an authentication service. 
+
+[MySQL2](https://www.npmjs.com/package/mysql2)<br>
+[Sequelize](https://www.npmjs.com/package/sequelize)<br>
+[Material UI](https://material-ui.com/)<br>
+[Auth0](https://auth0.com/)<br>
+
+
 ## Collaborators
+
+[Gustavo Gonzalez](https://github.com/GonzalezG97)<br>
+[Madison Vega](https://github.com/madison-vega)<br>
+[John Hinojosa](https://github.com/takolad)<br>
+[Jeremiah Rogers](https://github.com/jerogers8789)<br>
 
 
 
@@ -53,5 +66,5 @@ SOFTWARE.
 
 ## Questions
 
-If you have any further questions please feel free to contact 
-You can also view my Github profile for further 
+If you have any further questions please feel free to view our Github Profiles and see all our contact info there.
+
