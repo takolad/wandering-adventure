@@ -20,12 +20,12 @@ const Game = () => {
         image:""
     });
     const [gameState, setGameState] = useState({
-        phase: "encounter",
+        phase: "exploring",
         encounters: 0,
-        userHealth: 100,
+        userHealth: 1,
         maxMovement:7,
         currentMovement:0
-    });  
+    });
     
     // Array for the battle options
     const redOptions = ["I try to hit them", "I start dancing like a butterfly", "I try to sting like a Bee", "Bite them in the ear"];
@@ -73,19 +73,27 @@ const Game = () => {
             })
     }
 
+    // Restarts the game
     const restartGame = () => {
-        setGameState({...gameState, phase:"start"})
+        setGameState({...gameState, phase:"exploring", userHealth:100, currentMovement:0, encounters:0})
+        console.log(gameState.userHealth)
+        console.log(gameState.phase)
+        setDisplayState({...displayState, text:"You awake from your sleep, all of your memories come rushing back to you, you know what you must do...", title:""})
     }
 
+    // Checks the health of players
     const healthCheck = () => {
-        if (gameState.userHealth === 0) {
+        if (gameState.userHealth <= 0) {
         setDisplayState({...displayState, text:"You've been defeated! Better luck next time!"});
         setGameState({...gameState, phase:"end"});
-    } else if (enemyState.health === 0) {
+    } else if (enemyState.health <= 0) {
         setDisplayState({...displayState, text:"You defeated your Enemy! What direction do you want to go?", title:""});
+        console.log(enemyState.health)
         setGameState({...gameState, encounters:gameState.encounters +1, phase:"exploring", maxMovement:gameState.currentMovement+Math.floor(Math.random() *10) +3})
+        console.log(gameState.encounters)
     }}
 
+    // This for the non Combat button
     const npcEvent = () => {
         setDisplayState({...displayState, text:"You continue down your path", title:""})
         setGameState({...gameState, phase:"exploring", maxMovement:gameState.currentMovement+Math.floor(Math.random() *10) +3})
@@ -101,50 +109,61 @@ const Game = () => {
             console.log("User wins");
             setDisplayState({...displayState, text:"You drew blood!"});
             setEnemyState({...enemyState, health:enemyState.health -10})
+            console.log("User health:" + gameState.userHealth);
+            console.log("Enemy health:" + enemyState.health);
             healthCheck()
 
           } else if (userState === "rock" && compState === "paper") {
             console.log("Comp wins");
+            console.log("Enemy health:" + enemyState.health)
             setDisplayState({...displayState, text:"Your Enemy was to fast for you and struck you"})
-            setGameState({...gameState, userHealth:gameState.userHealth -10})
+            setGameState({...gameState, userHealth:gameState.userHealth -5})
             healthCheck()
 
           } else if (userState === "scissors" && compState === "paper") {
             console.log("User wins");
             setDisplayState({...displayState, text:"You outsmarted your Enemy"});
             setEnemyState({...enemyState, health:enemyState.health -10})
+            console.log("User health:" + gameState.userHealth);
+            console.log("Enemy health:" + enemyState.health);
             healthCheck()
 
           } else if (userState === "scissors" && compState === "rock") {
             console.log("Comp wins");
             setDisplayState({...displayState, text:"Your were to slow this time"})
-            setGameState({...gameState, userHealth:gameState.userHealth -10})
+            setGameState({...gameState, userHealth:gameState.userHealth -5})
+            console.log("User health:" + gameState.userHealth);
+            console.log("Enemy health:" + enemyState.health);
             healthCheck()
 
           } else if (userState === "paper" && compState === "rock") {
             console.log("User wins");
             setDisplayState({...displayState, text:"You hit the Enemy"});
             setEnemyState({...enemyState, health:enemyState.health -10})
+            console.log("User health:" + gameState.userHealth);
+            console.log("Enemy health:" + enemyState.health);
             healthCheck()
 
           } else if (userState === "paper" && compState === "scissors") {
             console.log("Com wins!");
             setDisplayState({...displayState, text:"You've been hit"});
-            setGameState({...gameState, userHealth:gameState.userHealth -10})
+            setGameState({...gameState, userHealth:gameState.userHealth -5})
+            console.log("User health:" + gameState.userHealth);
+            console.log("Enemy health:" + enemyState.health);
             healthCheck()
 
           } else {
             console.log("It's a tie!")
             setDisplayState({...displayState, text:"Battle was fierce but you each held your own"})
+            healthCheck()
           }
     };
     
     // Start of the game
-    // useEffect( () => {
-    //     setGameState({...gameState, phase:"start"})
-    //     setDisplayState({...displayState, text:"You awake from your sleep, all of your memories come rushing back to you, you know what you must do..."})
-    //     setGameState({...gameState, phase:"exploring"})
-    // }, [])
+    useEffect( () => {
+        setDisplayState({...displayState, text:"You awake from your sleep, all of your memories come rushing back to you, you know what you must do..."})
+        setGameState({...gameState, phase:"exploring"})
+    }, [])
 
     // Helps with battle
     useEffect( () => {

@@ -51,10 +51,10 @@ function App() {
             component={HomePage}
           />
 
-          <Route
+          <PrivateRoute
             exact
             path="/game"
-            // auth={isAuthenticated}
+            auth={isAuthenticated}
             component={Game}
           />
 
