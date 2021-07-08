@@ -1,0 +1,91 @@
+import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import Card from '@material-ui/core/Card';
+import CardActionArea from '@material-ui/core/CardActionArea';
+import CardContent from '@material-ui/core/CardContent';
+import CardMedia from '@material-ui/core/CardMedia';
+import Typography from '@material-ui/core/Typography';
+import Grid from '@material-ui/core/Grid';
+import Container from '@material-ui/core/Container';
+import FormField from '../../components/FormField';
+import SelectButton from '../../components/SelectButton';
+import './characterselect.css';
+
+
+
+
+
+const useStyles = makeStyles({
+    root: {
+        maxWidth: 400,
+    },
+    media: {
+        height: 400,
+    },
+});
+export default function CharacterSelect() {
+    const classes = useStyles();
+
+    return (
+        <div>
+            <Grid container spacing={3}>
+                <Grid item sm={2} />
+                <Grid item sm={3}>
+                    <Card className={classes.root}>
+                        <CardActionArea>
+                            <CardMedia
+                                className={classes.media}
+                                image="https://live.staticflickr.com/65535/51297013113_71c5d66e7d_w.jpg"
+                                title="https://www.deviantart.com/chaosringen/art/Swordman-536325555"
+                            />
+                            <CardContent>
+                                <Typography gutterBottom variant="h5" component="h2">
+                                    Warrior
+                                </Typography>
+                                <Typography variant="body2" color="textSecondary" component="p">
+                                    A fierce swordsman on a quest to become the greatest knight.
+                                </Typography>
+                            </CardContent>
+                            <Container>
+                                <FormField />
+                                <SelectButton />
+                            </Container>
+                        </CardActionArea>
+                    </Card>
+                </Grid>
+                <Grid item sm={2}>
+                    <Card >
+                        <CardContent>
+                            <h2>Choose your character and add a custom name!</h2>
+                        </CardContent>
+
+                    </Card>
+                </Grid>
+                <Grid item sm={3}>
+                    <Card className={classes.root}>
+                        <CardActionArea>
+                            <CardMedia
+                                className={classes.media}
+                                image="https://live.staticflickr.com/65535/51296892783_ff5dc2707f_w.jpg"
+                                title="https://www.deviantart.com/gerryarthur/art/Leaena-573272592"
+                            />
+                            <CardContent>
+                                <Typography gutterBottom variant="h5" component="h2">
+                                    Mage
+                                </Typography>
+                                <Typography variant="body2" color="textSecondary" component="p">
+                                    A cunning mage, setting out on their first quest out of their apprenticeship.
+                                </Typography>
+                            </CardContent>
+                            <Container>
+                                <FormField />
+                                <SelectButton />
+                            </Container>
+                        </CardActionArea>
+                    </Card>
+                </Grid>
+                <Grid item sm={2} />
+            </Grid>
+        </div>
+    );
+};

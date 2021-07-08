@@ -1,14 +1,16 @@
 const router = require("express").Router();
-const { Event, Game } = require("../../models");
+const { Event, Game, NPC } = require("../../models");
 
 let eventData;
 
 // get a random event
 router.get("/random", async (req, res) => {
   try {
-    eventData = await Event.findAll({}).then((eventData) => {
-      res.json(eventData[Math.floor(Math.random() * eventData.length)]);
-    });
+    eventData = await Event.findAll({ include: [{ model: NPC }] }).then(
+      (eventData) => {
+        res.json(eventData[Math.floor(Math.random() * eventData.length)]);
+      }
+    );
   } catch (err) {
     res.status(500).json(err);
   }
@@ -19,8 +21,8 @@ router
   // get all events
   .get(async (req, res) => {
     try {
-      eventData = await Event.findAll({}).then((eventData) =>
-        res.status(200).json(eventData)
+      eventData = await Event.findAll({ include: [{ model: NPC }] }).then(
+        (eventData) => res.status(200).json(eventData)
       );
     } catch (err) {
       console.log(err);

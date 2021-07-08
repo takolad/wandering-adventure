@@ -1,7 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -11,16 +10,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function StartButton() {
+export default function SelectButton() {
     const classes = useStyles();
   
     return (
       <div className={classes.root}>
-        <Link to='/character'>
-        <Button variant="contained" color="secondary">
-          Start New Game
+        <Button variant="contained">
+          Confirm
         </Button>
-        </Link>
       </div>
     );
   }
