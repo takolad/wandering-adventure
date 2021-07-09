@@ -23,7 +23,9 @@ const Game = () => {
     const [displayState, setDisplayState] = useState({
         title:"",
         text:"",
-        image:""
+        image:"",
+        userEffect:0,
+        enemyEffect:0
     });
     const [gameState, setGameState] = useState({
         phase: "end",
@@ -31,7 +33,7 @@ const Game = () => {
         seenEncounters: [],
         userHealth: 100,
         maxMovement:7,
-        currentMovement:0, 
+        currentMovement:0 
     });
 
     
