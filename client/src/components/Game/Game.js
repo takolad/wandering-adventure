@@ -106,20 +106,6 @@ const Game = () => {
         setDisplayState({...displayState, text:"You awake from your sleep, all of your memories come rushing back to you, you know what you must do...", title:""})
     }
 
-    // Checks the health of players
-    // const healthCheck = () => {
-    //     if (gameState.userHealth <= 0) {
-    //     setDisplayState({...displayState, text:"You've been defeated! Better luck next time!"});
-    //     setGameState({...gameState, phase:"end"});
-    // } else if (enemyState.health <= 0) {
-    //     setDisplayState({...displayState, text:"You defeated your Enemy! What direction do you want to go?", title:""});
-    //     setGameState({...gameState, encounters:gameState.encounters +1, phase:"exploring", maxMovement:gameState.currentMovement+Math.floor(Math.random() *10) +3})
-    //     setEnemyState({...enemyState, health:100})
-    //     // API Call to save the current progress
-    //     API.updateGame(gameState)
-    //     console.log(gameState.encounters)
-    // }}
-
     // This for the non Combat events
     const npcEvent = () => {
         setDisplayState({...displayState, text:"You continue down your path", title:""})
@@ -136,53 +122,39 @@ const Game = () => {
             console.log("User wins");
             setDisplayState({...displayState, text:"You drew blood!", enemyEffect:"-10"});
             setEnemyState({...enemyState, health:enemyState.health -10})
-            console.log("User health:" + gameState.userHealth);
-            console.log("Enemy health:" + enemyState.health);
-            // healthCheck()
 
           } else if (userState.attack === "rock" && compState === "paper") {
             console.log("Comp wins");
-            console.log("Enemy health:" + enemyState.health)
             setDisplayState({...displayState, text:"Your Enemy was to fast for you and struck you", userEffect:"-5"})
             setGameState({...gameState, userHealth:gameState.userHealth -5})
-            // healthCheck()
-
+            
           } else if (userState.attack === "scissors" && compState === "paper") {
             console.log("User wins");
             setDisplayState({...displayState, text:"You outsmarted your Enemy", enemyEffect:"-10"});
             setEnemyState({...enemyState, health:enemyState.health -10})
-            console.log("User health:" + gameState.userHealth);
-            console.log("Enemy health:" + enemyState.health);
-            // healthCheck()
+            
 
           } else if (userState.attack === "scissors" && compState === "rock") {
             console.log("Comp wins");
             setDisplayState({...displayState, text:"Your were to slow this time", userEffect:"-5"})
             setGameState({...gameState, userHealth:gameState.userHealth -5})
-            console.log("User health:" + gameState.userHealth);
-            console.log("Enemy health:" + enemyState.health);
-            // healthCheck()
+            
 
           } else if (userState.attack === "paper" && compState === "rock") {
             console.log("User wins");
             setDisplayState({...displayState, text:"You hit the Enemy", enemyEffect:"-10"});
             setEnemyState({...enemyState, health:enemyState.health -10})
-            console.log("User health:" + gameState.userHealth);
-            console.log("Enemy health:" + enemyState.health);
-            // healthCheck()
+            
 
           } else if (userState.attack === "paper" && compState === "scissors") {
             console.log("Com wins!");
             setDisplayState({...displayState, text:"You've been hit", userEffect:"-5"});
             setGameState({...gameState, userHealth:gameState.userHealth -5})
-            console.log("User health:" + gameState.userHealth);
-            console.log("Enemy health:" + enemyState.health);
-            // healthCheck()
+            
 
           } else {
             console.log("It's a tie!")
             setDisplayState({...displayState, text:"Battle was fierce but you each held your own"})
-            // healthCheck()
           }
     };
     
@@ -192,6 +164,13 @@ const Game = () => {
     //     setGameState({...gameState, phase:"exploring"})
     // }, [])
 
+    // End the Game 
+    useEffect( () => {
+        if (gameState.encounters === 5) {
+            
+        }
+    }, [gameState.encounters])
+
     // Helps with battle
     useEffect( () => {
         if (userState.attack === "") return;
@@ -199,6 +178,7 @@ const Game = () => {
         setUserState({...userState, attack:""})
     }, [userState.attack]);
 
+    // Health check
     useEffect(() => {
         if (gameState.userHealth <= 0) {
             setDisplayState({...displayState, text:"You've been defeated! Better luck next time!"});
@@ -208,7 +188,7 @@ const Game = () => {
             setGameState({...gameState, encounters:gameState.encounters +1, phase:"exploring", maxMovement:gameState.currentMovement+Math.floor(Math.random() *10) +3})
             setEnemyState({...enemyState, health:100})
             // API Call to save the current progress
-            API.updateGame(gameState)
+            // API.updateGame(gameState)
             console.log(gameState.encounters)
         }
     }, [gameState.userHealth, enemyState.health])
@@ -220,6 +200,11 @@ const Game = () => {
             setDisplayState({...displayState, text:"You've stumbled on to an event!"})
         }        
     }, [gameState.currentMovement]);
+
+    // Add's effects
+    // useEffect(() => {
+    //     if ()
+    // }, [])
 
     const history = useHistory();
     const navigateTo = () => history.push("/")
@@ -265,7 +250,12 @@ const Game = () => {
                         <Paper>{displayState.userEffect}</Paper>
                     </Grid>
                     <Grid item xs={6}>
-                        <Paper>{displayState.enemyEffect}</Paper>
+                        <Paper>
+                        {enemyState.name}
+                        {enemyState.health}
+                        {displayState.enemyEffect}
+                            
+                        </Paper>
                     </Grid>
                 </Grid>
                 </div>
@@ -294,9 +284,31 @@ const Game = () => {
             ): null }
 
             {gameState.phase === "NPC" ? (
+                <>
+                <Box component= "div" id="mainGame">
+                    <Box>
+                        <Typography id="text" variant="h6">
+                        {displayState.title}
+                        </Typography>
+                    </Box>
+                    <Typography id="text" className={classes.text} variant="h3">
+                        {displayState.text}
+                    </Typography>
+                <div className={classes.root}>
+                    <Grid container spacing={3}>
+                        <Grid item xs={6}>
+                            <Paper>{displayState.userEffect}</Paper>
+                        </Grid>
+                        <Grid item xs={6}>
+                            <Paper>{displayState.enemyEffect}</Paper>
+                        </Grid>
+                    </Grid>
+                </div>
+                </Box>
                 <Box component= "div" id="container">
                     <Button id="green" onClick={() => npcEvent()}>Continue</Button>
                 </Box>
+                </>
             ): null }
 
             {gameState.phase === "end" ? (
