@@ -1,12 +1,14 @@
 import React, {useEffect, useState} from 'react';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
+import Paper from '@material-ui/core/Paper';
+import Grid from '@material-ui/core/Grid';
 import Card from '../CharacterCard/CharacterCard';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import API from '../../utils/API'
-import { useHistory } from "react-router-dom"
-import './game.css'
+import API from '../../utils/API';
+import { useHistory } from "react-router-dom";
+import './game.css';
 
 const Game = () => {
     const [userState, setUserState] = useState({
@@ -15,7 +17,7 @@ const Game = () => {
     });
     const [compState, setCompState] = useState('');
     const [enemyState, setEnemyState] = useState({
-        name:"enemy",
+        name:"",
         health:100,
         stamina:100,
         mana:100
@@ -24,11 +26,11 @@ const Game = () => {
         title:"",
         text:"",
         image:"",
-        userEffect:0,
-        enemyEffect:0
+        userEffect:"",
+        enemyEffect:""
     });
     const [gameState, setGameState] = useState({
-        phase: "end",
+        phase: "exploring",
         encounters: 0,
         seenEncounters: [],
         userHealth: 100,
@@ -48,17 +50,20 @@ const Game = () => {
     const leftText = ["You walk by a merchant", "You cross paths with an odd looking traveler", "You see a bear cub with their mother"];
 
     // Material UI Styling
-    const useStyles = makeStyles({
+    const useStyles = makeStyles((theme) => ({
         root: {
-            width: "862px",
-            left: "504px",
-            top: "158px",
-        },
+            flexGrow: 1,
+          },
         text: {
             color: "white",
             float: "right",
-        }
-    });
+        },
+        paper: {
+            // padding: theme.spacing(2),
+            textAlign: 'center',
+            // color: theme.palette.text.secondary,
+          },
+    }));
 
     const classes = useStyles()
 
@@ -129,7 +134,7 @@ const Game = () => {
 
         if (userState.attack === "rock" && compState === "scissors") {
             console.log("User wins");
-            setDisplayState({...displayState, text:"You drew blood!"});
+            setDisplayState({...displayState, text:"You drew blood!", enemyEffect:"-10"});
             setEnemyState({...enemyState, health:enemyState.health -10})
             console.log("User health:" + gameState.userHealth);
             console.log("Enemy health:" + enemyState.health);
@@ -138,13 +143,13 @@ const Game = () => {
           } else if (userState.attack === "rock" && compState === "paper") {
             console.log("Comp wins");
             console.log("Enemy health:" + enemyState.health)
-            setDisplayState({...displayState, text:"Your Enemy was to fast for you and struck you"})
+            setDisplayState({...displayState, text:"Your Enemy was to fast for you and struck you", userEffect:"-5"})
             setGameState({...gameState, userHealth:gameState.userHealth -5})
             healthCheck()
 
           } else if (userState.attack === "scissors" && compState === "paper") {
             console.log("User wins");
-            setDisplayState({...displayState, text:"You outsmarted your Enemy"});
+            setDisplayState({...displayState, text:"You outsmarted your Enemy", enemyEffect:"-10"});
             setEnemyState({...enemyState, health:enemyState.health -10})
             console.log("User health:" + gameState.userHealth);
             console.log("Enemy health:" + enemyState.health);
@@ -152,7 +157,7 @@ const Game = () => {
 
           } else if (userState.attack === "scissors" && compState === "rock") {
             console.log("Comp wins");
-            setDisplayState({...displayState, text:"Your were to slow this time"})
+            setDisplayState({...displayState, text:"Your were to slow this time", userEffect:"-5"})
             setGameState({...gameState, userHealth:gameState.userHealth -5})
             console.log("User health:" + gameState.userHealth);
             console.log("Enemy health:" + enemyState.health);
@@ -160,7 +165,7 @@ const Game = () => {
 
           } else if (userState.attack === "paper" && compState === "rock") {
             console.log("User wins");
-            setDisplayState({...displayState, text:"You hit the Enemy"});
+            setDisplayState({...displayState, text:"You hit the Enemy", enemyEffect:"-10"});
             setEnemyState({...enemyState, health:enemyState.health -10})
             console.log("User health:" + gameState.userHealth);
             console.log("Enemy health:" + enemyState.health);
@@ -168,7 +173,7 @@ const Game = () => {
 
           } else if (userState.attack === "paper" && compState === "scissors") {
             console.log("Com wins!");
-            setDisplayState({...displayState, text:"You've been hit"});
+            setDisplayState({...displayState, text:"You've been hit", userEffect:"-5"});
             setGameState({...gameState, userHealth:gameState.userHealth -5})
             console.log("User health:" + gameState.userHealth);
             console.log("Enemy health:" + enemyState.health);
@@ -223,6 +228,8 @@ const Game = () => {
                 </Typography>
                 
             </Box>
+
+            {/* Battle Phase */}
             {gameState.phase === "encounter" ? (
                 <>
                 <Box component= "div" id="mainGame">
@@ -238,6 +245,16 @@ const Game = () => {
                     {enemyState.name}
                     {enemyState.health}
                 </Typography>
+                <div className={classes.root}>
+                <Grid container spacing={3}>
+                    <Grid item xs={6}>
+                        <Paper>{displayState.userEffect}</Paper>
+                    </Grid>
+                    <Grid item xs={6}>
+                        <Paper>{displayState.enemyEffect}</Paper>
+                    </Grid>
+                </Grid>
+                </div>
                 
                 </Box>
                 <Box component= "div" id="container">
