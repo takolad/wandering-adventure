@@ -107,18 +107,18 @@ const Game = () => {
     }
 
     // Checks the health of players
-    const healthCheck = () => {
-        if (gameState.userHealth <= 0) {
-        setDisplayState({...displayState, text:"You've been defeated! Better luck next time!"});
-        setGameState({...gameState, phase:"end"});
-    } else if (enemyState.health <= 0) {
-        setDisplayState({...displayState, text:"You defeated your Enemy! What direction do you want to go?", title:""});
-        setGameState({...gameState, encounters:gameState.encounters +1, phase:"exploring", maxMovement:gameState.currentMovement+Math.floor(Math.random() *10) +3})
-        setEnemyState({...enemyState, health:100})
-        // API Call to save the current progress
-        API.updateGame(gameState)
-        console.log(gameState.encounters)
-    }}
+    // const healthCheck = () => {
+    //     if (gameState.userHealth <= 0) {
+    //     setDisplayState({...displayState, text:"You've been defeated! Better luck next time!"});
+    //     setGameState({...gameState, phase:"end"});
+    // } else if (enemyState.health <= 0) {
+    //     setDisplayState({...displayState, text:"You defeated your Enemy! What direction do you want to go?", title:""});
+    //     setGameState({...gameState, encounters:gameState.encounters +1, phase:"exploring", maxMovement:gameState.currentMovement+Math.floor(Math.random() *10) +3})
+    //     setEnemyState({...enemyState, health:100})
+    //     // API Call to save the current progress
+    //     API.updateGame(gameState)
+    //     console.log(gameState.encounters)
+    // }}
 
     // This for the non Combat events
     const npcEvent = () => {
@@ -138,14 +138,14 @@ const Game = () => {
             setEnemyState({...enemyState, health:enemyState.health -10})
             console.log("User health:" + gameState.userHealth);
             console.log("Enemy health:" + enemyState.health);
-            healthCheck()
+            // healthCheck()
 
           } else if (userState.attack === "rock" && compState === "paper") {
             console.log("Comp wins");
             console.log("Enemy health:" + enemyState.health)
             setDisplayState({...displayState, text:"Your Enemy was to fast for you and struck you", userEffect:"-5"})
             setGameState({...gameState, userHealth:gameState.userHealth -5})
-            healthCheck()
+            // healthCheck()
 
           } else if (userState.attack === "scissors" && compState === "paper") {
             console.log("User wins");
@@ -153,7 +153,7 @@ const Game = () => {
             setEnemyState({...enemyState, health:enemyState.health -10})
             console.log("User health:" + gameState.userHealth);
             console.log("Enemy health:" + enemyState.health);
-            healthCheck()
+            // healthCheck()
 
           } else if (userState.attack === "scissors" && compState === "rock") {
             console.log("Comp wins");
@@ -161,7 +161,7 @@ const Game = () => {
             setGameState({...gameState, userHealth:gameState.userHealth -5})
             console.log("User health:" + gameState.userHealth);
             console.log("Enemy health:" + enemyState.health);
-            healthCheck()
+            // healthCheck()
 
           } else if (userState.attack === "paper" && compState === "rock") {
             console.log("User wins");
@@ -169,7 +169,7 @@ const Game = () => {
             setEnemyState({...enemyState, health:enemyState.health -10})
             console.log("User health:" + gameState.userHealth);
             console.log("Enemy health:" + enemyState.health);
-            healthCheck()
+            // healthCheck()
 
           } else if (userState.attack === "paper" && compState === "scissors") {
             console.log("Com wins!");
@@ -177,12 +177,12 @@ const Game = () => {
             setGameState({...gameState, userHealth:gameState.userHealth -5})
             console.log("User health:" + gameState.userHealth);
             console.log("Enemy health:" + enemyState.health);
-            healthCheck()
+            // healthCheck()
 
           } else {
             console.log("It's a tie!")
             setDisplayState({...displayState, text:"Battle was fierce but you each held your own"})
-            healthCheck()
+            // healthCheck()
           }
     };
     
@@ -198,6 +198,20 @@ const Game = () => {
         battle(userState.attack)
         setUserState({...userState, attack:""})
     }, [userState.attack]);
+
+    useEffect(() => {
+        if (gameState.userHealth <= 0) {
+            setDisplayState({...displayState, text:"You've been defeated! Better luck next time!"});
+            setGameState({...gameState, phase:"end"});
+        } else if (enemyState.health <= 0) {
+            setDisplayState({...displayState, text:"You defeated your Enemy! What direction do you want to go?", title:""});
+            setGameState({...gameState, encounters:gameState.encounters +1, phase:"exploring", maxMovement:gameState.currentMovement+Math.floor(Math.random() *10) +3})
+            setEnemyState({...enemyState, health:100})
+            // API Call to save the current progress
+            API.updateGame(gameState)
+            console.log(gameState.encounters)
+        }
+    }, [gameState.userHealth, enemyState.health])
 
     // Checks user for encounter 
     useEffect ( () => {
@@ -215,7 +229,7 @@ const Game = () => {
 
     return (
         <div>
-        <Card/>
+        <Card name={userState.chrName} health={gameState.userHealth}/>
         <Box component= "div" display="inline"className={classes.root}>
             <Box component= "div" id="mainGame">
                 <Box>
