@@ -12,18 +12,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function FormField() {
-  const [name, setName] = React.useState('Enter name here');
+export default function FormField(props) {
   const classes = useStyles();
-
-  const handleChange = (event) => {
-    setName(event.target.value);
-  };
 
   return (
     <form className={classes.root} noValidate autoComplete="off">
       <FormControl variant="filled">
-        <FilledInput id="component-filled" value={name} onChange={handleChange} />
+        <FilledInput id="component-filled" value={props.value} onChange={props.onChange} name={props.name} />
       </FormControl>
     </form>
   );
