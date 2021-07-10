@@ -73,19 +73,6 @@ export default function CharacterSelect() {
                                 A fierce swordsman on a quest to become the greatest knight.
                             </Typography>
                         </CardContent>
-                        <Container>
-                            <FormField
-                                onChange={handleInputChange}
-                                name='warrior'
-                                value={formField.name}
-
-                            />
-                            <SelectButton
-                                disabled={!(formField.name)}
-                                onClick={(event) => formSubmit(event, 'warrior')}
-
-                            />
-                        </Container>
 
                     </Card>
                 </Grid>
@@ -112,17 +99,6 @@ export default function CharacterSelect() {
                                 A cunning mage, setting out on their first quest out of their apprenticeship.
                             </Typography>
                         </CardContent>
-                        <Container>
-                            <FormField
-                                onChange={handleInputChange}
-                                name='mage'
-                                value={formField.name}
-                            />
-                            <SelectButton
-                                disabled={!(formField.name)}
-                                onClick={(event) => formSubmit(event, 'mage')}
-                            />
-                        </Container>
                     </Card>
                 </Grid>
                 <Grid item sm={2} />
@@ -130,8 +106,3 @@ export default function CharacterSelect() {
         </div>
     );
 };
-
-
-
-
-
