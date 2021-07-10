@@ -1,31 +1,43 @@
 import React, {useEffect, useState} from 'react';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
+import Paper from '@material-ui/core/Paper';
+import Grid from '@material-ui/core/Grid';
 import Card from '../CharacterCard/CharacterCard';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import API from '../../utils/API'
-import './game.css'
+import API from '../../utils/API';
+import { useHistory, Link } from "react-router-dom";
+import './game.css';
 
 const Game = () => {
-    const [userState, setUserState] = useState('');
+    const [userState, setUserState] = useState({
+        attack:"",
+        chrName:""
+    });
     const [compState, setCompState] = useState('');
     const [enemyState, setEnemyState] = useState({
-        name:"enemy",
-        health:100
+        name:"",
+        health:100,
+        stamina:100,
+        mana:100
     });
     const [displayState, setDisplayState] = useState({
         title:"",
         text:"",
-        image:""
+        image:"",
+        userEffect:"",
+        enemyEffect:""
     });
     const [gameState, setGameState] = useState({
         phase: "exploring",
         encounters: 0,
-        userHealth: 1,
+        seenEncounters: [],
+        userHealth: 100,
         maxMovement:7,
-        currentMovement:0
+        currentMovement:0 
     });
+
     
     // Array for the battle options
     const redOptions = ["I try to hit them", "I start dancing like a butterfly", "I try to sting like a Bee", "Bite them in the ear"];
@@ -38,17 +50,20 @@ const Game = () => {
     const leftText = ["You walk by a merchant", "You cross paths with an odd looking traveler", "You see a bear cub with their mother"];
 
     // Material UI Styling
-    const useStyles = makeStyles({
+    const useStyles = makeStyles((theme) => ({
         root: {
-            width: "862px",
-            left: "504px",
-            top: "158px",
-        },
+            flexGrow: 1,
+          },
         text: {
             color: "white",
             float: "right",
-        }
-    });
+        },
+        paper: {
+            // padding: theme.spacing(2),
+            textAlign: 'center',
+            // color: theme.palette.text.secondary,
+          },
+    }));
 
     const classes = useStyles()
 
@@ -59,18 +74,28 @@ const Game = () => {
     }
     
     // Handles click for the confirmation button/ Set up encounter
-    const confirmClick = () => {
-        //API call
-        API.getRandomEvent()
-            .then((res) => {
-                console.log(res.data)
-                setDisplayState({...displayState, text:res.data.text, title:res.data.title})
-                if (res.data.type === "Combat") {
+    const confirmClick = async () => {
+        let flag = true
+        let event; 
+
+        do {
+             event = await API.getRandomEvent();
+
+            if (!gameState.seenEncounters.includes(event.id)) {
+                flag = false
+            }
+
+        } while (flag) 
+        
+        console.log(event)
+                gameState.seenEncounters.push(event.data.id)
+                setDisplayState({...displayState, text:event.data.text, title:event.data.title})
+                if (event.data.type === "Combat") {
                     setGameState({...gameState, phase:"encounter"})
-                } else if (res.data.type === "Noncombat") {
+                    setEnemyState({...enemyState, name:event.data.name})
+                } else if (event.data.type === "Noncombat") {
                     setGameState({...gameState, phase:"NPC"})
                 }
-            })
     }
 
     // Restarts the game
@@ -81,22 +106,10 @@ const Game = () => {
         setDisplayState({...displayState, text:"You awake from your sleep, all of your memories come rushing back to you, you know what you must do...", title:""})
     }
 
-    // Checks the health of players
-    const healthCheck = () => {
-        if (gameState.userHealth <= 0) {
-        setDisplayState({...displayState, text:"You've been defeated! Better luck next time!"});
-        setGameState({...gameState, phase:"end"});
-    } else if (enemyState.health <= 0) {
-        setDisplayState({...displayState, text:"You defeated your Enemy! What direction do you want to go?", title:""});
-        console.log(enemyState.health)
-        setGameState({...gameState, encounters:gameState.encounters +1, phase:"exploring", maxMovement:gameState.currentMovement+Math.floor(Math.random() *10) +3})
-        console.log(gameState.encounters)
-    }}
-
-    // This for the non Combat button
+    // This for the non Combat events
     const npcEvent = () => {
         setDisplayState({...displayState, text:"You continue down your path", title:""})
-        setGameState({...gameState, phase:"exploring", maxMovement:gameState.currentMovement+Math.floor(Math.random() *10) +3})
+        setGameState({...gameState, phase:"exploring", userHealth:gameState.userHealth + 10,maxMovement:gameState.currentMovement+Math.floor(Math.random() *10) +3})
     }
     
     // The battle between Comp and User
@@ -105,74 +118,82 @@ const Game = () => {
 
         setCompState(choices[Math.floor(Math.random() * 3)])
 
-        if (userState === "rock" && compState === "scissors") {
+        if (userState.attack === "rock" && compState === "scissors") {
             console.log("User wins");
-            setDisplayState({...displayState, text:"You drew blood!"});
+            setDisplayState({...displayState, text:"You drew blood!", enemyEffect:"-10"});
             setEnemyState({...enemyState, health:enemyState.health -10})
-            console.log("User health:" + gameState.userHealth);
-            console.log("Enemy health:" + enemyState.health);
-            healthCheck()
 
-          } else if (userState === "rock" && compState === "paper") {
+          } else if (userState.attack === "rock" && compState === "paper") {
             console.log("Comp wins");
-            console.log("Enemy health:" + enemyState.health)
-            setDisplayState({...displayState, text:"Your Enemy was to fast for you and struck you"})
+            setDisplayState({...displayState, text:"Your Enemy was to fast for you and struck you", userEffect:"-5"})
             setGameState({...gameState, userHealth:gameState.userHealth -5})
-            healthCheck()
-
-          } else if (userState === "scissors" && compState === "paper") {
+            
+          } else if (userState.attack === "scissors" && compState === "paper") {
             console.log("User wins");
-            setDisplayState({...displayState, text:"You outsmarted your Enemy"});
+            setDisplayState({...displayState, text:"You outsmarted your Enemy", enemyEffect:"-10"});
             setEnemyState({...enemyState, health:enemyState.health -10})
-            console.log("User health:" + gameState.userHealth);
-            console.log("Enemy health:" + enemyState.health);
-            healthCheck()
+            
 
-          } else if (userState === "scissors" && compState === "rock") {
+          } else if (userState.attack === "scissors" && compState === "rock") {
             console.log("Comp wins");
-            setDisplayState({...displayState, text:"Your were to slow this time"})
+            setDisplayState({...displayState, text:"Your were to slow this time", userEffect:"-5"})
             setGameState({...gameState, userHealth:gameState.userHealth -5})
-            console.log("User health:" + gameState.userHealth);
-            console.log("Enemy health:" + enemyState.health);
-            healthCheck()
+            
 
-          } else if (userState === "paper" && compState === "rock") {
+          } else if (userState.attack === "paper" && compState === "rock") {
             console.log("User wins");
-            setDisplayState({...displayState, text:"You hit the Enemy"});
+            setDisplayState({...displayState, text:"You hit the Enemy", enemyEffect:"-10"});
             setEnemyState({...enemyState, health:enemyState.health -10})
-            console.log("User health:" + gameState.userHealth);
-            console.log("Enemy health:" + enemyState.health);
-            healthCheck()
+            
 
-          } else if (userState === "paper" && compState === "scissors") {
+          } else if (userState.attack === "paper" && compState === "scissors") {
             console.log("Com wins!");
-            setDisplayState({...displayState, text:"You've been hit"});
+            setDisplayState({...displayState, text:"You've been hit", userEffect:"-5"});
             setGameState({...gameState, userHealth:gameState.userHealth -5})
-            console.log("User health:" + gameState.userHealth);
-            console.log("Enemy health:" + enemyState.health);
-            healthCheck()
+            
 
           } else {
             console.log("It's a tie!")
             setDisplayState({...displayState, text:"Battle was fierce but you each held your own"})
-            healthCheck()
           }
     };
     
     // Start of the game
+    // useEffect( () => {
+    //     setDisplayState({...displayState, text:"You awake from your sleep, all of your memories come rushing back to you, you know what you must do..."})
+    //     setGameState({...gameState, phase:"exploring"})
+    // }, [])
+
+    // End the Game 
     useEffect( () => {
-        setDisplayState({...displayState, text:"You awake from your sleep, all of your memories come rushing back to you, you know what you must do..."})
-        setGameState({...gameState, phase:"exploring"})
-    }, [])
+        if (gameState.encounters === 5) {
+
+        }
+    }, [gameState.encounters])
 
     // Helps with battle
     useEffect( () => {
-        if (userState === "") return;
-        battle(userState)
-        setUserState('')
-    }, [userState]);
+        if (userState.attack === "") return;
+        battle(userState.attack)
+        setUserState({...userState, attack:""})
+    }, [userState.attack]);
 
-    // Checks user encounter 
+    // Health check
+    useEffect(() => {
+        if (gameState.userHealth <= 0) {
+            setDisplayState({...displayState, text:"You've been defeated! Better luck next time!"});
+            setGameState({...gameState, phase:"end"});
+        } else if (enemyState.health <= 0) {
+            setDisplayState({...displayState, text:"You defeated your Enemy! What direction do you want to go?", title:""});
+            setGameState({...gameState, encounters:gameState.encounters +1, phase:"exploring", maxMovement:gameState.currentMovement+Math.floor(Math.random() *10) +3})
+            setEnemyState({...enemyState, health:100})
+            // API Call to save the current progress
+            // API.updateGame(gameState)
+            console.log(gameState.encounters)
+        }
+    }, [gameState.userHealth, enemyState.health])
+
+    // Checks user for encounter 
     useEffect ( () => {
         if (gameState.currentMovement === gameState.maxMovement){
             setGameState({...gameState, phase:"confirm"})
@@ -180,13 +201,20 @@ const Game = () => {
         }        
     }, [gameState.currentMovement]);
 
+    // Add's effects
+    // useEffect(() => {
+    //     if ()
+    // }, [])
+
+    const history = useHistory();
+    const navigateTo = () => history.push("/")
 
     console.log(gameState.currentMovement);
     console.log(gameState.maxMovement);
 
     return (
         <div>
-        <Card/>
+        <Card name={userState.chrName} health={gameState.userHealth}/>
         <Box component= "div" display="inline"className={classes.root}>
             <Box component= "div" id="mainGame">
                 <Box>
@@ -199,12 +227,46 @@ const Game = () => {
                 </Typography>
                 
             </Box>
+
+            {/* Battle Phase */}
             {gameState.phase === "encounter" ? (
-                <Box component= "div" id="container">
-                    <Button id='red' onClick={() => setUserState('rock')}>{redOptions[Math.floor(Math.random()*redOptions.length)]}</Button>
-                    <Button id='blue' onClick={() => setUserState('paper')}>{blueOptions[Math.floor(Math.random()*blueOptions.length)]}</Button>
-                    <Button id='green' onClick={() => setUserState('scissors')}>{greenOptions[Math.floor(Math.random()*greenOptions.length)]}</Button>
+                <>
+                <Box component= "div" id="mainGame">
+                <Box>
+                    <Typography id="text" variant="h6">
+                        {displayState.title}
+                    </Typography>
                 </Box>
+                <Typography id="text" className={classes.text} variant="h3">
+                    {displayState.text}
+                </Typography>
+                <Typography>
+                    {enemyState.name}
+                    {enemyState.health}
+                </Typography>
+                <div className={classes.root}>
+                <Grid container spacing={3}>
+                    <Grid item xs={6}>
+                        <Paper>{displayState.userEffect}</Paper>
+                    </Grid>
+                    <Grid item xs={6}>
+                        <Paper>
+                        {enemyState.name}
+                        {enemyState.health}
+                        {displayState.enemyEffect}
+                            
+                        </Paper>
+                    </Grid>
+                </Grid>
+                </div>
+                
+                </Box>
+                <Box component= "div" id="container">
+                    <Button id='red' onClick={() => setUserState({...userState, attack:'rock'})}>{redOptions[Math.floor(Math.random()*redOptions.length)]}</Button>
+                    <Button id='blue' onClick={() => setUserState({...userState, attack:'paper'})}>{blueOptions[Math.floor(Math.random()*blueOptions.length)]}</Button>
+                    <Button id='green' onClick={() => setUserState({...userState, attack:'scissors'})}>{greenOptions[Math.floor(Math.random()*greenOptions.length)]}</Button>
+                </Box>
+                </>
             ): null }
             
             {gameState.phase === "exploring" ? (
@@ -222,15 +284,41 @@ const Game = () => {
             ): null }
 
             {gameState.phase === "NPC" ? (
+                <>
+                <Box component= "div" id="mainGame">
+                    <Box>
+                        <Typography id="text" variant="h6">
+                        {displayState.title}
+                        </Typography>
+                    </Box>
+                    <Typography id="text" className={classes.text} variant="h3">
+                        {displayState.text}
+                    </Typography>
+                <div className={classes.root}>
+                    <Grid container spacing={3}>
+                        <Grid item xs={6}>
+                            <Paper>{displayState.userEffect}</Paper>
+                        </Grid>
+                        <Grid item xs={6}>
+                            <Paper>{displayState.enemyEffect}</Paper>
+                        </Grid>
+                    </Grid>
+                </div>
+                </Box>
                 <Box component= "div" id="container">
                     <Button id="green" onClick={() => npcEvent()}>Continue</Button>
                 </Box>
+                </>
             ): null }
 
             {gameState.phase === "end" ? (
                 <Box component= "div" id="container">
                     <Button id="red" onClick={() => restartGame()}>Try Again</Button>
-                    <Button id ="blue">Main Menu</Button>
+
+                        <Link to="/">
+                            <Button id ="blue">Main Menu</Button>
+                        </Link>
+                    
                 </Box>
             ): null }
                 

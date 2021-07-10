@@ -9,7 +9,7 @@ import Typography from '@material-ui/core/Typography';
 
 
 
-export default function MediaCard() {
+export default function MediaCard(props) {
 
   const useStyles = makeStyles({
     root: {
@@ -35,7 +35,10 @@ export default function MediaCard() {
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
-            Character Name
+            {props.name}
+          </Typography>
+          <Typography>
+            {props.health}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
             Character Bio: From the depths the King of the Centaur's Dvorak has risen. 
