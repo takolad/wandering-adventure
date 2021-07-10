@@ -4,21 +4,21 @@
         "type": "Combat",
         "title": "Horrible Knight for a Fight",
         "text": "A knight with a vendetta draws their weapon!",
-        "imageUrl": ""
+        "imageUrl": "https://i.pinimg.com/originals/ec/76/a6/ec76a6bc705d3b8620431b791ddbb761.jpg"
     },
     {
         "id": 2,
         "type": "Combat",
         "title": "Hitchcock was right",
         "text": "You are attacked by a wild kite!",
-        "imageUrl": ""
+        "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/2/2f/Milvus_migrans_2005-new.jpg"
     },
     {
         "id": 3,
         "type": "Combat",
         "title": "Griffin",
         "text": "You encounter a griffin!",
-        "imageUrl": ""
+        "imageUrl": "https://photo.kidzworld.com/images/2020323/8ccbee09-4440-47aa-9b49-b395c74dc10d/griffin-mythology-article.jpg"
     },
     {
         "id": 4,
