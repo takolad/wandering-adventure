@@ -39,11 +39,12 @@ router.get("/:id", async (req, res) => {
 
 // create character
 router.post("/", async (req, res) => {
+  console.log('postroutehit')
   const { name, bio } = req.body.characterData;
   const class_ = req.body.characterData.class;
   const userID = req.body.user_id;
 
-  if (class_ === "Warrior") {
+  if (class_ === "warrior") {
     try {
       characterData = await Character.create({
         name: name,
@@ -62,7 +63,7 @@ router.post("/", async (req, res) => {
     }
   }
 
-  if (class_ === "Mage") {
+  if (class_ === "mage") {
     try {
       characterData = await Character.create({
         name: name,

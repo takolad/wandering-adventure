@@ -10,12 +10,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SelectButton() {
+export default function SelectButton(props) {
     const classes = useStyles();
   
     return (
       <div className={classes.root}>
-        <Button variant="contained">
+        <Button variant="contained" onClick={props.onClick}>
           Confirm
         </Button>
       </div>
