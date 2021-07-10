@@ -7,7 +7,7 @@ import Card from '../CharacterCard/CharacterCard';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import API from '../../utils/API';
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import './game.css';
 
 const Game = () => {
@@ -167,7 +167,7 @@ const Game = () => {
     // End the Game 
     useEffect( () => {
         if (gameState.encounters === 5) {
-            
+
         }
     }, [gameState.encounters])
 
@@ -314,8 +314,10 @@ const Game = () => {
             {gameState.phase === "end" ? (
                 <Box component= "div" id="container">
                     <Button id="red" onClick={() => restartGame()}>Try Again</Button>
-                    
-                        <Button id ="blue" onClick={navigateTo}>Main Menu</Button>
+
+                        <Link to="/">
+                            <Button id ="blue">Main Menu</Button>
+                        </Link>
                     
                 </Box>
             ): null }
