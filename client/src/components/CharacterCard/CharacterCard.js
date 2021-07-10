@@ -13,10 +13,10 @@ export default function MediaCard(props) {
 
   const useStyles = makeStyles({
     root: {
-    width: "406.5px",
-    height: "698.18px",
-    left: "34.52px",
-    top: "130.41px"
+    // width: "406.5px",
+    // height: "698.18px",
+    // left: "34.52px",
+    // top: "130.41px"
     },
   });
   
@@ -29,8 +29,7 @@ export default function MediaCard(props) {
         <CardMedia
           id="character"
           component="img"
-          // height="150"
-          image="https://i.pinimg.com/474x/d0/90/08/d090082483f4dfe04ace7fdc07e3fe4c.jpg"
+          image="https://live.staticflickr.com/65535/51297013113_71c5d66e7d_w.jpg"
           title="Contemplative Reptile"
         />
         <CardContent>
