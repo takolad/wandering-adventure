@@ -75,5 +75,68 @@
         "title": "Not The Bs",
         "text": "You are struck from behind with a jar of honey. The sound of pitter-pattering feet and giggling grows distant as a honeybear takes flight and approaches from a nearby cave!",
         "imageUrl": ""
+    },
+    {
+        "id": 12,
+        "type":"Noncombat",
+        "title":"Oh Duck",
+        "text": "A raft of ducks approches you. They seem adorable and you attempt to feed them, but for them, peace was never an option and they take all of your food and dignity.",
+        "imageUrl": ""
+    },
+    {
+        "id": 13,
+        "type":"Combat",
+        "title":"Whale Shit",
+        "text":"You see an empty pier and approach the end of it to take in the fresh sea air, but your senses are assaulted by the scent of sulphur and whale feces. The demon whale, Monstro rises from the water to confront you.",
+        "imageUrl": ""
+    },
+    {
+        "id": 14,
+        "type": "Noncombat",
+        "title":"Merely a Fleshwound",
+        "text": "As you walk through the woods you come upon a small creek crossing with an odd-looking figure obstructing the path. Upon closer inspection you realize the figure is the former Champion known as the Black Knight who was defeated in a duel with King Arthur in which he tragically lost all of his limbs, but none of his attitude. You step over him and continue your journey.",
+        "imageUrl": ""
+    },
+    {
+        "id": 15,
+        "type":"Noncombat",
+        "title":"The One Ring",
+        "text":"You come upon a small pond and spot a shiny gold ring in the bottom, curious you reach into the water and pick it up and call it your precious",
+        "imageUrl":""
+    },
+    {
+        "id": 16,
+        "type":"Combat",
+        "title":"Pickle Rick",
+        "text":"You encounter an angry weaponized pickle named Rick",
+        "imageUrl": ""
+    },
+    {
+        "id": 17,
+        "type":"Noncombat",
+        "title":"Prickle Rick",
+        "text":"You encounter another angry pickle pickle but this time he's drunk and just insults you",
+        "imageUrl": ""
+    },
+    {
+        "id":18,
+        "type":"Noncombat",
+        "title":"Time for a drink",
+        "text": "You stop in at a nearby pub and proceed to drink away your sorrows",
+        "imageUrl": ""
+    },
+    {
+        "id":19,
+        "type":"Combat",
+        "title":"Big Oops",
+        "text":"You come across a large angry Giant",
+        "imageUrl":""
+    },
+    {
+        "id": 20,
+        "type":"Noncombat",
+        "title":"Kick Rocks",
+        "text":"Bummed about the lack of action, you mope along the road kicking rocks like a loser",
+        "imageUrl": ""
     }
 ]
