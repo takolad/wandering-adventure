@@ -36,7 +36,7 @@ export default function SaveSelect() {
         <div>
             <Grid container spacing={2}>
                 <Grid item sm={2} />
-                <Grid item sm={3}>
+                <Grid item sm={6}>
                     <Card className={classes.root}>
                         <CardContent>
                             <SaveList />
@@ -47,7 +47,6 @@ export default function SaveSelect() {
                 </Grid>
                 <Grid item sm={2} />
                 <Grid item sm={3} />
-                <Grid item sm={2} />
             </Grid>
         </div>
     );
