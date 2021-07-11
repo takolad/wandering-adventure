@@ -1,13 +1,12 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
-import Grid from '@material-ui/core/Grid';
-import Card from '@material-ui/core/Card';
-import StartButton from '../../components/StartButton';
-import ContinueButton from '../../components/ContinueButton';
-import { useAuth0 } from '@auth0/auth0-react'
-import './homepage.css'
-
+import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import Container from "@material-ui/core/Container";
+import Grid from "@material-ui/core/Grid";
+import Card from "@material-ui/core/Card";
+import StartButton from "../../components/StartButton";
+import ContinueButton from "../../components/ContinueButton";
+import { useAuth0 } from "@auth0/auth0-react";
+import "./homepage.css";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -38,7 +37,10 @@ export default function HomePage() {
           <Container>
             <div className={classes.root}>
               <div id="center">
-                <h2>Hi {user.name}! Make a selection.</h2>
+                <h2>
+                  Hi {user.given_name || user.nickname || user.name}! Make a
+                  selection.
+                </h2>
                 <Container>
                   <StartButton />
                   <ContinueButton />
@@ -49,7 +51,6 @@ export default function HomePage() {
         </Card>
       </Grid>
       <Grid item sm={2} />
-
     </Grid>
   );
 }
