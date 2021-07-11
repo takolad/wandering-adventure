@@ -20,14 +20,21 @@
 
 ## Usage
 
+[Deployed Application](https://wanderingadventure.herokuapp.com/)
+
+
 ## Credits
 
-Aside from React and the various packages it has associated with it, we also utilized some other npm packages, a React UI framework, and an authentication service. 
+Aside from React and the various packages it has associated with it, we also utilized some other npm packages, a React UI framework, and an authentication service. We also watched some tutorials to help guide us if we ran into any issues.
 
 [MySQL2](https://www.npmjs.com/package/mysql2)<br>
 [Sequelize](https://www.npmjs.com/package/sequelize)<br>
 [Material UI](https://material-ui.com/)<br>
 [Auth0](https://auth0.com/)<br>
+[Particles-js](https://www.npmjs.com/package/react-particles-js)<br>
+[Auth0 Tutorial](https://www.youtube.com/watch?v=MqczHS3Z2bc&t=1065s&ab_channel=codeSTACKr)<br>
+[Particles js Tutorial](https://www.youtube.com/watch?v=ordgGUgd2P0&ab_channel=BAE-BeingAverageEngineer)<br>
+
 
 
 ## Collaborators
