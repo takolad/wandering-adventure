@@ -1,3 +1,4 @@
+
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
@@ -7,6 +8,7 @@ import StartButton from "../../components/StartButton";
 import ContinueButton from "../../components/ContinueButton";
 import { useAuth0 } from "@auth0/auth0-react";
 import "./homepage.css";
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
