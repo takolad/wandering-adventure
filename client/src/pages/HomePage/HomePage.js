@@ -8,6 +8,7 @@ import StartButton from "../../components/StartButton";
 import ContinueButton from "../../components/ContinueButton";
 import { useAuth0 } from "@auth0/auth0-react";
 import "./homepage.css";
+import ParticleBackground from "../../Particles";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -32,27 +33,28 @@ export default function HomePage() {
   const userId = user.sub.split("|")[1];
   console.log("userId: ", userId);
   return (
-    <Grid container justify="center" alignItems="center">
-      <Grid item sm={2} />
-      <Grid item sm={6}>
-        <Card>
-          <Container>
-            <div className={classes.root}>
-              <div id="center">
-                <h2>
-                  Hi {user.given_name || user.nickname || user.name}! Make a
-                  selection.
-                </h2>
-                <Container>
-                  <StartButton />
-                  <ContinueButton />
-                </Container>
+      <Grid container justify="center" alignItems="center">
+        <Grid item sm={2} />
+        <Grid item sm={6}>
+          <Card>
+            <Container>
+              <div className={classes.root}>
+                <div id="center">
+                  <h2>
+                    Hi {user.given_name || user.nickname || user.name}! Make a
+                    selection.
+                  </h2>
+                  <Container>
+                    <StartButton />
+                    <ContinueButton />
+                  </Container>
+                </div>
               </div>
-            </div>
-          </Container>
-        </Card>
+            </Container>
+          </Card>
+          <ParticleBackground/>
+        </Grid>
+        <Grid item sm={2} />
       </Grid>
-      <Grid item sm={2} />
-    </Grid>
   );
 }

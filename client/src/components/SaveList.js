@@ -13,6 +13,7 @@ import FolderIcon from '@material-ui/icons/Folder';
 import DeleteIcon from '@material-ui/icons/Delete';
 import API from '../utils/API';
 import { useAuth0 } from '@auth0/auth0-react'
+import Button from '@material-ui/core/Button'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -27,14 +28,6 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-function generate(element) {
-    return [0, 1, 2].map((value) =>
-        React.cloneElement(element, {
-            key: value,
-        }),
-    );
-}
-
 export default function SaveList() {
     const [dense, setDense] = useState(false);
     const [secondary, setSecondary] = useState(false);
@@ -42,6 +35,7 @@ export default function SaveList() {
         character: []
 
     })
+    console.log(charState.character)
     useEffect(() => {
         loadChar()
     }, [])
@@ -52,11 +46,17 @@ export default function SaveList() {
             .catch(err => console.log(err))
     }
 
-    function deleteChar(id) {
-        API.deleteCharacter(id)
+    function deleteChar(id, user_id) {
+        API.deleteCharacter(id, user_id)
             .then(res => loadChar())
             .catch(err => console.log(err));
+        
     }
+
+    function charID() {
+        console.log(charState.character[0].id)
+    };
+
     const classes = useStyles();
 
     const { user } = useAuth0();
@@ -74,6 +74,7 @@ export default function SaveList() {
                             {charState.character.map(char => {
                                 return (
                                     <ListItem key={char.id}>
+                                        <Button onClick={charID()}>
                                         <ListItemAvatar>
                                             <Avatar>
                                                 <FolderIcon />
@@ -83,14 +84,13 @@ export default function SaveList() {
                                             primary={char.name}
                                             secondary={secondary ? 'Secondary text' : null}
                                         />
+                                        </Button>
                                         <ListItemSecondaryAction>
-                                            <IconButton edge="end" aria-label="delete" onclick={() => deleteChar(charState.character.id)}>
+                                            <IconButton edge="end" aria-label="delete" onClick={() => deleteChar(charState.character.id, charState.character.user_id)}>
                                                 <DeleteIcon />
                                             </IconButton>
                                         </ListItemSecondaryAction>
                                     </ListItem>
-
-
                                 )
                             })}
                         </List>
