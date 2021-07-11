@@ -12,7 +12,6 @@ NPC.init(
     name: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: true,
       validate: {
         len: [2, 60],
       },
@@ -22,6 +21,7 @@ NPC.init(
     },
     health: {
       type: DataTypes.INTEGER,
+      defaultValue: 100,
       validate: {
         min: 0,
         max: 100,

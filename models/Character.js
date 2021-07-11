@@ -13,7 +13,6 @@ Character.init(
     name: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: true,
       validate: {
         len: [1, 30],
         isAlpha: true,
