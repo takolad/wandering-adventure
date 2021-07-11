@@ -181,15 +181,6 @@
     },
     {
         "id": 21,
-        "name": "Caravan",
-        "bio": "A Caravan, with a broken wheel on the side of the road",
-        "health": 100,
-        "stamina": 100,
-        "mana": 0,
-        "event_id": 20
-    },
-    {
-        "id": 22,
         "name": "Monstro",
         "bio": "A giant whale lurking for its next meal",
         "health": 1,
