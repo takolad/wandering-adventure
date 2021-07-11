@@ -25,4 +25,15 @@
 
 #mainGame {
 background-color: #333333;
+height: 100%;
 }
+
+#gameSub {
+    height: 100%;
+}
+
+.buttons {
+    /* align-self: flex-end; */
+}
+
+

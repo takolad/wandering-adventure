@@ -115,14 +115,14 @@
         "id": 17,
         "type":"Noncombat",
         "title":"Prickle Rick",
-        "text":"You encounter another angry pickle pickle but this time he's drunk and just insults you",
+        "text":"You encounter another angry pickle but this time he's drunk and just insults you",
         "imageUrl": ""
     },
     {
         "id":18,
         "type":"Noncombat",
         "title":"Time for a drink",
-        "text": "You stop in at a nearby pub and proceed to drink away your sorrows",
+        "text": "You stop in at a nearby tavern and proceed to drink away your sorrows",
         "imageUrl": ""
     },
     {

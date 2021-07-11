@@ -8,7 +8,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import { useAuth0 } from "@auth0/auth0-react";
 import API from "../../utils/API";
-import { useHistory, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./game.css";
 
 const Game = () => {
@@ -39,8 +39,8 @@ const Game = () => {
     currentMovement: 0,
   });
 
-  const { user } = useAuth0();
-  const userId = user.sub.split("|")[1];
+//   const { user } = useAuth0();
+//   const userId = user.sub.split("|")[1];
 
   // Array for the battle options
   const redOptions = [
@@ -131,6 +131,7 @@ const Game = () => {
     } else if (event.data.type === "Noncombat") {
       setGameState({ ...gameState, phase: "NPC" });
     }
+    console.log("Seen encounters :" + gameState.seenEncounters)
   };
 
   // Restarts the game
@@ -232,11 +233,23 @@ const Game = () => {
 
   // Start of the game
   useEffect(() => {
+      API.getCharacter(1, 2).then((res) => {
+          console.log(res)
+          setUserState({ ...userState, chrName:res.data.name, health:res.data.health})
+          setGameState({...gameState, encounters: res.data.game.event_count, phase: "exploring"})
+      })
+      API.getSeenEvents(2).then((res) => {
+          console.log(res.data)
+          res.data.map(event => {
+                gameState.seenEncounters.push(event.id);
+              return 
+          })
+      })
     setDisplayState({
       ...displayState,
       text: "You awake from your sleep, all of your memories come rushing back to you, you know what you must do...",
     });
-    setGameState({ ...gameState, phase: "exploring" });
+    console.log(gameState.seenEncounters)
   }, []);
 
   // End the Game
@@ -251,6 +264,16 @@ const Game = () => {
     battle(userState.attack);
     setUserState({ ...userState, attack: "" });
   }, [userState.attack]);
+
+  const chr = {
+      health: 75,
+      id:2,
+      game: {
+          id:2
+      },
+      mana: 100,
+      stamina: 10
+  }
 
   // Health check
   useEffect(() => {
@@ -273,10 +296,11 @@ const Game = () => {
         maxMovement:
           gameState.currentMovement + Math.floor(Math.random() * 10) + 3,
       });
-      setEnemyState({ ...enemyState, health: 100 });
-      console.log(userId);
+      setEnemyState({ ...enemyState, health: 100, name: "" });
+    //   console.log(userId);
       // API Call to save the current progress
-      API.updateCharacter(1, 2, gameState.seenEncounters.lenght - 1);
+      API.updateCharacter(1, chr, gameState.seenEncounters[gameState.seenEncounters.length - 1] )
+        
       console.log(gameState.encounters);
     }
   }, [gameState.userHealth, enemyState.health]);
@@ -292,14 +316,6 @@ const Game = () => {
     }
   }, [gameState.currentMovement]);
 
-  // Add's effects
-  // useEffect(() => {
-  //     if ()
-  // }, [])
-
-  const history = useHistory();
-  const navigateTo = () => history.push("/");
-
   console.log(gameState.currentMovement);
   console.log(gameState.maxMovement);
 
@@ -308,22 +324,22 @@ const Game = () => {
       <Grid item xs={3}>
         <Card name={userState.chrName} health={gameState.userHealth} />
       </Grid>
-      <Grid item xs={9}>
+      <Grid item xs={9} justifyContent="space-between">
         <Box component="div" id="mainGame">
-          <Grid container direction="column">
-            <Grid item>
+          <Grid container id="gameSub">
+            <Grid item xs={12}>
               <Typography id="text" variant="h3">
                 {displayState.title}
               </Typography>
             </Grid>
 
-            <Grid item>
+            <Grid item xs={12}>
               <Typography id="text" className={classes.text} variant="h5">
                 {displayState.text}
               </Typography>
             </Grid>
 
-            <Grid item>
+            <Grid item class="buttons" xs={12}>
               {/* Battle Phase */}
               {gameState.phase === "encounter" ? (
                 <>
@@ -333,44 +349,21 @@ const Game = () => {
                       {enemyState.health}
                     </Typography>
                     <div className={classes.root}>
-                      <Grid container spacing={3}>
-                        <Grid item xs={6}>
-                          <Paper>{displayState.userEffect}</Paper>
-                        </Grid>
-                        <Grid item xs={6}>
-                          <Paper>
-                            {enemyState.name}
-                            {enemyState.health}
-                            {displayState.enemyEffect}
-                          </Paper>
-                        </Grid>
-                      </Grid>
-                    </div>
+                      
+                    </div> 
                   </Box>
                   <Box component="div" id="container">
                     <Button
                       id="red"
                       onClick={() =>
-                        setUserState({ ...userState, attack: "rock" })
-                      }
-                    >
-                      {
-                        redOptions[
-                          Math.floor(Math.random() * redOptions.length)
-                        ]
-                      }
+                        setUserState({ ...userState, attack: "rock" })}>
+                      {redOptions[Math.floor(Math.random() * redOptions.length)]}
                     </Button>
                     <Button
                       id="blue"
                       onClick={() =>
-                        setUserState({ ...userState, attack: "paper" })
-                      }
-                    >
-                      {
-                        blueOptions[
-                          Math.floor(Math.random() * blueOptions.length)
-                        ]
-                      }
+                        setUserState({ ...userState, attack: "paper" })}>
+                      {blueOptions[Math.floor(Math.random() * blueOptions.length)]}
                     </Button>
                     <Button
                       id="green"
@@ -433,20 +426,15 @@ const Game = () => {
               {gameState.phase === "NPC" ? (
                 <>
                   <Box component="div" id="mainGame">
-                    <Box>
-                      <Typography id="text" variant="h6">
-                        {displayState.title}
-                      </Typography>
-                    </Box>
                     <div className={classes.root}>
-                      <Grid container spacing={3}>
+                      {/* <Grid container spacing={3}>
                         <Grid item xs={6}>
                           <Paper>{displayState.userEffect}</Paper>
                         </Grid>
                         <Grid item xs={6}>
                           <Paper>{displayState.enemyEffect}</Paper>
                         </Grid>
-                      </Grid>
+                      </Grid> */}
                     </div>
                   </Box>
                   <Box component="div" id="container">
