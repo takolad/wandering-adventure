@@ -40,7 +40,7 @@ export default function MediaCard(props) {
             {props.health}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            Character Bio: From the depths the King of the Centaur's Dvorak has risen. 
+            {props.bio}
           </Typography>
         </CardContent>
       </CardActionArea>

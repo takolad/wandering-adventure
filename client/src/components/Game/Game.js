@@ -22,6 +22,7 @@ const Game = () => {
     health: 100,
     stamina: 100,
     mana: 100,
+    bio:""
   });
   const [displayState, setDisplayState] = useState({
     title: "",
@@ -127,7 +128,7 @@ const Game = () => {
     });
     if (event.data.type === "Combat") {
       setGameState({ ...gameState, phase: "encounter" });
-      setEnemyState({ ...enemyState, name: event.data.name });
+      setEnemyState({ ...enemyState, name: event.data.npc.name, health: event.data.npc.health, bio: event.data.npc.bio});
     } else if (event.data.type === "Noncombat") {
       setGameState({ ...gameState, phase: "NPC" });
     }
@@ -318,13 +319,14 @@ const Game = () => {
 
   console.log(gameState.currentMovement);
   console.log(gameState.maxMovement);
+  console.log(enemyState)
 
   return (
     <Grid container>
       <Grid item xs={3}>
         <Card name={userState.chrName} health={gameState.userHealth} />
       </Grid>
-      <Grid item xs={9} justifyContent="space-between">
+      <Grid item xs={6} justifyContent="space-between">
         <Box component="div" id="mainGame">
           <Grid container id="gameSub">
             <Grid item xs={12}>
@@ -458,6 +460,9 @@ const Game = () => {
             </Grid>
           </Grid>
         </Box>
+      </Grid>
+      <Grid item xs={3}>
+        <Card name={enemyState.name} health={enemyState.health} bio={enemyState.bio}/>
       </Grid>
     </Grid>
   );
