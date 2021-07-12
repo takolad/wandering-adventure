@@ -11,7 +11,7 @@
     {
         "id": 2,
         "name": "Magnus",
-        "bio": "A man who pratices the dark arts, you can barely can him a man now",
+        "bio": "A man who practices the dark arts, you can barely call him a man now",
         "health": 100,
         "stamina": 100,
         "mana": 100,
@@ -174,7 +174,7 @@
         "id": 20,
         "name": "Caravan",
         "bio": "A Caravan, with a broken wheel on the side of the road",
-        "health": 100,
+        "health": 60,
         "stamina": 100,
         "mana": 0,
         "event_id": 20

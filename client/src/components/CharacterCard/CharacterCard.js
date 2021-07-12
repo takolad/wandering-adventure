@@ -37,7 +37,7 @@ export default function MediaCard(props) {
             {props.name}
           </Typography>
           <Typography>
-            {props.health}
+            Health:{props.health}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
             {props.bio}

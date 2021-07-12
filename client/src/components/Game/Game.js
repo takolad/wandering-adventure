@@ -13,19 +13,19 @@ import "./game.css";
 const Game = () => {
   const [userState, setUserState] = useState({
     attack: "",
-    userID:"",
+    userID: "",
     chrName: "",
-    img:"https://live.staticflickr.com/65535/51297013113_71c5d66e7d_w.jpg",
-    bio:"A fierce swordsman on a quest to become the greatest knight."
+    img: "https://live.staticflickr.com/65535/51297013113_71c5d66e7d_w.jpg",
+    bio: "A fierce swordsman on a quest to become the greatest knight.",
   });
   const [compState, setCompState] = useState("");
   const [enemyState, setEnemyState] = useState({
-    name: "",
+    name: "The World",
     health: 1,
     stamina: 100,
     mana: 100,
-    bio: "",
-    img: "",
+    bio: "Explore the world!",
+    img: "https://i.pinimg.com/originals/55/15/8c/55158c9f1515b9f7afb257b312cc4e48.jpg",
   });
   const [displayState, setDisplayState] = useState({
     title: "",
@@ -133,7 +133,7 @@ const Game = () => {
       name: event.data.npc.name,
       health: event.data.npc.health,
       bio: event.data.npc.bio,
-      img: event.data.imageUrl
+      img: event.data.imageUrl,
     });
     if (event.data.type === "Combat") {
       setGameState({ ...gameState, phase: "encounter" });
@@ -174,6 +174,13 @@ const Game = () => {
       userHealth: gameState.userHealth + 10,
       maxMovement:
         gameState.currentMovement + Math.floor(Math.random() * 10) + 3,
+    });
+    setEnemyState({
+      ...enemyState,
+      health: 1,
+      bio: "Explore the world!",
+      name: "The World",
+      img: "https://i.pinimg.com/originals/55/15/8c/55158c9f1515b9f7afb257b312cc4e48.jpg",
     });
   };
 
@@ -244,15 +251,14 @@ const Game = () => {
   useEffect(() => {
     API.getCharacter(1, 2).then((res) => {
       console.log(res);
-      if (res.data.class === "Mage"){
+      if (res.data.class === "Mage") {
         setUserState({
           ...userState,
           chrName: res.data.name,
           health: res.data.health,
-          img:"https://live.staticflickr.com/65535/51296892783_ff5dc2707f_w.jpg",
-          bio:"A cunning mage, setting out on their first quest out of their apprenticeship."
+          img: "https://live.staticflickr.com/65535/51296892783_ff5dc2707f_w.jpg",
+          bio: "A cunning mage, setting out on their first quest out of their apprenticeship.",
         });
-
       }
       setGameState({
         ...gameState,
@@ -318,12 +324,18 @@ const Game = () => {
         maxMovement:
           gameState.currentMovement + Math.floor(Math.random() * 10) + 3,
       });
-      setEnemyState({ ...enemyState, health: 100, name: "" });
+      setEnemyState({
+        ...enemyState,
+        health: 100,
+        name: "The World",
+        bio: "Explore the world",
+        img: "https://i.pinimg.com/originals/55/15/8c/55158c9f1515b9f7afb257b312cc4e48.jpg",
+      });
       //   console.log(userId);
       // API Call to save the current progress
       API.updateCharacter(
-        1,
-        chr,
+        1, //userID
+        chr, //character object
         gameState.seenEncounters[gameState.seenEncounters.length - 1]
       );
 
@@ -349,7 +361,12 @@ const Game = () => {
   return (
     <Grid container>
       <Grid item xs={3}>
-        <Card name={userState.chrName} health={gameState.userHealth} img={userState.img} bio={userState.bio}/>
+        <Card
+          name={userState.chrName}
+          health={gameState.userHealth}
+          img={userState.img}
+          bio={userState.bio}
+        />
       </Grid>
       <Grid item xs={6} justifycontent="space-between">
         <Box component="div" id="mainGame">
