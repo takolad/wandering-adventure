@@ -35,7 +35,7 @@ const Game = () => {
   });
   const [gameState, setGameState] = useState({
     phase: "exploring",
-    encounters: 0,
+    encounters: 3,
     seenEncounters: [],
     userHealth: 100,
     maxMovement: 7,
@@ -152,12 +152,19 @@ const Game = () => {
       currentMovement: 0,
       encounters: 0,
     });
-    console.log(gameState.userHealth);
-    console.log(gameState.phase);
     setDisplayState({
       ...displayState,
       text: "You awake from your sleep, all of your memories come rushing back to you, you know what you must do...",
       title: "",
+    });
+    setEnemyState({
+      ...enemyState,
+      name: "The World",
+      health: 1,
+      stamina: 100,
+      mana: 100,
+      bio: "Explore the world!",
+      img: "https://i.pinimg.com/originals/55/15/8c/55158c9f1515b9f7afb257b312cc4e48.jpg",
     });
   };
 
@@ -262,7 +269,7 @@ const Game = () => {
       }
       setGameState({
         ...gameState,
-        encounters: res.data.game.event_count,
+        // encounters: res.data.game.event_count,
         phase: "exploring",
       });
     });
@@ -275,14 +282,33 @@ const Game = () => {
     });
     setDisplayState({
       ...displayState,
-      text: "You awake from your sleep, all of your memories come rushing back to you, you know what you must do...",
+      text: 'You suddenly appear on an island, you cant remember anything. You hear a voice in your head saying 3 enemys will attack you. You can feel this to be true in your bones. You decide that forward is the way out...',
+      title: "Who are you?"
     });
     console.log(gameState.seenEncounters);
   }, []);
 
-  // End the Game
+  // Boss Fight
   useEffect(() => {
-    if (gameState.encounters === 5) {
+    if (gameState.encounters === 4) {
+      setGameState({
+        ...gameState,
+        phase: "encounter",
+      });
+      setDisplayState({
+        ...displayState,
+        title: "Where am I!?",
+        text: "You are suddenly teleported infront of a dark Mage. You actually recognize the jewel on his staff, its the Fox Fire. It is Dragorim the black!" ,
+      });
+      setEnemyState({
+        ...enemyState,
+        name: "Dragorim the Black",
+        health: 120,
+        stamina: 100,
+        mana: 100,
+        bio: "The most notorious mage known for human sacrificing to draw more power. He draws all his power from the Fox Fire.",
+        img: "https://i.redd.it/z8juypra2ce31.jpg",
+      });
     }
   }, [gameState.encounters]);
 
@@ -356,7 +382,7 @@ const Game = () => {
 
   console.log(gameState.currentMovement);
   console.log(gameState.maxMovement);
-  console.log(enemyState);
+  console.log(gameState);
 
   return (
     <Grid container>
@@ -369,115 +395,110 @@ const Game = () => {
         />
       </Grid>
       <Grid item xs={6} justifycontent="space-between">
-        <Box component="div" id="mainGame">
-          <Grid container id="gameSub">
-            <Grid item xs={12}>
-              <Typography id="text" variant="h3">
-                {displayState.title}
-              </Typography>
-            </Grid>
+        <Grid container id="gameSub">
+          <Grid item xs={12}>
+            <Typography id="text" variant="h3">
+              {displayState.title}
+            </Typography>
+          </Grid>
 
-            <Grid item xs={12}>
-              <Typography id="text" className={classes.text} variant="h5">
-                {displayState.text}
-              </Typography>
-            </Grid>
+          <Grid item xs={12}>
+            <Typography id="text" className={classes.text} variant="h4">
+              {displayState.text}
+            </Typography>
+          </Grid>
 
-            <Grid item className="buttons" xs={12}>
-              {/* Battle Phase */}
-              {gameState.phase === "encounter" ? (
-                <>
-                  <Box component="div" id="mainGame">
-                    <div className={classes.root}></div>
-                  </Box>
-                  <Box component="div" id="container">
-                    <Button
-                      id="red"
-                      onClick={() =>
-                        setUserState({ ...userState, attack: "rock" })
-                      }
-                    >
-                      {
-                        redOptions[
-                          Math.floor(Math.random() * redOptions.length)
-                        ]
-                      }
-                    </Button>
-                    <Button
-                      id="blue"
-                      onClick={() =>
-                        setUserState({ ...userState, attack: "paper" })
-                      }
-                    >
-                      {
-                        blueOptions[
-                          Math.floor(Math.random() * blueOptions.length)
-                        ]
-                      }
-                    </Button>
-                    <Button
-                      id="green"
-                      onClick={() =>
-                        setUserState({ ...userState, attack: "scissors" })
-                      }
-                    >
-                      {
-                        greenOptions[
-                          Math.floor(Math.random() * greenOptions.length)
-                        ]
-                      }
-                    </Button>
-                  </Box>
-                </>
-              ) : null}
-              {gameState.phase === "exploring" ? (
+          <Grid item className="buttons" xs={12}>
+            {/* Battle Phase */}
+            {gameState.phase === "encounter" ? (
+              <>
+                <Box component="div" id="mainGame">
+                  <div className={classes.root}></div>
+                </Box>
                 <Box component="div" id="container">
                   <Button
                     id="red"
                     onClick={() =>
-                      exploringClick(
-                        leftText[Math.floor(Math.random() * leftText.length)]
-                      )
+                      setUserState({ ...userState, attack: "rock" })
                     }
                   >
-                    Left
+                    {redOptions[Math.floor(Math.random() * redOptions.length)]}
                   </Button>
                   <Button
                     id="blue"
                     onClick={() =>
-                      exploringClick(
-                        forwardText[
-                          Math.floor(Math.random() * forwardText.length)
-                        ]
-                      )
+                      setUserState({ ...userState, attack: "paper" })
                     }
                   >
-                    Forward
+                    {
+                      blueOptions[
+                        Math.floor(Math.random() * blueOptions.length)
+                      ]
+                    }
                   </Button>
                   <Button
                     id="green"
                     onClick={() =>
-                      exploringClick(
-                        rightText[Math.floor(Math.random() * rightText.length)]
-                      )
+                      setUserState({ ...userState, attack: "scissors" })
                     }
                   >
-                    Right
+                    {
+                      greenOptions[
+                        Math.floor(Math.random() * greenOptions.length)
+                      ]
+                    }
                   </Button>
                 </Box>
-              ) : null}
-              {gameState.phase === "confirm" ? (
-                <Box component="div" id="container">
-                  <Button id="red" onClick={() => confirmClick()}>
-                    Investigate
-                  </Button>
-                </Box>
-              ) : null}
-              {gameState.phase === "NPC" ? (
-                <>
-                  <Box component="div" id="mainGame">
-                    <div className={classes.root}>
-                      {/* <Grid container spacing={3}>
+              </>
+            ) : null}
+            {gameState.phase === "exploring" ? (
+              <Box component="div" id="container">
+                <Button
+                  id="red"
+                  onClick={() =>
+                    exploringClick(
+                      leftText[Math.floor(Math.random() * leftText.length)]
+                    )
+                  }
+                >
+                  Left
+                </Button>
+                <Button
+                  id="blue"
+                  onClick={() =>
+                    exploringClick(
+                      forwardText[
+                        Math.floor(Math.random() * forwardText.length)
+                      ]
+                    )
+                  }
+                >
+                  Forward
+                </Button>
+                <Button
+                  id="green"
+                  onClick={() =>
+                    exploringClick(
+                      rightText[Math.floor(Math.random() * rightText.length)]
+                    )
+                  }
+                >
+                  Right
+                </Button>
+              </Box>
+            ) : null}
+            {gameState.phase === "confirm" ? (
+              <Box component="div" id="container">
+                <Button id="red" onClick={() => confirmClick()}>
+                  Investigate
+                </Button>
+              </Box>
+            ) : null}
+            {gameState.phase === "NPC" ? (
+              <>
+                <Box component="div" id="mainGame">
+                  <div className={classes.root}>
+                    {/* <Grid container spacing={3}>
                         <Grid item xs={6}>
                           <Paper>{displayState.userEffect}</Paper>
                         </Grid>
@@ -485,29 +506,28 @@ const Game = () => {
                           <Paper>{displayState.enemyEffect}</Paper>
                         </Grid>
                       </Grid> */}
-                    </div>
-                  </Box>
-                  <Box component="div" id="container">
-                    <Button id="green" onClick={() => npcEvent()}>
-                      Continue
-                    </Button>
-                  </Box>
-                </>
-              ) : null}
-              {gameState.phase === "end" ? (
-                <Box component="div" id="container">
-                  <Button id="red" onClick={() => restartGame()}>
-                    Try Again
-                  </Button>
-
-                  <Link to="/">
-                    <Button id="blue">Main Menu</Button>
-                  </Link>
+                  </div>
                 </Box>
-              ) : null}
-            </Grid>
+                <Box component="div" id="container">
+                  <Button id="green" onClick={() => npcEvent()}>
+                    Continue
+                  </Button>
+                </Box>
+              </>
+            ) : null}
+            {gameState.phase === "end" ? (
+              <Box component="div" id="container">
+                <Button id="red" onClick={() => restartGame()}>
+                  Try Again
+                </Button>
+
+                <Link to="/">
+                  <Button id="blue">Main Menu</Button>
+                </Link>
+              </Box>
+            ) : null}
           </Grid>
-        </Box>
+        </Grid>
       </Grid>
       <Grid item xs={3}>
         <Card
