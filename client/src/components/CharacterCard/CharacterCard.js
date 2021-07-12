@@ -29,7 +29,7 @@ export default function MediaCard(props) {
         <CardMedia
           id="character"
           component="img"
-          image="https://live.staticflickr.com/65535/51297013113_71c5d66e7d_w.jpg"
+          image={props.img}
           title="Contemplative Reptile"
         />
         <CardContent>

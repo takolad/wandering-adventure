@@ -19,10 +19,11 @@ const Game = () => {
   const [compState, setCompState] = useState("");
   const [enemyState, setEnemyState] = useState({
     name: "",
-    health: 100,
+    health: 1,
     stamina: 100,
     mana: 100,
-    bio:""
+    bio: "",
+    img: "",
   });
   const [displayState, setDisplayState] = useState({
     title: "",
@@ -40,8 +41,8 @@ const Game = () => {
     currentMovement: 0,
   });
 
-//   const { user } = useAuth0();
-//   const userId = user.sub.split("|")[1];
+  //   const { user } = useAuth0();
+  //   const userId = user.sub.split("|")[1];
 
   // Array for the battle options
   const redOptions = [
@@ -126,13 +127,19 @@ const Game = () => {
       text: event.data.text,
       title: event.data.title,
     });
+    setEnemyState({
+      ...enemyState,
+      name: event.data.npc.name,
+      health: event.data.npc.health,
+      bio: event.data.npc.bio,
+      img: event.data.imageUrl
+    });
     if (event.data.type === "Combat") {
       setGameState({ ...gameState, phase: "encounter" });
-      setEnemyState({ ...enemyState, name: event.data.npc.name, health: event.data.npc.health, bio: event.data.npc.bio});
     } else if (event.data.type === "Noncombat") {
       setGameState({ ...gameState, phase: "NPC" });
     }
-    console.log("Seen encounters :" + gameState.seenEncounters)
+    console.log("Seen encounters :" + gameState.seenEncounters);
   };
 
   // Restarts the game
@@ -234,23 +241,31 @@ const Game = () => {
 
   // Start of the game
   useEffect(() => {
-      API.getCharacter(1, 2).then((res) => {
-          console.log(res)
-          setUserState({ ...userState, chrName:res.data.name, health:res.data.health})
-          setGameState({...gameState, encounters: res.data.game.event_count, phase: "exploring"})
-      })
-      API.getSeenEvents(2).then((res) => {
-          console.log(res.data)
-          res.data.map(event => {
-                gameState.seenEncounters.push(event.id);
-              return 
-          })
-      })
+    API.getCharacter(1, 2).then((res) => {
+      console.log(res);
+      setUserState({
+        ...userState,
+        chrName: res.data.name,
+        health: res.data.health,
+      });
+      setGameState({
+        ...gameState,
+        encounters: res.data.game.event_count,
+        phase: "exploring",
+      });
+    });
+    API.getSeenEvents(2).then((res) => {
+      console.log(res.data);
+      res.data.map((event) => {
+        gameState.seenEncounters.push(event.id);
+        return;
+      });
+    });
     setDisplayState({
       ...displayState,
       text: "You awake from your sleep, all of your memories come rushing back to you, you know what you must do...",
     });
-    console.log(gameState.seenEncounters)
+    console.log(gameState.seenEncounters);
   }, []);
 
   // End the Game
@@ -267,14 +282,14 @@ const Game = () => {
   }, [userState.attack]);
 
   const chr = {
-      health: 75,
-      id:2,
-      game: {
-          id:2
-      },
-      mana: 100,
-      stamina: 10
-  }
+    health: 75,
+    id: 2,
+    game: {
+      id: 2,
+    },
+    mana: 100,
+    stamina: 10,
+  };
 
   // Health check
   useEffect(() => {
@@ -298,10 +313,14 @@ const Game = () => {
           gameState.currentMovement + Math.floor(Math.random() * 10) + 3,
       });
       setEnemyState({ ...enemyState, health: 100, name: "" });
-    //   console.log(userId);
+      //   console.log(userId);
       // API Call to save the current progress
-      API.updateCharacter(1, chr, gameState.seenEncounters[gameState.seenEncounters.length - 1] )
-        
+      API.updateCharacter(
+        1,
+        chr,
+        gameState.seenEncounters[gameState.seenEncounters.length - 1]
+      );
+
       console.log(gameState.encounters);
     }
   }, [gameState.userHealth, enemyState.health]);
@@ -319,7 +338,7 @@ const Game = () => {
 
   console.log(gameState.currentMovement);
   console.log(gameState.maxMovement);
-  console.log(enemyState)
+  console.log(enemyState);
 
   return (
     <Grid container>
@@ -346,26 +365,32 @@ const Game = () => {
               {gameState.phase === "encounter" ? (
                 <>
                   <Box component="div" id="mainGame">
-                    <Typography>
-                      {enemyState.name}
-                      {enemyState.health}
-                    </Typography>
-                    <div className={classes.root}>
-                      
-                    </div> 
+                    <div className={classes.root}></div>
                   </Box>
                   <Box component="div" id="container">
                     <Button
                       id="red"
                       onClick={() =>
-                        setUserState({ ...userState, attack: "rock" })}>
-                      {redOptions[Math.floor(Math.random() * redOptions.length)]}
+                        setUserState({ ...userState, attack: "rock" })
+                      }
+                    >
+                      {
+                        redOptions[
+                          Math.floor(Math.random() * redOptions.length)
+                        ]
+                      }
                     </Button>
                     <Button
                       id="blue"
                       onClick={() =>
-                        setUserState({ ...userState, attack: "paper" })}>
-                      {blueOptions[Math.floor(Math.random() * blueOptions.length)]}
+                        setUserState({ ...userState, attack: "paper" })
+                      }
+                    >
+                      {
+                        blueOptions[
+                          Math.floor(Math.random() * blueOptions.length)
+                        ]
+                      }
                     </Button>
                     <Button
                       id="green"
@@ -462,7 +487,12 @@ const Game = () => {
         </Box>
       </Grid>
       <Grid item xs={3}>
-        <Card name={enemyState.name} health={enemyState.health} bio={enemyState.bio}/>
+        <Card
+          name={enemyState.name}
+          health={enemyState.health}
+          bio={enemyState.bio}
+          img={enemyState.img}
+        />
       </Grid>
     </Grid>
   );
