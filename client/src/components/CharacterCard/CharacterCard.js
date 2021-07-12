@@ -30,7 +30,7 @@ export default function MediaCard(props) {
           id="character"
           component="img"
           image={props.img}
-          title="Contemplative Reptile"
+          title="Wandering Adventure"
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">

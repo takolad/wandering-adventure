@@ -183,7 +183,7 @@
         "id": 21,
         "name": "Monstro",
         "bio": "A giant whale lurking for its next meal",
-        "health": 1,
+        "health": 100,
         "stamina": 100,
         "mana": 0,
         "event_id": 13

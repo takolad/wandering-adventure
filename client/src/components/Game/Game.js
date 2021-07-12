@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
-import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import Card from "../CharacterCard/CharacterCard";
 import { makeStyles } from "@material-ui/core/styles";
@@ -14,7 +13,10 @@ import "./game.css";
 const Game = () => {
   const [userState, setUserState] = useState({
     attack: "",
+    userID:"",
     chrName: "",
+    img:"https://live.staticflickr.com/65535/51297013113_71c5d66e7d_w.jpg",
+    bio:"A fierce swordsman on a quest to become the greatest knight."
   });
   const [compState, setCompState] = useState("");
   const [enemyState, setEnemyState] = useState({
@@ -28,7 +30,6 @@ const Game = () => {
   const [displayState, setDisplayState] = useState({
     title: "",
     text: "",
-    image: "",
     userEffect: "",
     enemyEffect: "",
   });
@@ -243,11 +244,16 @@ const Game = () => {
   useEffect(() => {
     API.getCharacter(1, 2).then((res) => {
       console.log(res);
-      setUserState({
-        ...userState,
-        chrName: res.data.name,
-        health: res.data.health,
-      });
+      if (res.data.class === "Mage"){
+        setUserState({
+          ...userState,
+          chrName: res.data.name,
+          health: res.data.health,
+          img:"https://live.staticflickr.com/65535/51296892783_ff5dc2707f_w.jpg",
+          bio:"A cunning mage, setting out on their first quest out of their apprenticeship."
+        });
+
+      }
       setGameState({
         ...gameState,
         encounters: res.data.game.event_count,
@@ -343,9 +349,9 @@ const Game = () => {
   return (
     <Grid container>
       <Grid item xs={3}>
-        <Card name={userState.chrName} health={gameState.userHealth} />
+        <Card name={userState.chrName} health={gameState.userHealth} img={userState.img} bio={userState.bio}/>
       </Grid>
-      <Grid item xs={6} justifyContent="space-between">
+      <Grid item xs={6} justifycontent="space-between">
         <Box component="div" id="mainGame">
           <Grid container id="gameSub">
             <Grid item xs={12}>
@@ -360,7 +366,7 @@ const Game = () => {
               </Typography>
             </Grid>
 
-            <Grid item class="buttons" xs={12}>
+            <Grid item className="buttons" xs={12}>
               {/* Battle Phase */}
               {gameState.phase === "encounter" ? (
                 <>
