@@ -298,16 +298,37 @@ const Game = () => {
       setDisplayState({
         ...displayState,
         title: "Where am I!?",
-        text: "You are suddenly teleported infront of a dark Mage. You actually recognize the jewel on his staff, its the Fox Fire. It is Dragorim the black!" ,
+        text: "You are suddenly teleported infront of a dark Mage. You actually recognize the jewel on his staff, its the Fox Fire. It is Dragorim the Black!" ,
       });
       setEnemyState({
         ...enemyState,
         name: "Dragorim the Black",
-        health: 120,
+        health: 1,
         stamina: 100,
         mana: 100,
         bio: "The most notorious mage known for human sacrificing to draw more power. He draws all his power from the Fox Fire.",
         img: "https://i.redd.it/z8juypra2ce31.jpg",
+      });
+    }
+
+    if (gameState.encounters === 5) {
+      setGameState({
+        ...gameState,
+        phase: "end",
+      });
+      setDisplayState({
+        ...displayState,
+        title: "I need a drink",
+        text: "You defeated, Dragorim! You grab and smash the Fox Fire to peaces. You are suddenly teleported outside of a tavern. All of your memories come back, you remember you were here with your companions. As you walk in you are being called to a table by your companions saying hurry up it is your turn!" ,
+      });
+      setEnemyState({
+        ...enemyState,
+        name: "The Winking Skeever",
+        health: 1,
+        stamina: 100,
+        mana: 100,
+        bio: "The regular meeting spot for your group, Rebels of Fortune.",
+        img: "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/d297121a-919b-4f18-9163-78f08879b333/d7exfcc-8877ab0e-31c7-4be8-b5cf-2a44e2b65631.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2QyOTcxMjFhLTkxOWItNGYxOC05MTYzLTc4ZjA4ODc5YjMzM1wvZDdleGZjYy04ODc3YWIwZS0zMWM3LTRiZTgtYjVjZi0yYTQ0ZTJiNjU2MzEuanBnIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.9uNrg5ItCE1-SV_LEmovKxPrpf_AOZuP9MRLxL3Yzq4",
       });
     }
   }, [gameState.encounters]);
