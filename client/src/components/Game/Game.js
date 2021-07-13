@@ -180,8 +180,8 @@ const Game = () => {
     setEnemyState({
       ...enemyState,
       health: 1,
-      bio: "Explore the world!",
-      name: "The World",
+      bio: "Keep eyes in the back of your head",
+      name: "The Island",
       img: "https://i.pinimg.com/originals/55/15/8c/55158c9f1515b9f7afb257b312cc4e48.jpg",
     });
   };
@@ -325,8 +325,8 @@ const Game = () => {
       setEnemyState({
         ...enemyState,
         health: 100,
-        name: "The World",
-        bio: "Explore the world",
+        name: "The Island",
+        bio: "You find that there not all enemys",
         img: "https://i.pinimg.com/originals/55/15/8c/55158c9f1515b9f7afb257b312cc4e48.jpg",
       });
       //   console.log(userId);
