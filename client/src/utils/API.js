@@ -55,12 +55,12 @@ export default {
     return axios.get("/api/games/active/" + user_id);
   },
   // call with event_id and game_id from state,
-  updateGame: function (eventCount, game_id) {
+  updateGame: function (game_id, eventCount) {
     // pass game id AND event count
     return axios.put("/api/games/" + game_id, { event_count: eventCount });
-  }, 
+  },
   // call with game id, event count AND status
-  updateGame: function (game_id, eventCount, status) {
+  updateGameFull: function (game_id, eventCount, status) {
     return axios.put("/api/games/" + game_id, {
       status: status,
       event_count: eventCount,
