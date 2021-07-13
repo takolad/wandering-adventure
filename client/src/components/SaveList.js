@@ -14,6 +14,8 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import API from '../utils/API';
 import { useAuth0 } from '@auth0/auth0-react'
 import Button from '@material-ui/core/Button'
+import mage from '../pages/CharacterSelect/mage.jpeg'
+import warrior from '../pages/CharacterSelect/warrior.jpeg'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -79,7 +81,7 @@ export default function SaveList() {
                                         <Link to={`/game/${char.id}/user/${char.user_id}`}>
                                             <Button onClick={() => charID()}>
                                                 <ListItemAvatar>
-                                                    <Avatar />
+                                                    {(char.class === 'mage' ? <Avatar src={mage} /> : <Avatar src={warrior} />)}
                                                 </ListItemAvatar>
                                                 <ListItemText
                                                     primary={char.name}
