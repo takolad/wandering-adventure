@@ -9,10 +9,13 @@ import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-import FolderIcon from '@material-ui/icons/Folder';
+import { Link } from 'react-router-dom';
 import DeleteIcon from '@material-ui/icons/Delete';
 import API from '../utils/API';
 import { useAuth0 } from '@auth0/auth0-react'
+import Button from '@material-ui/core/Button'
+import mage from '../pages/CharacterSelect/mage.jpeg'
+import warrior from '../pages/CharacterSelect/warrior.jpeg'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -27,14 +30,6 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-function generate(element) {
-    return [0, 1, 2].map((value) =>
-        React.cloneElement(element, {
-            key: value,
-        }),
-    );
-}
-
 export default function SaveList() {
     const [dense, setDense] = useState(false);
     const [secondary, setSecondary] = useState(false);
@@ -42,21 +37,30 @@ export default function SaveList() {
         character: []
 
     })
+    console.log(charState.character)
     useEffect(() => {
         loadChar()
     }, [])
     function loadChar() {
         API.getCharacters(userId)
-            .then(res => setCharState({...charState, character: res.data})
-            )
+            .then(res => {
+                setCharState({ ...charState, character: res.data })
+                console.log(res.data)
+            })
             .catch(err => console.log(err))
     }
 
-    function deleteChar(id) {
-        API.deleteCharacter(id)
+    function deleteChar(id, user_id) {
+        API.deleteCharacter(user_id, id)
             .then(res => loadChar())
             .catch(err => console.log(err));
+
     }
+
+    function charID() {
+        console.log(charState.character[0].id)
+    };
+
     const classes = useStyles();
 
     const { user } = useAuth0();
@@ -74,23 +78,23 @@ export default function SaveList() {
                             {charState.character.map(char => {
                                 return (
                                     <ListItem key={char.id}>
-                                        <ListItemAvatar>
-                                            <Avatar>
-                                                <FolderIcon />
-                                            </Avatar>
-                                        </ListItemAvatar>
-                                        <ListItemText
-                                            primary={char.name}
-                                            secondary={secondary ? 'Secondary text' : null}
-                                        />
+                                        <Link to={`/game/${char.id}/user/${char.user_id}`}>
+                                            <Button onClick={() => charID()}>
+                                                <ListItemAvatar>
+                                                    {(char.class === 'mage' ? <Avatar src={mage} /> : <Avatar src={warrior} />)}
+                                                </ListItemAvatar>
+                                                <ListItemText
+                                                    primary={char.name}
+                                                    secondary={secondary ? 'Secondary text' : null}
+                                                />
+                                            </Button>
+                                        </Link>
                                         <ListItemSecondaryAction>
-                                            <IconButton edge="end" aria-label="delete" onclick={() => deleteChar(charState.character.id)}>
+                                            <IconButton edge="end" aria-label="delete" onClick={() => deleteChar(char.id, char.user_id)}>
                                                 <DeleteIcon />
                                             </IconButton>
                                         </ListItemSecondaryAction>
                                     </ListItem>
-
-
                                 )
                             })}
                         </List>

@@ -11,7 +11,7 @@ import {
   Redirect,
 } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
-// import ParticleBackground from "./Particles";
+
 
 function App() {
   const { isAuthenticated, isLoading } = useAuth0();
@@ -67,6 +67,13 @@ function App() {
             auth={isAuthenticated}
             component={Game}
           />
+
+          <PrivateRoute
+            exact path="/game/:gameId/user/:userId"
+            auth={isAuthenticated}
+            component={Game}
+          />
+
 
           <PrivateRoute
             exact path="/save"

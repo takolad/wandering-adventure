@@ -1,8 +1,8 @@
 body {
     background-image: url('../LoginPage/tavern.jpeg');
     background-position: center;
-    background-size: cover;
     background-repeat: no-repeat;
+    height: 100vh;
 }
 
 #warrior {
