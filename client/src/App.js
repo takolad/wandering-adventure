@@ -69,7 +69,7 @@ function App() {
           />
 
           <PrivateRoute
-            exact path="/game/:gameId/user/:userId"
+            exact path="/game/:gameId/user/:userId/character/:chrId"
             auth={isAuthenticated}
             component={Game}
           />

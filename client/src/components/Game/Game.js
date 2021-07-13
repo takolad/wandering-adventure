@@ -252,6 +252,7 @@ const Game = (props) => {
 
   // Start of the game
   useEffect(() => {
+    console.log(props)
       const { gameId, userId } = props.match.params
     API.getCharacter(userId, gameId).then((res) => {
       console.log(res);
@@ -264,6 +265,11 @@ const Game = (props) => {
           bio: "A cunning mage, setting out on their first quest out of their apprenticeship.",
         });
       }
+      setUserState({
+        ...userState,
+        chrName: res.data.name,
+        health: res.data.health,
+      });
       setGameState({
         ...gameState,
         encounters: res.data.game.event_count,
