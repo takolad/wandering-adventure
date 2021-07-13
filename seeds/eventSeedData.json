@@ -16,127 +16,127 @@
     {
         "id": 3,
         "type": "Combat",
-        "title": "Griffin",
-        "text": "You encounter a griffin!",
-        "imageUrl": "https://photo.kidzworld.com/images/2020323/8ccbee09-4440-47aa-9b49-b395c74dc10d/griffin-mythology-article.jpg"
+        "title": "What's that in the sky!",
+        "text": "You hear a loud screech in the sky. Suddenly a griffin lands right infront of you!",
+        "imageUrl": "https://i.pinimg.com/originals/4e/a1/5e/4ea15e0b2ed162ff5a9f514cd3444b43.jpg"
     },
     {
         "id": 4,
         "type": "Noncombat",
         "title": "To Shreds You Say",
         "text": "\"A bandersnatch, in this place?\" you say to yourself before you are torn to shreds. (You got better)",
-        "imageUrl": ""
+        "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSUQc5ZWLfeZaehtzawdaxZKZvqbUFEkOD6JP_y4zLwZXbT9gjCTnc6IU9orEUEWFA9z8s&usqp=CAU"
     },
     {
         "id": 5,
         "type": "Noncombat",
-        "title": "Misplaced Keys",
-        "text": "You've misplaced your keys and are late to work.",
-        "imageUrl": ""
+        "title": "A fellow traveler",
+        "text": "Hey, you don't look so good take this",
+        "imageUrl": "https://i.redd.it/yr9a96f3clez.jpg"
     },
     {
         "id": 6,
         "type": "Noncombat",
-        "title": "Oh Jeralt",
+        "title": "Oh Geralt",
         "text": "A shine catches your eye from the ground. As you walk up to take a closer look you see it's a wolf medallion. \"Fudge\", you say.",
-        "imageUrl": ""
+        "imageUrl": "https://i.pinimg.com/originals/5a/f3/a7/5af3a743614359fc06d82b12855fc394.png"
     },
     {
         "id": 7,
         "type": "Noncombat",
         "title": "Wild Gophers",
         "text": "A pack of wild gophers gets the jump on you, after an incredibly embarrassing de-pantsing incident you continue your journey.",
-        "imageUrl": ""
+        "imageUrl": "https://i.pinimg.com/originals/37/67/54/3767540d047ff407e04f8d953b842d4a.jpg"
     },
     {
         "id": 8,
         "type": "Combat",
         "title": "Encantar",
-        "text": "An enemy you find extremely attractive approaches you!",
-        "imageUrl": ""
+        "text": "In the distance you can see someone is approaching quickly. You can't help to notice, how beautiful this attacker is!",
+        "imageUrl": "https://images8.alphacoders.com/829/thumb-1920-829208.png"
     },
     {
         "id": 9,
         "type": "Noncombat",
         "title": "Take Time",
         "text": "You stop to take a moment for yourself. Shutting your eyes, you breathe in deep and slowly release. After a few breaths you carry on.",
-        "imageUrl": ""
+        "imageUrl": "https://img4.goodfon.com/wallpaper/nbig/4/a9/iqnatius-budi-take-a-break-fantasy-art-illiustratsiia.jpg"
     },
     {
         "id": 10,
         "type": "Combat",
         "title": "SOAT",
         "text": "A one meter tall spider wearing sneakers descends before you!",
-        "imageUrl": ""
+        "imageUrl": "https://www.clipartguide.com/_named_clipart_images/0511-0809-1514-4734_Cartoon_Spider_Wearing_Sneakers_Clip_Art_clipart_image.jpg"
     },
     {
         "id": 11,
         "type": "Combat",
-        "title": "Not The Bs",
+        "title": "Not this again",
         "text": "You are struck from behind with a jar of honey. The sound of pitter-pattering feet and giggling grows distant as a honeybear takes flight and approaches from a nearby cave!",
-        "imageUrl": ""
+        "imageUrl": "https://db4sgowjqfwig.cloudfront.net/campaigns/179975/assets/913853/Cave_Bear_card_art.png?1540771059"
     },
     {
         "id": 12,
         "type":"Noncombat",
         "title":"Oh Duck",
         "text": "A raft of ducks approches you. They seem adorable and you attempt to feed them, but for them, peace was never an option and they take all of your food and dignity.",
-        "imageUrl": ""
+        "imageUrl": "https://i.pinimg.com/originals/78/57/95/785795e541a9901071b92d5c91ec28e7.jpg"
     },
     {
         "id": 13,
         "type":"Combat",
-        "title":"Whale Shit",
-        "text":"You see an empty pier and approach the end of it to take in the fresh sea air, but your senses are assaulted by the scent of sulphur and whale feces. The demon whale, Monstro rises from the water to confront you.",
-        "imageUrl": ""
+        "title":"OhWhale",
+        "text":"You see an empty pier and approach the end of it to take in the fresh sea air. The demon whale, Monstro rises from the water to confront you.",
+        "imageUrl": "https://i1.wp.com/www.tor.com/wp-content/uploads/2014/12/Iku_Turso.jpg?fit=475%2C%209999&crop=0%2C0%2C100%2C388px"
     },
     {
         "id": 14,
         "type": "Noncombat",
         "title":"Merely a Fleshwound",
-        "text": "As you walk through the woods you come upon a small creek crossing with an odd-looking figure obstructing the path. Upon closer inspection you realize the figure is the former Champion known as the Black Knight who was defeated in a duel with King Arthur in which he tragically lost all of his limbs, but none of his attitude. You step over him and continue your journey.",
-        "imageUrl": ""
+        "text": "As you walk through the woods you come upon a small creek crossing with an odd-looking figure obstructing the path. Upon closer inspection you realize the figure is the former Champion known as Drogo the Wild who was defeated in a duel with King Arthur, but none of his attitude. You search him and find a potion on his corps.",
+        "imageUrl": "https://i.pinimg.com/originals/7e/75/cb/7e75cbe6bbfcc6b34c6b3ab66e0ca998.jpg"
     },
     {
         "id": 15,
         "type":"Noncombat",
         "title":"The One Ring",
         "text":"You come upon a small pond and spot a shiny gold ring in the bottom, curious you reach into the water and pick it up and call it your precious",
-        "imageUrl":""
+        "imageUrl":"https://i.pinimg.com/originals/15/dd/c9/15ddc9a72ac05798e9d7c24e9aa5b405.jpg"
     },
     {
         "id": 16,
         "type":"Combat",
         "title":"Pickle Rick",
         "text":"You encounter an angry weaponized pickle named Rick",
-        "imageUrl": ""
+        "imageUrl": "https://cdn.europosters.eu/image/750/posters/rick-and-morty-pickle-rick-i51002.jpg"
     },
     {
         "id": 17,
         "type":"Noncombat",
-        "title":"Prickle Rick",
-        "text":"You encounter another angry pickle pickle but this time he's drunk and just insults you",
-        "imageUrl": ""
+        "title":"Take this!",
+        "text":"You encounter a gravely wounded traveler, they hand you a potion with nothing but a blank stare",
+        "imageUrl": "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/162534e8-cf5c-4619-a70d-470a067246af/dc21bvu-de1e1570-d682-4f89-b8c7-ade3d9197c54.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOiIsImlzcyI6InVybjphcHA6Iiwib2JqIjpbW3sicGF0aCI6IlwvZlwvMTYyNTM0ZTgtY2Y1Yy00NjE5LWE3MGQtNDcwYTA2NzI0NmFmXC9kYzIxYnZ1LWRlMWUxNTcwLWQ2ODItNGY4OS1iOGM3LWFkZTNkOTE5N2M1NC5qcGcifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6ZmlsZS5kb3dubG9hZCJdfQ.JqxnMEcF0UZFpcuImowDFH2_Tm9Ya2BFMq4fm8ecnVE"
     },
     {
         "id":18,
         "type":"Noncombat",
         "title":"Time for a drink",
-        "text": "You stop in at a nearby pub and proceed to drink away your sorrows",
-        "imageUrl": ""
+        "text": "You stop in at a nearby tavern and proceed to drink away your sorrows",
+        "imageUrl": "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/97fae83b-1ded-4508-9f9c-bee6787696f0/dalt41z-899e7217-94c0-4ac8-a024-2bd4242fe298.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzk3ZmFlODNiLTFkZWQtNDUwOC05ZjljLWJlZTY3ODc2OTZmMFwvZGFsdDQxei04OTllNzIxNy05NGMwLTRhYzgtYTAyNC0yYmQ0MjQyZmUyOTguanBnIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.eTXM1ianG1TKGGI2KAT1hYFGEBPZEToGAsSTsKZ3oBQ"
     },
     {
         "id":19,
         "type":"Combat",
         "title":"Big Oops",
         "text":"You come across a large angry Giant",
-        "imageUrl":""
+        "imageUrl":"https://i.pinimg.com/originals/fe/d0/31/fed031bbfe16a308663ed9d95bf14d6a.jpg"
     },
     {
         "id": 20,
         "type":"Noncombat",
-        "title":"Kick Rocks",
-        "text":"Bummed about the lack of action, you mope along the road kicking rocks like a loser",
-        "imageUrl": ""
+        "title":"Caravan",
+        "text":"You come up on a caravan, with a broken wheel. You assist with the repair and you're handed a potion",
+        "imageUrl": "https://i.pinimg.com/originals/67/4d/98/674d98532ce0b6f2518252af0195984e.jpg"
     }
 ]

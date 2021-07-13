@@ -23,7 +23,7 @@ Event.init(
       type: DataTypes.TEXT,
     },
     imageUrl: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
       allowNull: true,
     },
   },

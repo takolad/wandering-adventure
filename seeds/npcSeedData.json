@@ -10,8 +10,8 @@
     },
     {
         "id": 2,
-        "name": "Garthcliff",
-        "bio": "Hates Mondays and those who walk.",
+        "name": "Magnus",
+        "bio": "A man who practices the dark arts, you can barely call him a man now",
         "health": 100,
         "stamina": 100,
         "mana": 100,
@@ -19,8 +19,8 @@
     },
     {
         "id": 3,
-        "name": "Ben",
-        "bio": "A mighty griffin in search of that which was stolen. Last name: Dover",
+        "name": "Griffin",
+        "bio": "A mighty griffin in search of that which was stolen",
         "health": 100,
         "stamina": 100,
         "mana": 0,
@@ -28,8 +28,8 @@
     },
     {
         "id": 4,
-        "name": "Toni Toni Slapper",
-        "bio": "No relations",
+        "name": "Aerin",
+        "bio": "A vicious, hunter who is only after her mark and will not allow anything to stop her",
         "health": 100,
         "stamina": 100,
         "mana": 100,
@@ -52,5 +52,140 @@
         "stamina": 100,
         "mana": 0,
         "event_id": 11
+    },
+    {
+        "id": 7,
+        "name": "Bandersnatch",
+        "bio": "It's come alive from Netflix",
+        "health": 100,
+        "stamina": 100,
+        "mana": 0,
+        "event_id": 4
+    },
+    {
+        "id": 8,
+        "name": "Traveler",
+        "bio": "A nice fellow with a good heart",
+        "health": 100,
+        "stamina": 100,
+        "mana": 0,
+        "event_id": 5
+    },
+    {
+        "id": 9,
+        "name": "Geralt's Medallion",
+        "bio": "It looks like the eyes are glowing",
+        "health": 100,
+        "stamina": 100,
+        "mana": 0,
+        "event_id": 6
+    },
+    {
+        "id": 10,
+        "name": "Gophers",
+        "bio": "Gopher sounds!",
+        "health": 100,
+        "stamina": 100,
+        "mana": 0,
+        "event_id": 7
+    },
+    {
+        "id": 11,
+        "name": "Air",
+        "bio": "Just a nice summer breeze",
+        "health": 100,
+        "stamina": 100,
+        "mana": 0,
+        "event_id": 9
+    },
+    {
+        "id": 12,
+        "name": "Raft of Ducks",
+        "bio": "The infamous Pirate Ducks",
+        "health": 100,
+        "stamina": 100,
+        "mana": 0,
+        "event_id": 12
+    },
+    {
+        "id": 13,
+        "name": "Drogo the Wild",
+        "bio": "A once famous knight, now nothing but a rotting corps",
+        "health": 1,
+        "stamina": 100,
+        "mana": 0,
+        "event_id": 14
+    },
+    {
+        "id": 14,
+        "name": "Ring",
+        "bio": "It calls to you",
+        "health": 100,
+        "stamina": 100,
+        "mana": 0,
+        "event_id": 15
+    },
+    {
+        "id": 15,
+        "name": "Pickle Rick",
+        "bio": "Look he's a pickle!",
+        "health": 100,
+        "stamina": 100,
+        "mana": 0,
+        "event_id": 16
+    },
+    {
+        "id": 16,
+        "name": "Dying Traveler",
+        "bio": "A wounded warrior, with a multiple cuts all over, appears to be holding to their last breath",
+        "health": 2,
+        "stamina": 100,
+        "mana": 0,
+        "event_id": 17
+    },
+    {
+        "id": 17,
+        "name": "Ale",
+        "bio": "Some of the best Ale you've ever had!",
+        "health": 100,
+        "stamina": 100,
+        "mana": 0,
+        "event_id": 18
+    },
+    {
+        "id": 18,
+        "name": "Giant",
+        "bio": "A Giant standing 15 feet tall, with a giant club",
+        "health": 100,
+        "stamina": 100,
+        "mana": 0,
+        "event_id": 19
+    },
+    {
+        "id": 19,
+        "name": "Raft of Ducks",
+        "bio": "The infamous Pirate Ducks",
+        "health": 100,
+        "stamina": 100,
+        "mana": 0,
+        "event_id": 12
+    },
+    {
+        "id": 20,
+        "name": "Caravan",
+        "bio": "A Caravan, with a broken wheel on the side of the road",
+        "health": 60,
+        "stamina": 100,
+        "mana": 0,
+        "event_id": 20
+    },
+    {
+        "id": 21,
+        "name": "Monstro",
+        "bio": "A giant whale lurking for its next meal",
+        "health": 100,
+        "stamina": 100,
+        "mana": 0,
+        "event_id": 13
     }
 ]
