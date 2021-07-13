@@ -26,9 +26,7 @@ export default function SaveSelect() {
                     <Card className={classes.root}>
                         <CardContent>
                             <SaveList />
-
                         </CardContent>
-
                     </Card>
                 </Grid>
                 <Grid item sm={2} />
