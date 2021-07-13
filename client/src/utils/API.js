@@ -49,7 +49,7 @@ export default {
     return axios.get("/api/events/" + char_id);
   },
   createGame: function (charID) {
-    return axios.create("/api/games", { character_id: charID });
+    return axios.post("/api/games", { character_id: charID });
   },
   getActiveGamesByUser: function (user_id) {
     return axios.get("/api/games/active/" + user_id);

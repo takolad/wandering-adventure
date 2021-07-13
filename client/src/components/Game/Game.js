@@ -10,7 +10,8 @@ import API from "../../utils/API";
 import { Link } from "react-router-dom";
 import "./game.css";
 
-const Game = () => {
+const Game = (props) => {
+    console.log(props);
   const [userState, setUserState] = useState({
     attack: "",
     userID: "",
@@ -251,7 +252,8 @@ const Game = () => {
 
   // Start of the game
   useEffect(() => {
-    API.getCharacter(1, 2).then((res) => {
+      const { gameId, userId } = props.match.params
+    API.getCharacter(userId, gameId).then((res) => {
       console.log(res);
       if (res.data.class === "Mage") {
         setUserState({
