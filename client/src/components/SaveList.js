@@ -49,7 +49,7 @@ export default function SaveList() {
     }
 
     function deleteChar(id, user_id) {
-        API.deleteCharacter(id, user_id)
+        API.deleteCharacter(user_id, id)
             .then(res => loadChar())
             .catch(err => console.log(err));
 
@@ -88,7 +88,7 @@ export default function SaveList() {
                                             </Button>
                                         </Link>
                                         <ListItemSecondaryAction>
-                                            <IconButton edge="end" aria-label="delete" onClick={() => deleteChar(charState.character.id, charState.character.user_id)}>
+                                            <IconButton edge="end" aria-label="delete" onClick={() => deleteChar(char.id, char.user_id)}>
                                                 <DeleteIcon />
                                             </IconButton>
                                         </ListItemSecondaryAction>
