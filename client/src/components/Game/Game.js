@@ -301,10 +301,10 @@ const Game = (props) => {
   }, [userState.attack]);
 
   const chr = {
-    health: 75,
-    id: 2,
+    health: gameState.userHealth,
+    id: charId,
     game: {
-      id: 2,
+      id: gameId,
     },
     mana: 100,
     stamina: 10,
@@ -341,7 +341,7 @@ const Game = (props) => {
       //   console.log(userId);
       // API Call to save the current progress
       API.updateCharacter(
-        1, //userID
+        userId, //userID
         chr, //character object
         gameState.seenEncounters[gameState.seenEncounters.length - 1]
         );
