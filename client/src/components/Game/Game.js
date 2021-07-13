@@ -5,9 +5,8 @@ import Grid from "@material-ui/core/Grid";
 import Card from "../CharacterCard/CharacterCard";
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
-import { useAuth0 } from "@auth0/auth0-react";
 import API from "../../utils/API";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import "./game.css";
 
 const Game = (props) => {
@@ -16,8 +15,8 @@ const Game = (props) => {
     attack: "",
     userID: "",
     chrName: "",
-    img: "https://live.staticflickr.com/65535/51297013113_71c5d66e7d_w.jpg",
-    bio: "A fierce swordsman on a quest to become the greatest knight.",
+    img: "",
+    bio: "",
   });
   const [compState, setCompState] = useState("");
   const [enemyState, setEnemyState] = useState({
@@ -42,9 +41,6 @@ const Game = (props) => {
     maxMovement: 7,
     currentMovement: 0,
   });
-
-  //   const { user } = useAuth0();
-  //   const userId = user.sub.split("|")[1];
 
   // Array for the battle options
   const redOptions = [
@@ -250,11 +246,11 @@ const Game = (props) => {
     }
   };
 
+  const { gameId, userId, charId } = useParams()
   // Start of the game
   useEffect(() => {
     console.log(props)
-      const { gameId, userId } = props.match.params
-    API.getCharacter(userId, gameId).then((res) => {
+    API.getCharacter(userId, charId).then((res) => {
       console.log(res);
       if (res.data.class === "Mage") {
         setUserState({
@@ -265,11 +261,16 @@ const Game = (props) => {
           bio: "A cunning mage, setting out on their first quest out of their apprenticeship.",
         });
       }
-      setUserState({
-        ...userState,
-        chrName: res.data.name,
-        health: res.data.health,
-      });
+      if (res.data.class === "Warrior") {
+        setUserState({
+          ...userState,
+          chrName: res.data.name,
+          health: res.data.health,
+          img: "https://live.staticflickr.com/65535/51297013113_71c5d66e7d_w.jpg",
+          bio: "A fierce swordsman on a quest to become the greatest knight.",
+        });
+      }
+      
       setGameState({
         ...gameState,
         encounters: res.data.game.event_count,
@@ -289,7 +290,7 @@ const Game = (props) => {
       title: "Who are you?"
     });
     console.log(gameState.seenEncounters);
-  }, []);
+  }, [charId]);
 
   
   // Helps with battle
