@@ -17,7 +17,7 @@ export default {
   },
   // delete character
   deleteCharacter: function (user_id, char_id) {
-    return axios.delete("/api/characters/" + char_id);
+    return axios.delete("/api/characters/" + char_id, { params: { user_id } });
   },
   // update the character's stats as well as progress in a game (how many and which events seen)
   // characterData & eventID from state
@@ -49,7 +49,7 @@ export default {
     return axios.get("/api/events/" + char_id);
   },
   createGame: function (charID) {
-    return axios.create("/api/games", { character_id: charID });
+    return axios.post("/api/games", { character_id: charID });
   },
   getActiveGamesByUser: function (user_id) {
     return axios.get("/api/games/active/" + user_id);
