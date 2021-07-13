@@ -8,7 +8,7 @@ let characterData;
 router.get("/:id", async (req, res) => {
   console.log("get by user_id");
   try {
-    characterData = await Character.findAll({
+    const characterData = await Character.findAll({
       where: {
         user_id: req.params.id,
       },
@@ -32,51 +32,41 @@ router.get("/:id", async (req, res) => {
     );
     res.status(200).json(characters);
   } catch (err) {
-    console.log(err);
     res.status(500).json(err);
   }
 });
 
 // create character
 router.post("/", async (req, res) => {
-  console.log('postroutehit')
   const { name, bio } = req.body.characterData;
-  const class_ = req.body.characterData.class;
+  const charClass = req.body.characterData.class;
   const userID = req.body.user_id;
 
-  if (class_ === "warrior") {
+  if (charClass === "warrior") {
     try {
-      characterData = await Character.create({
+      const characterData = await Character.create({
         name: name,
         bio: bio,
-        class: class_,
+        class: charClass,
         stamina: 100,
         user_id: userID,
-      })
-        .then((characterData) => res.status(200).json(characterData))
-        .catch((err) => {
-          console.log(err);
-          res.status(500).json(err);
-        });
+      });
+      res.status(200).json(characterData);
     } catch (err) {
       res.status(500).json(err);
     }
   }
 
-  if (class_ === "mage") {
+  if (charClass === "mage") {
     try {
-      characterData = await Character.create({
+      const characterData = await Character.create({
         name: name,
         bio: bio,
-        class: class_,
+        class: charClass,
         mana: 100,
         user_id: userID,
-      })
-        .then((characterData) => res.status(200).json(characterData))
-        .catch((err) => {
-          console.log(err);
-          res.status(500).json(err);
-        });
+      });
+      res.status(200).json(characterData);
     } catch (err) {
       res.status(500).json(err);
     }
@@ -87,7 +77,7 @@ router.post("/", async (req, res) => {
 router.put("/", async (req, res) => {
   const { id, health, stamina, mana } = req.body.characterData;
   try {
-    updatedCharacter = await Character.update(
+    const updatedCharacter = await Character.update(
       {
         health: health,
         stamina: stamina,
@@ -99,11 +89,14 @@ router.put("/", async (req, res) => {
           user_id: req.body.user_id,
         },
       }
-    )
-      .then((updatedCharacter) => res.json(updatedCharacter))
-      .catch((err) => res.status(500).json(err));
+    );
+    if (!updatedCharacter[0]) {
+      res.status(404).json({ message: "No matching character data found!" });
+      return;
+    }
+    res.status(200).json(updatedCharacter);
   } catch (err) {
-    res.json(err);
+    res.status(500).json(err);
   }
 });
 
@@ -111,9 +104,8 @@ router.put("/", async (req, res) => {
 router
   .route("/")
   .get(async (req, res) => {
-    console.log(req.query);
     try {
-      characterData = await Character.findOne({
+      const characterData = await Character.findOne({
         where: {
           id: req.query.id,
           user_id: req.query.user_id,
@@ -126,34 +118,32 @@ router
             },
           },
         ],
-      }).then((characterData) => {
-        if (!characterData) {
-          res.status(404).json({ message: "No character found with this id" });
-          return;
-        }
-        res.json(characterData);
       });
+
+      if (!characterData) {
+        res.status(404).json({ message: "No character found with this id" });
+        return;
+      }
+      res.status(200).json(characterData);
     } catch (err) {
-      console.log(err);
       res.status(500).json(err);
     }
   })
   .delete(async (req, res) => {
     try {
-      characterData = await Character.destroy({
+      const characterData = await Character.destroy({
         where: {
           id: req.params.id,
           user_id: req.query.user_id,
         },
-      }).then((characterData) => {
-        if (!characterData) {
-          res.status(404).json({ message: "No character found with this id" });
-          return;
-        }
-        res.json(characterData);
       });
+
+      if (!characterData) {
+        res.status(404).json({ message: "No character found with this id" });
+        return;
+      }
+      res.status(200).json(characterData);
     } catch (err) {
-      console.log(err);
       res.status(500).json(err);
     }
   });
