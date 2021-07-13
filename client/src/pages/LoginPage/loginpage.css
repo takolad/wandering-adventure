@@ -3,6 +3,8 @@
 body {
     background-image: url('./tavern.jpeg');
     background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh;
 }
 
 #login {

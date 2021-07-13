@@ -3,13 +3,10 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
-// import ParticlesBg from 'particles-bg';
 import LoginButton from '../../components/Login';
 import { useAuth0 } from '@auth0/auth0-react';
 import { useHistory } from 'react-router-dom';
-// import Typography from '@material-ui/core/Typography';
-// import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
-// import ParticleBackground from '../../Particles'
+import ParticleBackground from '../../Particles'
 import './loginpage.css';
 
 const useStyles = makeStyles((theme) => ({
@@ -72,7 +69,7 @@ export default function LoginPage() {
                     <Container>
                         <div className={classes.root}>
                             <div id='login'>
-                                {/* <ThemeProvider theme={style}> */}
+                               
                                 <h2>
                                     Welcome to Wandering Adventure!
                                 </h2>
@@ -83,7 +80,7 @@ export default function LoginPage() {
                                 <h3>
                                     Click below to enter the Tavern of the Wanderer.
                                 </h3>
-                                {/* </ThemeProvider> */}
+                               
                                 <Container>
                                     <LoginButton />
                                 </Container>
@@ -91,6 +88,7 @@ export default function LoginPage() {
                         </div>
                     </Container>
                 </Card>
+                <ParticleBackground/>
             </Grid>
             <Grid item sm={2} />
         </Grid>
