@@ -101,51 +101,51 @@ router.put("/", async (req, res) => {
 });
 
 // get character by id
-router
-  .route("/")
-  .get(async (req, res) => {
-    try {
-      const characterData = await Character.findOne({
-        where: {
-          id: req.query.id,
-          user_id: req.query.user_id,
-        },
-        include: [
-          {
-            model: Game,
-            include: {
-              model: Event,
-            },
+router.route("/").get(async (req, res) => {
+  try {
+    const characterData = await Character.findOne({
+      where: {
+        id: req.query.id,
+        user_id: req.query.user_id,
+      },
+      include: [
+        {
+          model: Game,
+          include: {
+            model: Event,
           },
-        ],
-      });
-
-      if (!characterData) {
-        res.status(404).json({ message: "No character found with this id" });
-        return;
-      }
-      res.status(200).json(characterData);
-    } catch (err) {
-      res.status(500).json(err);
-    }
-  })
-  .delete(async (req, res) => {
-    try {
-      const characterData = await Character.destroy({
-        where: {
-          id: req.params.id,
-          user_id: req.query.user_id,
         },
-      });
+      ],
+    });
 
-      if (!characterData) {
-        res.status(404).json({ message: "No character found with this id" });
-        return;
-      }
-      res.status(200).json(characterData);
-    } catch (err) {
-      res.status(500).json(err);
+    if (!characterData) {
+      res.status(404).json({ message: "No character found with this id" });
+      return;
     }
-  });
+    res.status(200).json(characterData);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+router.delete("/:id", async (req, res) => {
+  console.log(req);
+  try {
+    const characterData = await Character.destroy({
+      where: {
+        id: req.params.id,
+        user_id: req.query.user_id,
+      },
+    });
+
+    if (!characterData) {
+      res.status(404).json({ message: "No character found with this id" });
+      return;
+    }
+    res.status(200).json(characterData);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 
 module.exports = router;
