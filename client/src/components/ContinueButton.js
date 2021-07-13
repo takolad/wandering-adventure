@@ -1,6 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -15,9 +16,11 @@ export default function ContinueButton() {
   
     return (
       <div className={classes.root}>
+        <Link to='/save'>
         <Button variant="contained">
           Continue Game
         </Button>
+        </Link>
       </div>
     );
   }
