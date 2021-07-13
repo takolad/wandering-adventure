@@ -70,6 +70,13 @@ function App() {
           />
 
           <PrivateRoute
+            exact path="/game/:gameId/user/:userId"
+            auth={isAuthenticated}
+            component={Game}
+          />
+
+
+          <PrivateRoute
             exact path="/save"
             auth={isAuthenticated}
             component={SaveSelect}

@@ -46,6 +46,7 @@ export default function HomePage() {
                   </h2>
                   <Container>
                     <StartButton />
+                    <br/>
                     <ContinueButton />
                   </Container>
                 </div>

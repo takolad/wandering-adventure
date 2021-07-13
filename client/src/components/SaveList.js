@@ -9,7 +9,7 @@ import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-import FolderIcon from '@material-ui/icons/Folder';
+import { Link } from 'react-router-dom';
 import DeleteIcon from '@material-ui/icons/Delete';
 import API from '../utils/API';
 import { useAuth0 } from '@auth0/auth0-react'
@@ -41,8 +41,10 @@ export default function SaveList() {
     }, [])
     function loadChar() {
         API.getCharacters(userId)
-            .then(res => setCharState({...charState, character: res.data})
-            )
+            .then(res => {
+                setCharState({ ...charState, character: res.data })
+                console.log(res.data)
+            })
             .catch(err => console.log(err))
     }
 
@@ -50,7 +52,7 @@ export default function SaveList() {
         API.deleteCharacter(id, user_id)
             .then(res => loadChar())
             .catch(err => console.log(err));
-        
+
     }
 
     function charID() {
@@ -74,17 +76,17 @@ export default function SaveList() {
                             {charState.character.map(char => {
                                 return (
                                     <ListItem key={char.id}>
-                                        <Button onClick={charID()}>
-                                        <ListItemAvatar>
-                                            <Avatar>
-                                                <FolderIcon />
-                                            </Avatar>
-                                        </ListItemAvatar>
-                                        <ListItemText
-                                            primary={char.name}
-                                            secondary={secondary ? 'Secondary text' : null}
-                                        />
-                                        </Button>
+                                        <Link to={`/game/${char.id}/user/${char.user_id}`}>
+                                            <Button onClick={() => charID()}>
+                                                <ListItemAvatar>
+                                                    <Avatar />
+                                                </ListItemAvatar>
+                                                <ListItemText
+                                                    primary={char.name}
+                                                    secondary={secondary ? 'Secondary text' : null}
+                                                />
+                                            </Button>
+                                        </Link>
                                         <ListItemSecondaryAction>
                                             <IconButton edge="end" aria-label="delete" onClick={() => deleteChar(charState.character.id, charState.character.user_id)}>
                                                 <DeleteIcon />
