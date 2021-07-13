@@ -20,11 +20,11 @@ const Game = () => {
   });
   const [compState, setCompState] = useState("");
   const [enemyState, setEnemyState] = useState({
-    name: "The World",
+    name: "The Island",
     health: 1,
     stamina: 100,
     mana: 100,
-    bio: "Explore the world!",
+    bio: "Tread carefully, you dont know who will attack you",
     img: "https://i.pinimg.com/originals/55/15/8c/55158c9f1515b9f7afb257b312cc4e48.jpg",
   });
   const [displayState, setDisplayState] = useState({
@@ -35,7 +35,7 @@ const Game = () => {
   });
   const [gameState, setGameState] = useState({
     phase: "exploring",
-    encounters: 3,
+    encounters: 2,
     seenEncounters: [],
     userHealth: 100,
     maxMovement: 7,
@@ -89,12 +89,7 @@ const Game = () => {
     },
     text: {
       color: "white",
-      float: "right",
-    },
-    paper: {
-      // padding: theme.spacing(2),
-      textAlign: "center",
-    },
+    }
   }));
 
   const classes = useStyles();
@@ -159,11 +154,11 @@ const Game = () => {
     });
     setEnemyState({
       ...enemyState,
-      name: "The World",
+      name: "The Island",
       health: 1,
       stamina: 100,
       mana: 100,
-      bio: "Explore the world!",
+      bio: "Tread carefully, you dont know who will attack you",
       img: "https://i.pinimg.com/originals/55/15/8c/55158c9f1515b9f7afb257b312cc4e48.jpg",
     });
   };
@@ -269,7 +264,7 @@ const Game = () => {
       }
       setGameState({
         ...gameState,
-        // encounters: res.data.game.event_count,
+        encounters: res.data.game.event_count,
         phase: "exploring",
       });
     });
@@ -288,8 +283,79 @@ const Game = () => {
     console.log(gameState.seenEncounters);
   }, []);
 
-  // Boss Fight
+  
+  // Helps with battle
   useEffect(() => {
+    if (userState.attack === "") return;
+    battle(userState.attack);
+    setUserState({ ...userState, attack: "" });
+  }, [userState.attack]);
+
+  const chr = {
+    health: 75,
+    id: 2,
+    game: {
+      id: 2,
+    },
+    mana: 100,
+    stamina: 10,
+  };
+  
+  // Health check
+  useEffect(() => {
+    if (gameState.userHealth <= 0) {
+      setDisplayState({
+        ...displayState,
+        text: "You've been defeated! Better luck next time!",
+      });
+      setGameState({ ...gameState, phase: "end" });
+    } else if (enemyState.health <= 0) {
+      setDisplayState({
+        ...displayState,
+        text: "You defeated your Enemy! What direction do you want to go?",
+        title: "",
+      });
+      setGameState({
+        ...gameState,
+        encounters: gameState.encounters + 1,
+        phase: "exploring",
+        maxMovement:
+        gameState.currentMovement + Math.floor(Math.random() * 10) + 3,
+      });
+      setEnemyState({
+        ...enemyState,
+        health: 100,
+        name: "The World",
+        bio: "Explore the world",
+        img: "https://i.pinimg.com/originals/55/15/8c/55158c9f1515b9f7afb257b312cc4e48.jpg",
+      });
+      //   console.log(userId);
+      // API Call to save the current progress
+      API.updateCharacter(
+        1, //userID
+        chr, //character object
+        gameState.seenEncounters[gameState.seenEncounters.length - 1]
+        );
+        
+        console.log(gameState.encounters);
+      }
+    }, [gameState.userHealth, enemyState.health]);
+
+    // Checks user for encounter
+  useEffect(() => {
+    if (gameState.currentMovement === gameState.maxMovement) {
+      setGameState({ ...gameState, phase: "confirm" });
+      setDisplayState({
+        ...displayState,
+        text: "You've stumbled on to an event!",
+      });
+    }
+  }, [gameState.currentMovement]);
+  
+  
+  // Boss Fight and Ending Seen
+  useEffect(() => {
+    //Boss Fight
     if (gameState.encounters === 4) {
       setGameState({
         ...gameState,
@@ -310,7 +376,7 @@ const Game = () => {
         img: "https://i.redd.it/z8juypra2ce31.jpg",
       });
     }
-
+    //Ending Seen
     if (gameState.encounters === 5) {
       setGameState({
         ...gameState,
@@ -332,75 +398,7 @@ const Game = () => {
       });
     }
   }, [gameState.encounters]);
-
-  // Helps with battle
-  useEffect(() => {
-    if (userState.attack === "") return;
-    battle(userState.attack);
-    setUserState({ ...userState, attack: "" });
-  }, [userState.attack]);
-
-  const chr = {
-    health: 75,
-    id: 2,
-    game: {
-      id: 2,
-    },
-    mana: 100,
-    stamina: 10,
-  };
-
-  // Health check
-  useEffect(() => {
-    if (gameState.userHealth <= 0) {
-      setDisplayState({
-        ...displayState,
-        text: "You've been defeated! Better luck next time!",
-      });
-      setGameState({ ...gameState, phase: "end" });
-    } else if (enemyState.health <= 0) {
-      setDisplayState({
-        ...displayState,
-        text: "You defeated your Enemy! What direction do you want to go?",
-        title: "",
-      });
-      setGameState({
-        ...gameState,
-        encounters: gameState.encounters + 1,
-        phase: "exploring",
-        maxMovement:
-          gameState.currentMovement + Math.floor(Math.random() * 10) + 3,
-      });
-      setEnemyState({
-        ...enemyState,
-        health: 100,
-        name: "The World",
-        bio: "Explore the world",
-        img: "https://i.pinimg.com/originals/55/15/8c/55158c9f1515b9f7afb257b312cc4e48.jpg",
-      });
-      //   console.log(userId);
-      // API Call to save the current progress
-      API.updateCharacter(
-        1, //userID
-        chr, //character object
-        gameState.seenEncounters[gameState.seenEncounters.length - 1]
-      );
-
-      console.log(gameState.encounters);
-    }
-  }, [gameState.userHealth, enemyState.health]);
-
-  // Checks user for encounter
-  useEffect(() => {
-    if (gameState.currentMovement === gameState.maxMovement) {
-      setGameState({ ...gameState, phase: "confirm" });
-      setDisplayState({
-        ...displayState,
-        text: "You've stumbled on to an event!",
-      });
-    }
-  }, [gameState.currentMovement]);
-
+  
   console.log(gameState.currentMovement);
   console.log(gameState.maxMovement);
   console.log(gameState);
