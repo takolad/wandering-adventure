@@ -8,12 +8,11 @@ let gameData;
 // create new game record // req should have the character_id
 router.post("/", async (req, res) => {
   try {
-    newGame = await Game.create({
+    const newGame = await Game.create({
       character_id: req.body.character_id,
       status: "Active",
-    })
-      .then((newGame) => res.status(200).json(newGame))
-      .catch((err) => res.status(500).json(err));
+    });
+    res.status(200).json(newGame);
   } catch (err) {
     res.status(500).json(err);
   }
@@ -55,7 +54,6 @@ router.put("/:id", async (req, res) => {
         res.status(404).json({ message: "No matchin game found." });
         return;
       }
-      console.log(updatedGame);
       res.status(200).json(updatedGame);
     }
   } catch (err) {
@@ -66,7 +64,7 @@ router.put("/:id", async (req, res) => {
 // get a users active games
 router.get("/active/:user_id", async (req, res) => {
   try {
-    gameData = await Game.findAll({
+    const gameData = await Game.findAll({
       where: {
         status: "Active",
       },
@@ -87,6 +85,24 @@ router.get("/active/:user_id", async (req, res) => {
 
     const games = gameData.map((game) => game.get({ plain: true }));
     res.status(200).json(games);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+router.delete("/:id", async (req, res) => {
+  try {
+    const gameData = await Game.destroy({
+      where: {
+        id: req.params.id,
+        character_id: req.body.character_id,
+      },
+    });
+    if (!gameData) {
+      res.status(404).json({ message: "No matching game data found!" });
+      return;
+    }
+    res.status(200).json(gameData);
   } catch (err) {
     res.status(500).json(err);
   }
