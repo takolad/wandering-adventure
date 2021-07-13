@@ -5,13 +5,8 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 
-
-
 export default function MediaCard(props) {
-
-
   return (
-
     <Card>
       <CardActionArea>
         <CardMedia

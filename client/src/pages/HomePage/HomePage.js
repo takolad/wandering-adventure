@@ -33,29 +33,29 @@ export default function HomePage() {
   const userId = user.sub.split("|")[1];
   console.log("userId: ", userId);
   return (
-      <Grid container justify="center" alignItems="center">
-        <Grid item sm={2} />
-        <Grid item sm={6}>
-          <Card>
-            <Container>
-              <div className={classes.root}>
-                <div id="center">
-                  <h2>
-                    Hi {user.given_name || user.nickname || user.name}! Make a
-                    selection.
-                  </h2>
-                  <Container>
-                    <StartButton />
-                    <br/>
-                    <ContinueButton />
-                  </Container>
-                </div>
+    <Grid container justify="center" alignItems="center">
+      <Grid item sm={2} />
+      <Grid item sm={6}>
+        <Card>
+          <Container>
+            <div className={classes.root}>
+              <div id="center">
+                <h2>
+                  Hi {user.given_name || user.nickname || user.name}! Make a
+                  selection.
+                </h2>
+                <Container>
+                  <StartButton />
+                  <br />
+                  <ContinueButton />
+                </Container>
               </div>
-            </Container>
-          </Card>
-          <ParticleBackground/>
-        </Grid>
-        <Grid item sm={2} />
+            </div>
+          </Container>
+        </Card>
+        <ParticleBackground />
       </Grid>
+      <Grid item sm={2} />
+    </Grid>
   );
 }

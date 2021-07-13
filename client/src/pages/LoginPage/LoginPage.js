@@ -69,18 +69,16 @@ export default function LoginPage() {
                     <Container>
                         <div className={classes.root}>
                             <div id='login'>
-                               
                                 <h2>
                                     Welcome to Wandering Adventure!
                                 </h2>
                                 <p>
-                                    A fun, immersive text adventure game where you pick your actions.<br/>
+                                    A fun, immersive text adventure game where you pick your actions.<br />
                                     Enter the tavern to begin your journey and complete the quest!
                                 </p>
                                 <h3>
                                     Click below to enter the Tavern of the Wanderer.
                                 </h3>
-                               
                                 <Container>
                                     <LoginButton />
                                 </Container>
@@ -88,7 +86,7 @@ export default function LoginPage() {
                         </div>
                     </Container>
                 </Card>
-                <ParticleBackground/>
+                <ParticleBackground />
             </Grid>
             <Grid item sm={2} />
         </Grid>

@@ -58,7 +58,7 @@ export default {
   updateGame: function (eventCount, game_id) {
     // pass game id AND event count
     return axios.put("/api/games/" + game_id, { event_count: eventCount });
-  }, 
+  },
   // call with game id, event count AND status
   updateGame: function (game_id, eventCount, status) {
     return axios.put("/api/games/" + game_id, {

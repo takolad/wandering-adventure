@@ -36,16 +36,12 @@ style.typography.h3 = {
         fontSize: '2.5rem',
     },
     fontFamily: "IM Fell English SC",
-
-
 };
-
-
 
 export default function NavBar() {
     const classes = useStyles();
     const { isAuthenticated } = useAuth0();
-
+    
     return (
         <div className={classes.root}>
             <AppBar position="static" classes={{ root: classes.color }}>
