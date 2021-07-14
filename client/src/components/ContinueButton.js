@@ -18,7 +18,7 @@ export default function ContinueButton() {
       <div className={classes.root}>
         <Link to='/save'>
         <Button variant="contained">
-          Continue Game
+          Continue Your Journey
         </Button>
         </Link>
       </div>

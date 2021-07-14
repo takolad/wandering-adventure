@@ -73,7 +73,6 @@ function App() {
             component={Game}
           />
 
-
           <PrivateRoute
             exact path="/save"
             auth={isAuthenticated}

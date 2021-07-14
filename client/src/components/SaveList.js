@@ -27,6 +27,7 @@ const useStyles = makeStyles((theme) => ({
     },
     title: {
         margin: theme.spacing(4, 0, 2),
+        textAlign: 'center'
     },
 }));
 
@@ -69,7 +70,7 @@ export default function SaveList() {
     return (
         <div className={classes.root}>
             <Grid>
-                <Grid item xs={6} md={9}>
+                <Grid item xs={12} md={8}>
                     <Typography variant="h6" className={classes.title}>
                         Pick your save game!
                     </Typography>

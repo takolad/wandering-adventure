@@ -12,6 +12,7 @@ import { useAuth0 } from '@auth0/auth0-react'
 import { useHistory } from 'react-router-dom';
 import API from '../../utils/API'
 import './characterselect.css';
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 
 export default function CharacterSelect() {
     const history = useHistory();
@@ -24,8 +25,9 @@ export default function CharacterSelect() {
         },
         media: {
             height: 400,
-        },
+        }
     });
+   
     const classes = useStyles();
     const [formField, setFormField] = useState({
         name: '',

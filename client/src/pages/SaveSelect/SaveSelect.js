@@ -22,8 +22,8 @@ export default function SaveSelect() {
 
         <div>
             <Grid container spacing={2}>
-                <Grid item sm={2} />
-                <Grid item sm={6}>
+                <Grid item xs={1} sm={4} />
+                <Grid item  sm={8} xs={12}>
                     <Card className={classes.root}>
                         <CardContent>
                             <SaveList />
