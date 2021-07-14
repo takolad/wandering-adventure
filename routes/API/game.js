@@ -20,6 +20,7 @@ router.post("/", async (req, res) => {
 
 // update game record // req should have event_count & id (game)
 router.put("/:id", async (req, res) => {
+  console.log(req.body);
   try {
     if (!req.body.status) {
       const updatedGame = await Game.update(
@@ -32,7 +33,7 @@ router.put("/:id", async (req, res) => {
           },
         }
       );
-      if (!updatedGame[0]) {
+      if (!updatedGame) {
         res.status(404).json({ message: "No matching game found." });
         return;
       }
@@ -50,7 +51,7 @@ router.put("/:id", async (req, res) => {
         }
       );
 
-      if (!updatedGame[0]) {
+      if (!updatedGame) {
         res.status(404).json({ message: "No matchin game found." });
         return;
       }
