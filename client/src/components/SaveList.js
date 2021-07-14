@@ -78,7 +78,7 @@ export default function SaveList() {
                             {charState.character.map(char => {
                                 return (
                                     <ListItem key={char.id}>
-                                        <Link to={`/game/${char.id}/user/${char.user_id}`}>
+                                        <Link to={`/game/${char.game.id}/user/${char.user_id}/character/${char.id}`}>
                                             <Button onClick={() => charID()}>
                                                 <ListItemAvatar>
                                                     {(char.class === 'mage' ? <Avatar src={mage} /> : <Avatar src={warrior} />)}

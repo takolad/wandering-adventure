@@ -5,9 +5,8 @@ import Grid from "@material-ui/core/Grid";
 import Card from "../CharacterCard/CharacterCard";
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
-import { useAuth0 } from "@auth0/auth0-react";
 import API from "../../utils/API";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import "./game.css";
 
 const Game = (props) => {
@@ -16,8 +15,8 @@ const Game = (props) => {
     attack: "",
     userID: "",
     chrName: "",
-    img: "https://live.staticflickr.com/65535/51297013113_71c5d66e7d_w.jpg",
-    bio: "A fierce swordsman on a quest to become the greatest knight.",
+    img: "",
+    bio: "",
   });
   const [compState, setCompState] = useState("");
   const [enemyState, setEnemyState] = useState({
@@ -42,9 +41,6 @@ const Game = (props) => {
     maxMovement: 7,
     currentMovement: 0,
   });
-
-  //   const { user } = useAuth0();
-  //   const userId = user.sub.split("|")[1];
 
   // Array for the battle options
   const redOptions = [
@@ -181,8 +177,8 @@ const Game = (props) => {
     setEnemyState({
       ...enemyState,
       health: 1,
-      bio: "Explore the world!",
-      name: "The World",
+      bio: "Keep eyes in the back of your head",
+      name: "The Island",
       img: "https://i.pinimg.com/originals/55/15/8c/55158c9f1515b9f7afb257b312cc4e48.jpg",
     });
   };
@@ -250,10 +246,11 @@ const Game = (props) => {
     }
   };
 
+  const { gameId, userId, charId } = useParams()
   // Start of the game
   useEffect(() => {
-      const { gameId, userId } = props.match.params
-    API.getCharacter(userId, gameId).then((res) => {
+    console.log(props)
+    API.getCharacter(userId, charId).then((res) => {
       console.log(res);
       if (res.data.class === "Mage") {
         setUserState({
@@ -264,6 +261,16 @@ const Game = (props) => {
           bio: "A cunning mage, setting out on their first quest out of their apprenticeship.",
         });
       }
+      if (res.data.class === "Warrior") {
+        setUserState({
+          ...userState,
+          chrName: res.data.name,
+          health: res.data.health,
+          img: "https://live.staticflickr.com/65535/51297013113_71c5d66e7d_w.jpg",
+          bio: "A fierce swordsman on a quest to become the greatest knight.",
+        });
+      }
+      
       setGameState({
         ...gameState,
         encounters: res.data.game.event_count,
@@ -283,7 +290,7 @@ const Game = (props) => {
       title: "Who are you?"
     });
     console.log(gameState.seenEncounters);
-  }, []);
+  }, [charId]);
 
   
   // Helps with battle
@@ -294,10 +301,10 @@ const Game = (props) => {
   }, [userState.attack]);
 
   const chr = {
-    health: 75,
-    id: 2,
+    health: gameState.userHealth,
+    id: charId,
     game: {
-      id: 2,
+      id: gameId,
     },
     mana: 100,
     stamina: 10,
@@ -327,14 +334,14 @@ const Game = (props) => {
       setEnemyState({
         ...enemyState,
         health: 100,
-        name: "The World",
-        bio: "Explore the world",
+        name: "The Island",
+        bio: "You find that there not all enemys",
         img: "https://i.pinimg.com/originals/55/15/8c/55158c9f1515b9f7afb257b312cc4e48.jpg",
       });
       //   console.log(userId);
       // API Call to save the current progress
       API.updateCharacter(
-        1, //userID
+        userId, //userID
         chr, //character object
         gameState.seenEncounters[gameState.seenEncounters.length - 1]
         );

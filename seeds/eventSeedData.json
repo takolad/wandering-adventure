@@ -4,14 +4,14 @@
         "type": "Combat",
         "title": "Horrible Knight for a Fight",
         "text": "A knight with a vendetta draws their weapon!",
-        "imageUrl": "https://i.pinimg.com/originals/ec/76/a6/ec76a6bc705d3b8620431b791ddbb761.jpg"
+        "imageUrl": "https://images-na.ssl-images-amazon.com/images/I/91GdK2KLVpL._SY500_.jpg"
     },
     {
         "id": 2,
         "type": "Combat",
-        "title": "Hitchcock was right",
-        "text": "You are attacked by a wild kite!",
-        "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/2/2f/Milvus_migrans_2005-new.jpg"
+        "title": "Wrong turn",
+        "text": "You stumbled open a dark fortress, as soon as you decide to turn away you get attacked by the Evil Mage",
+        "imageUrl": "https://i.pinimg.com/736x/0e/5b/31/0e5b31a5091c03372d53a3a0ec08e7e9--character-ideas-character-art.jpg"
     },
     {
         "id": 3,

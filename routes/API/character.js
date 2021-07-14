@@ -102,6 +102,7 @@ router.put("/", async (req, res) => {
 
 // get character by id
 router.route("/").get(async (req, res) => {
+  console.log(req)
   try {
     const characterData = await Character.findOne({
       where: {
