@@ -72,7 +72,7 @@ export default function SaveList() {
             <Grid>
                 <Grid item xs={12} md={8}>
                     <Typography variant="h6" className={classes.title}>
-                        Pick your save game!
+                        Pick your character to continue!
                     </Typography>
                     <div className={classes.demo}>
                         <List dense={dense}>
@@ -82,7 +82,7 @@ export default function SaveList() {
                                         <Link to={`/game/${char.game.id}/user/${char.user_id}/character/${char.id}`}>
                                             <Button onClick={() => charID()}>
                                                 <ListItemAvatar>
-                                                    {(char.class === 'mage' ? <Avatar src={mage} /> : <Avatar src={warrior} />)}
+                                                    {(char.class === 'Mage' ? <Avatar src={mage} /> : <Avatar src={warrior} />)}
                                                 </ListItemAvatar>
                                                 <ListItemText
                                                     primary={char.name}
