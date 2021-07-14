@@ -11,7 +11,7 @@ import './loginpage.css';
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        display: 'flex',
+        display: 'block',
         flexWrap: 'wrap',
     },
     margin: {
@@ -24,30 +24,7 @@ const useStyles = makeStyles((theme) => ({
         width: '25ch',
     },
 }));
-// const style = createMuiTheme();
 
-// style.typography.h4 = {
-//     fontSize: '1rem',
-//     '@media (min-width:300px)': {
-//         fontSize: '1.5rem',
-//     },
-//     [style.breakpoints.up('sm')]: {
-//         fontSize: '2rem',
-//     },
-//     fontFamily: "IM Fell English SC",
-
-
-// };
-// style.typography.h5 = {
-//     fontSize: '.5rem',
-//     '@media (min-width:300px)': {
-//         fontSize: '1rem',
-//     },
-//     [style.breakpoints.up('md')]: {
-//         fontSize: '1.5rem',
-//     },
-//     fontFamily: "IM Fell English SC",
-// }
 
 export default function LoginPage() {
     const { isAuthenticated } = useAuth0();
@@ -66,7 +43,7 @@ export default function LoginPage() {
             <Grid item sm={2} />
             <Grid item sm={6}>
                 <Card id='cardbox'>
-                    <Container>
+                    
                         <div className={classes.root}>
                             <div id='login'>
                                 <h2>
@@ -84,7 +61,7 @@ export default function LoginPage() {
                                 </Container>
                             </div>
                         </div>
-                    </Container>
+                    
                 </Card>
                 <ParticleBackground />
             </Grid>

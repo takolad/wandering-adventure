@@ -13,7 +13,7 @@ import ParticleBackground from "../../Particles";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    display: "flex",
+    display: "block",
     flexWrap: "wrap",
   },
   margin: {

@@ -10,4 +10,6 @@ body {
 #login {
   padding-bottom: 3%;
   text-align: center;
+  justify-content: center;
 }
+

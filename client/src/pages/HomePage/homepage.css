@@ -8,4 +8,5 @@ body {
 #center {
   text-align: center;
   padding-bottom: 3%;
+  justify-content: center;
 }
