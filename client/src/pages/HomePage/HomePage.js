@@ -65,7 +65,7 @@ export default function HomePage() {
                 <Container>
                   <StartButton />
                   <br />
-                  {(chState) === 'false' ? (
+                  {chState === 'true' ? (
                     <ContinueButton />
                     ) : null}
                 </Container>
