@@ -1,18 +1,16 @@
-@import url('https://fonts.googleapis.com/css2?family=IM+Fell+English+SC&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=IM+Fell+English+SC&display=swap");
 
 body {
-    background-image: url('./tavern.jpeg');
-    background-position: center;
-    background-repeat: no-repeat;
-    height: 100vh;
+  background-image: url("./tavern.jpeg");
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100vh;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
 }
 
 #login {
-    padding-bottom: 3%;
-    text-align: center;
-    
+  padding-bottom: 3%;
+  text-align: center;
+  justify-content: center;
 }
-
-
-
 

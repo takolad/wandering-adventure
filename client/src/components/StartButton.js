@@ -12,15 +12,15 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function StartButton() {
-    const classes = useStyles();
-  
-    return (
-      <div className={classes.root}>
-        <Link to='/character'>
+  const classes = useStyles();
+
+  return (
+    <div className={classes.root}>
+      <Link to='/character'>
         <Button variant="contained" color="secondary">
           Start New Game
         </Button>
-        </Link>
-      </div>
-    );
-  }
+      </Link>
+    </div>
+  );
+}

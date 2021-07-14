@@ -1,11 +1,18 @@
 body {
-    background-image: url('../LoginPage/tavern.jpeg');
-    background-position: center;
-    background-repeat: no-repeat;
-    height: 100vh;
+  background-image: url("../LoginPage/tavern.jpeg");
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100vh;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  
 }
 
 #center {
-    text-align: center;
-    padding-bottom: 3%;
+  text-align: center;
+  padding-bottom: 3%;
+  justify-content: center;
+}
+
+#cardo {
+  width: 80%
 }

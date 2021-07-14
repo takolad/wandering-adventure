@@ -16,11 +16,12 @@ const LoginButton = () => {
   const classes = useStyles();
   const { loginWithRedirect } = useAuth0();
 
-  return <Button 
-  color="primary" 
-    variant="contained" 
-    className={classes.root} 
-  onClick={() => loginWithRedirect()}>Enter</Button>;
+  return <Button
+    color="primary"
+    variant="contained"
+    className={classes.root}
+    onClick={() => loginWithRedirect()}>Enter
+  </Button>;
 };
 
 export default LoginButton;
