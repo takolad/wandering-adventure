@@ -90,7 +90,7 @@ router.put("/", async (req, res) => {
         },
       }
     );
-    if (!updatedCharacter[0]) {
+    if (!updatedCharacter) {
       res.status(404).json({ message: "No matching character data found!" });
       return;
     }
