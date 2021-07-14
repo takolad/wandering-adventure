@@ -90,7 +90,7 @@ router.put("/", async (req, res) => {
         },
       }
     );
-    if (!updatedCharacter[0]) {
+    if (!updatedCharacter) {
       res.status(404).json({ message: "No matching character data found!" });
       return;
     }
@@ -102,6 +102,7 @@ router.put("/", async (req, res) => {
 
 // get character by id
 router.route("/").get(async (req, res) => {
+  console.log(req)
   try {
     const characterData = await Character.findOne({
       where: {

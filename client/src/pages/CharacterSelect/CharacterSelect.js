@@ -50,7 +50,11 @@ export default function CharacterSelect() {
             )
                 .then(res => {
                     console.log(res);
+                    const charId = res.data.id
                     API.createGame(res.data.id)
+                    .then(res => {
+                        history.push(`/game/${res.data.id}/user/${userId}/character/${charId}`)
+                    })
                     history.push('/game')
                 })
         }
