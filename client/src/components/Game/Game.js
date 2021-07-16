@@ -166,12 +166,15 @@ const Game = (props) => {
   // Restarts the game
   const restartGame = () => {
     // get saved stats
-    setGameState({ ...gameState, currHealth: 1 });
-    getCharInfo(); // bookmark
+    getCharInfo(userState.id); // loads to last state
     setDisplayState({
       ...displayState,
       text: "You awake from your sleep, all of your memories come rushing back to you, you know what you must do...",
       title: "",
+    });
+    setGameState({
+      ...gameState,
+      currentMovement: gameState.currentMovement - 7,
     });
     setEnemyState({
       ...enemyState,
@@ -201,7 +204,7 @@ const Game = (props) => {
       currHealth: healthBelow90 ? gameState.currHealth + 10 : 100,
       phase: "exploring",
       maxMovement:
-        gameState.currentMovement + Math.floor(Math.random() * 10) + 3,
+        gameState.currentMovement + Math.floor(Math.random() * (8 - 3) + 1) + 3,
     });
     setEnemyState({
       ...enemyState,
@@ -360,7 +363,9 @@ const Game = (props) => {
         encounters: gameState.encounters + 1,
         phase: "exploring",
         maxMovement:
-          gameState.currentMovement + Math.floor(Math.random() * 10) + 3,
+          gameState.currentMovement +
+          Math.floor(Math.random() * (8 - 3) + 1) +
+          3,
       });
       setEnemyState({
         ...enemyState,
@@ -416,6 +421,10 @@ const Game = (props) => {
 
   function getCharInfo(charId) {
     API.getCharacter(USERID, charId).then((res) => {
+      let lowHealth = false;
+      if (res.data.health <= 30) {
+        lowHealth = true;
+      }
       console.log("API call for char");
       console.log("HERE!", res.data);
       if (res.data.class === "Mage") {
@@ -424,7 +433,7 @@ const Game = (props) => {
           ...userState,
           id: res.data.id,
           name: res.data.name,
-          health: res.data.health,
+          health: lowHealth ? res.data.health + 20 : res.data.health,
           mana: res.data.mana,
           img: "https://live.staticflickr.com/65535/51296892783_ff5dc2707f_w.jpg",
           bio: "A cunning mage, setting out on their first quest out of their apprenticeship.",
@@ -435,7 +444,7 @@ const Game = (props) => {
           ...userState,
           id: res.data.id,
           name: res.data.name,
-          health: res.data.health,
+          health: lowHealth ? res.data.health + 20 : res.data.health,
           stamina: res.data.stamina,
           img: warrior,
           bio: "A fierce swordsman on a quest to become the greatest knight.",
@@ -449,7 +458,7 @@ const Game = (props) => {
       }
       setGameState({
         ...gameState,
-        currHealth: res.data.health,
+        currHealth: lowHealth ? res.data.health + 20 : res.data.health,
         encounters: res.data.game.event_count,
         gameID: res.data.game.id,
         phase: "exploring",
