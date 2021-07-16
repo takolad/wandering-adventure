@@ -5,6 +5,7 @@ import HomePage from "./pages/HomePage/HomePage";
 import CharacterSelect from "./pages/CharacterSelect/CharacterSelect";
 import SaveSelect from "./pages/SaveSelect/SaveSelect";
 import { StoreProvider } from "./utils/GlobalState";
+import { CircularProgress, Typography } from "@material-ui/core";
 import {
   BrowserRouter as Router,
   Switch,
@@ -12,6 +13,7 @@ import {
   Redirect,
 } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
+import { textAlign } from "@material-ui/system";
 
 function App() {
   const { isAuthenticated, isLoading } = useAuth0();
@@ -39,7 +41,24 @@ function App() {
     );
   };
   if (isLoading) {
-    return <div> Loading </div>;
+    return (
+      <Typography
+        style={{
+          textAlign: "center",
+        }}
+      >
+        <div
+          style={{
+            backgroundColor: "white",
+            maxWidth: "fit-content",
+            padding: "5px",
+            margin: "auto",
+          }}
+        >
+          Loading... <CircularProgress />
+        </div>
+      </Typography>
+    );
   }
 
   return (
