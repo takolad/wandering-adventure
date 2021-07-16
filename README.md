@@ -37,7 +37,7 @@ Aside from React and the various packages it has associated with it, we also uti
 
 ## Collaborators
 
-Forked Project
+Forked Project  
 [John Hinojosa](https://github.com/takolad)<br>
 
 **Original Project**
