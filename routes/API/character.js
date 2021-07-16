@@ -6,7 +6,6 @@ let characterData;
 
 // get all characters of matching user_id
 router.get("/:id", async (req, res) => {
-  console.log("get by user_id");
   try {
     const characterData = await Character.findAll({
       where: {
@@ -42,7 +41,7 @@ router.post("/", async (req, res) => {
   const charClass = req.body.characterData.class;
   const userID = req.body.user_id;
 
-  if (charClass === "warrior") {
+  if (charClass === "warrior" || charClass === "Warrior") {
     try {
       const characterData = await Character.create({
         name: name,
@@ -51,13 +50,13 @@ router.post("/", async (req, res) => {
         stamina: 100,
         user_id: userID,
       });
+
       res.status(200).json(characterData);
+      return;
     } catch (err) {
       res.status(500).json(err);
     }
-  }
-
-  if (charClass === "mage") {
+  } else if (charClass === "mage" || charClass === "Mage") {
     try {
       const characterData = await Character.create({
         name: name,
@@ -67,6 +66,7 @@ router.post("/", async (req, res) => {
         user_id: userID,
       });
       res.status(200).json(characterData);
+      return;
     } catch (err) {
       res.status(500).json(err);
     }
@@ -102,7 +102,6 @@ router.put("/", async (req, res) => {
 
 // get character by id
 router.route("/").get(async (req, res) => {
-  console.log(req)
   try {
     const characterData = await Character.findOne({
       where: {
@@ -130,7 +129,6 @@ router.route("/").get(async (req, res) => {
 });
 
 router.delete("/:id", async (req, res) => {
-  console.log(req);
   try {
     const characterData = await Character.destroy({
       where: {
