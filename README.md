@@ -41,11 +41,13 @@ Forked Project
 [John Hinojosa](https://github.com/takolad)<br>
 
 **Original Project**
+
 [Repository](https://github.com/madison-vega/wandering-adventure)
-FrontEnd
+
+FrontEnd  
 [Gustavo Gonzalez](https://github.com/GonzalezG97)<br>
-[Madison Vega](https://github.com/madison-vega)<br>
-BackEnd
+[Madison Vega](https://github.com/madison-vega)<br>  
+BackEnd  
 [John Hinojosa](https://github.com/takolad)<br>
 [Jeremiah Rogers](https://github.com/jerogers8789)<br>
 
@@ -73,7 +75,7 @@ SOFTWARE.
 
 ## Questions
 
-Concerns about this aforementioned forked version of the project:
+Concerns about this aforementioned forked version of the project:  
 [View my Github Profile](https://github.com/takolad)
 
 Concerns about the original project:
