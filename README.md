@@ -1,9 +1,8 @@
-# wandering-adventure
+# wandering-adventure -John's Fork
 
 ## Description
 
-
-
+    A text-adventure game with combat in the styling of rock-paper-scissors.
 
 ## Table of Contents
 
@@ -16,15 +15,13 @@
 
 ## Installation
 
-No installation necessary to use our application.  Simply click the link below and you will be routed to our deployed application.
-
+No installation necessary to use our application. Simply click the link below and you will be routed to our deployed application.
 
 ## Usage
 
-Once on our live application site, you will be presented with our login page, clicking the enter button will route you to Auth0 verification, you may sign up with email or Google.  Once signed up you will be able to select your character and add your own custom name.  Once confirmed you will be routed to our game and presented with a scenario and options you will be able to choose.  Make your choices and have fun on your adventure.
+Once on our live application site, you will be presented with our login page, clicking the enter button will route you to Auth0 verification, you may sign up with email or Google. Once signed up you will be able to select your character and add your own custom name. Once confirmed you will be routed to our game and presented with a scenario and options you will be able to choose. Make your choices and have fun on your adventure.
 
-[Deployed Application](https://wanderingadventure.herokuapp.com/)
-
+[Deployed Application](https://wandering-inferno.herokuapp.com/)
 
 ## Credits
 
@@ -38,23 +35,23 @@ Aside from React and the various packages it has associated with it, we also uti
 [Auth0 Tutorial](https://www.youtube.com/watch?v=MqczHS3Z2bc&t=1065s&ab_channel=codeSTACKr)<br>
 [Particles js Tutorial](https://www.youtube.com/watch?v=ordgGUgd2P0&ab_channel=BAE-BeingAverageEngineer)<br>
 
-
-
 ## Collaborators
 
+Forked Project
+[John Hinojosa](https://github.com/takolad)<br>
+
+**Original Project**
+[Repository](https://github.com/madison-vega/wandering-adventure)
+FrontEnd
 [Gustavo Gonzalez](https://github.com/GonzalezG97)<br>
 [Madison Vega](https://github.com/madison-vega)<br>
+BackEnd
 [John Hinojosa](https://github.com/takolad)<br>
 [Jeremiah Rogers](https://github.com/jerogers8789)<br>
-
-
-
 
 ## License
 
 MIT License
-
-Copyright (c) [2021] [madisonvega]
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -76,5 +73,8 @@ SOFTWARE.
 
 ## Questions
 
-If you have any further questions please feel free to view our Github Profiles and see all our contact info there.
+Concerns about this aforementioned forked version of the project:
+[View my Github Profile](https://github.com/takolad)
 
+Concerns about the original project:
+Any further questions please feel free to view our Github Profiles and see all our contact info there.
