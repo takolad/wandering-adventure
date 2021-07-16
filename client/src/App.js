@@ -2,8 +2,9 @@ import LoginPage from "./pages/LoginPage/LoginPage";
 import NavBar from "./components/Navbar/Navbar";
 import Game from "./components/Game/Game";
 import HomePage from "./pages/HomePage/HomePage";
-import CharacterSelect from './pages/CharacterSelect/CharacterSelect';
-import SaveSelect from './pages/SaveSelect/SaveSelect';
+import CharacterSelect from "./pages/CharacterSelect/CharacterSelect";
+import SaveSelect from "./pages/SaveSelect/SaveSelect";
+import { StoreProvider } from "./utils/GlobalState";
 import {
   BrowserRouter as Router,
   Switch,
@@ -11,7 +12,6 @@ import {
   Redirect,
 } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
-
 
 function App() {
   const { isAuthenticated, isLoading } = useAuth0();
@@ -21,7 +21,6 @@ function App() {
     console.log("auth status: ", auth);
 
     return (
-
       <Route
         {...rest}
         render={(props) =>
@@ -46,41 +45,48 @@ function App() {
   return (
     <Router>
       <div className="App">
-      <NavBar />
-        <br />
-        <Switch>
-          <PrivateRoute
-            exact path="/"
-            auth={isAuthenticated}
-            component={HomePage}
-          />
+        <StoreProvider>
+          <NavBar />
+          <br />
+          <Switch>
+            <PrivateRoute
+              exact
+              path="/"
+              auth={isAuthenticated}
+              component={HomePage}
+            />
 
-          <PrivateRoute
-            exact path="/character"
-            auth={isAuthenticated}
-            component={CharacterSelect}
-          />
+            <PrivateRoute
+              exact
+              path="/character"
+              auth={isAuthenticated}
+              component={CharacterSelect}
+            />
 
-          <PrivateRoute
-            exact path="/game"
-            auth={isAuthenticated}
-            component={Game}
-          />
+            <PrivateRoute
+              exact
+              path="/game"
+              auth={isAuthenticated}
+              component={Game}
+            />
 
-          <PrivateRoute
-            exact path="/game/:gameId/user/:userId/character/:charId"
-            auth={isAuthenticated}
-            component={Game}
-          />
+            <PrivateRoute
+              exact
+              path="/character/:charId/user/:userId"
+              auth={isAuthenticated}
+              component={Game}
+            />
 
-          <PrivateRoute
-            exact path="/save"
-            auth={isAuthenticated}
-            component={SaveSelect}
-          />
+            <PrivateRoute
+              exact
+              path="/save"
+              auth={isAuthenticated}
+              component={SaveSelect}
+            />
 
-          <Route path="/login" component={LoginPage} />
-        </Switch>
+            <Route path="/login" component={LoginPage} />
+          </Switch>
+        </StoreProvider>
       </div>
     </Router>
   );
